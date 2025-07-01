@@ -1,0 +1,16 @@
+default:
+  production: TRUE
+  verbose: FALSE
+  name: "SCATTER"
+  title:
+    en: "Scatter Plot"
+    fr: "Diagramme de dispersion"
+  description:
+    en: |
+      This application allows to draw a scatter plot.
+    fr: |
+      Cette application permet de réaliser un diagramme de dispersion.
+
+test:
+  production: FALSE
+  verbose: TRUE

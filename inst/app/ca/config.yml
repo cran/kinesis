@@ -1,0 +1,18 @@
+default:
+  production: TRUE
+  verbose: FALSE
+  name: "CA"
+  title:
+    en: "Correspondence Analysis"
+    fr: "Analyse factorielle des correspondances"
+  description:
+    en: |
+      This application allows to compute a correspondence analysis based on the
+      singular value decomposition.
+    fr: |
+      Cette application permet de réaliser une analyse factorielle des
+      correspondances.
+
+test:
+  production: FALSE
+  verbose: TRUE

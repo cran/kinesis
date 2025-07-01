@@ -1,0 +1,27 @@
+default:
+  production: TRUE
+  verbose: FALSE
+  name: "MCD"
+  title:
+    en: "Mean Ceramic Date"
+    fr: "Date céramique moyenne"
+  description:
+    en: |
+      This application allows to compute the Mean Ceramic Dates (MCD) of a set
+      of archaeological assemblages. The MCD is a point estimate of the
+      occupation of an archaeological site (South 1977). It is estimated as the
+      weighted mean of the date midpoints of the ceramic types found in a given
+      assemblage. The weights are the relative frequencies of the respective
+      types in the assemblage.
+    fr: |
+      Cette application permet de calculer les dates céramiques moyennes (MCD)
+      d'un ensemble d'assemblages archéologiques. La MCD est une estimation
+      ponctuelle de l'occupation d'un site archéologique (South 1977). Elle est
+      estimée comme la moyenne pondérée des dates centrales des types de
+      céramiques trouvées dans un assemblage donné. Les coefficients de
+      pondération correspondent à la fréquence relative des différents types
+      dans l'assemblage.
+
+test:
+  production: FALSE
+  verbose: TRUE

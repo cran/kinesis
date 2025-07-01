@@ -1,0 +1,26 @@
+default:
+  production: TRUE
+  verbose: FALSE
+  name: "AORISTIC"
+  title:
+    en: "Aoristic Analysis"
+    fr: "Analyse aoristique"
+  description:
+    en: |
+      This application allows to perform aoristic analysis of time intervals.
+      Aoristic analysis can be used to determine the probability of
+      contemporaneity of archaeological assemblages. The aoristic analysis
+      distributes the probability of an event uniformly over each temporal
+      fraction of the period considered. The aoristic sum is then the distribution
+      of the total number of events to be assumed within this period.
+    fr: |
+      Cette application permet de réaliser l'analyses aoristique d'intervalles
+      de temps. L'analyse aoristique peut être utilisée pour déterminer la
+      probabilité de contemporanéité d'assemblages archéologiques. Cette analyse
+      distribue la probabilité d'un événement uniformément sur chaque fraction
+      temporelle de la période considérée. La somme aoristique est alors la
+      distribution du nombre total d'événements observés dans cette période.
+
+test:
+  production: FALSE
+  verbose: TRUE

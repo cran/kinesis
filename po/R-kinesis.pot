@@ -1,0 +1,1235 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kinesis 0.2.0\n"
+"POT-Creation-Date: 2025-06-26 16:38+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: aorisitc.R:17
+msgid "Analysis"
+msgstr ""
+
+#: aorisitc.R:21 aorisitc.R:96 aorisitc.R:117 time_interval.R:94
+msgid "Aoristic Analysis"
+msgstr ""
+
+#: aorisitc.R:24
+msgid "Temporal step size"
+msgstr ""
+
+#: aorisitc.R:31
+msgid "Beginning of the time window"
+msgstr ""
+
+#: aorisitc.R:36
+msgid "End of the time window"
+msgstr ""
+
+#: aorisitc.R:42
+msgid "Weigth"
+msgstr ""
+
+#: aorisitc.R:46 ca.R:37 coda_hclust.R:34 count_diversity_beta.R:30 count_mcd.R:25 count_occurrence.R:31 pca.R:53
+msgid "(Re)Compute"
+msgstr ""
+
+#: aorisitc.R:49 ca.R:40 coda_outliers.R:41 count_diversity_alpha.R:24 count_mcd.R:28 count_occurrence.R:34 pca.R:56
+msgid "Download results"
+msgstr ""
+
+#: bertin.R:18 coda_barplot.R:62 coda_outliers.R:47 ternary.R:124
+msgid "Plot"
+msgstr ""
+
+#: bertin.R:24 coda_logratio.R:35 coda_outliers.R:52
+msgid "Plot type"
+msgstr ""
+
+#: bertin.R:26
+msgid "Ford diagram"
+msgstr ""
+
+#: bertin.R:26
+msgid "Bertin barplot"
+msgstr ""
+
+#: bertin.R:27
+msgid "Bertin scalogram"
+msgstr ""
+
+#: bertin.R:27 coda_statistics.R:60 ternary.R:49
+msgid "Heatmap"
+msgstr ""
+
+#: bertin.R:40
+msgid "Weights"
+msgstr ""
+
+#: bertin.R:50
+msgid "Threshold"
+msgstr ""
+
+#: bertin.R:52 import.R:96 multivariate.R:66 scatter.R:38 ternary.R:50 ternary.R:80
+msgid "None"
+msgstr ""
+
+#: bertin.R:52
+msgid "Mean"
+msgstr ""
+
+#: bertin.R:52
+msgid "Median"
+msgstr ""
+
+#: ca.R:17 ca.R:74
+msgid "CA"
+msgstr ""
+
+#: ca.R:21 ca.R:99
+msgid "Correspondence Analysis"
+msgstr ""
+
+#: ca.R:24 pca.R:40
+msgid "Supplementary individuals"
+msgstr ""
+
+#: ca.R:29 pca.R:45
+msgid "Supplementary quantitative variables"
+msgstr ""
+
+#: ca.R:34 pca.R:50
+msgid "Supplementary qualitative variables"
+msgstr ""
+
+#: ca.R:126
+msgid "Chi-squared Test"
+msgstr ""
+
+#: ca.R:129
+msgid "Statistic: %.0f"
+msgstr ""
+
+#: ca.R:132
+msgid "Degrees of freedom: %.0f"
+msgstr ""
+
+#: ca.R:135
+msgid "p-value: %s"
+msgstr ""
+
+#: ca.R:138
+msgid "Cramer's V: %.2f"
+msgstr ""
+
+#: coda.R:17 coda.R:32 prepare.R:17 prepare.R:22 prepare.R:32
+msgid "Data"
+msgstr ""
+
+#: coda.R:22 coda.R:113
+msgid "Compositional Data"
+msgstr ""
+
+#: coda.R:39
+msgid "Group by"
+msgstr ""
+
+#: coda.R:42
+msgid ""
+"You can use a qualitative variable to assign each sample to a (reference) "
+"group."
+msgstr ""
+
+#: coda.R:43
+msgid "Missing values will be interpreted as unassigned samples."
+msgstr ""
+
+#: coda.R:51
+msgid "Condense by"
+msgstr ""
+
+#: coda.R:54
+msgid ""
+"You can use one or more categorical variable to split the data into subsets "
+"and compute the compositional mean for each."
+msgstr ""
+
+#: coda.R:55
+msgid ""
+"Usefull if your data contain several observations for the same sample (e.g. "
+"repeated measurements)."
+msgstr ""
+
+#: coda.R:61 home.R:29
+msgid "Overview"
+msgstr ""
+
+#: coda.R:66 prepare.R:40 prepare.R:108
+msgid "Missing values"
+msgstr ""
+
+#: coda.R:168 multivariate.R:160 multivariate.R:163
+msgid "Group"
+msgstr ""
+
+#: coda.R:185
+msgid ""
+"If your data contains zeros, these can be considered as values below the "
+"detection limit (i.e. small unknown values)."
+msgstr ""
+
+#: coda.R:186
+msgid ""
+"In this case, you can define the detection limit for each compositional part "
+"below."
+msgstr ""
+
+#: coda.R:187
+msgid ""
+"If all limits are specified, zeros will be replaced by a fraction of these "
+"limits."
+msgstr ""
+
+#: coda.R:188
+msgid "For computational details, see"
+msgstr ""
+
+#: coda.R:193
+msgid "Fraction"
+msgstr ""
+
+#: coda.R:199
+msgid "Replace zero"
+msgstr ""
+
+#: coda_barplot.R:17 coda_barplot.R:21
+msgid "Bar Plot"
+msgstr ""
+
+#: coda_barplot.R:24
+msgid "Major elements"
+msgstr ""
+
+#: coda_barplot.R:29
+msgid "Minor elements"
+msgstr ""
+
+#: coda_barplot.R:34
+msgid "Trace elements"
+msgstr ""
+
+#: coda_barplot.R:40
+msgid "Sort columns"
+msgstr ""
+
+#: coda_barplot.R:43
+msgid "Row order"
+msgstr ""
+
+#: coda_barplot.R:46
+msgid "Decreasing row order"
+msgstr ""
+
+#: coda_barplot.R:56
+msgid "Gutter"
+msgstr ""
+
+#: coda_hclust.R:17 coda_hclust.R:78
+msgid "HCLUST"
+msgstr ""
+
+#: coda_hclust.R:21 coda_hclust.R:101
+msgid "Hierarchical Clustering"
+msgstr ""
+
+#: coda_hclust.R:24 multivariate.R:411
+msgid "Distance"
+msgstr ""
+
+#: coda_hclust.R:29
+msgid "Clustering linkage"
+msgstr ""
+
+#: coda_hclust.R:37
+msgid "Desired number of clusters"
+msgstr ""
+
+#: coda_hclust.R:42
+msgid "Download distances"
+msgstr ""
+
+#: coda_hclust.R:46
+msgid "Download clusters"
+msgstr ""
+
+#: coda_hclust.R:52 coda_statistics.R:65
+msgid "Dendrogram"
+msgstr ""
+
+#: coda_hclust.R:119
+msgid "Aitchison distance, %s linkage"
+msgstr ""
+
+#: coda_logratio.R:26
+msgid "Compute log-ratio transformation of compositional data."
+msgstr ""
+
+#: coda_logratio.R:29
+msgid "Weighted log-ratio"
+msgstr ""
+
+#: coda_logratio.R:37
+msgid "Scatter plot"
+msgstr ""
+
+#: coda_logratio.R:37
+msgid "Boxplot"
+msgstr ""
+
+#: coda_logratio.R:41
+msgid "Download log-ratio"
+msgstr ""
+
+#: coda_logratio.R:50 ternary.R:50
+msgid "Density"
+msgstr ""
+
+#: coda_logratio.R:77
+msgid "Rationing part:"
+msgstr ""
+
+#: coda_logratio.R:78
+msgid "Pivotal variable:"
+msgstr ""
+
+#: coda_logratio.R:141
+msgid "Centered Log-Ratio"
+msgstr ""
+
+#: coda_logratio.R:142
+msgid "Additive Log-Ratio"
+msgstr ""
+
+#: coda_logratio.R:143
+msgid "Isometric Log-Ratio"
+msgstr ""
+
+#: coda_logratio.R:144
+msgid "Pivot Log-Ratio"
+msgstr ""
+
+#: coda_outliers.R:17
+msgid "Outliers"
+msgstr ""
+
+#: coda_outliers.R:21 coda_outliers.R:89
+msgid "Outliers Detection"
+msgstr ""
+
+#: coda_outliers.R:23
+msgid "See"
+msgstr ""
+
+#: coda_outliers.R:29
+msgid "Multivariate location estimation"
+msgstr ""
+
+#: coda_outliers.R:30
+msgid "Minimum volume ellipsoid"
+msgstr ""
+
+#: coda_outliers.R:31
+msgid "Minimum covariance determinant"
+msgstr ""
+
+#: coda_outliers.R:36
+msgid "Quantile"
+msgstr ""
+
+#: coda_outliers.R:40
+msgid "(Re)Detect"
+msgstr ""
+
+#: coda_outliers.R:79
+msgid "Check your data."
+msgstr ""
+
+#: coda_statistics.R:17
+msgid "Statistics"
+msgstr ""
+
+#: coda_statistics.R:21
+msgid "Descriptive Statistics"
+msgstr ""
+
+#: coda_statistics.R:22
+msgid "Data summary and descriptive statistics."
+msgstr ""
+
+#: coda_statistics.R:25
+msgid "Download tables"
+msgstr ""
+
+#: coda_statistics.R:27
+msgid "Select a part"
+msgstr ""
+
+#: coda_statistics.R:30
+msgid "Histogram"
+msgstr ""
+
+#: coda_statistics.R:38
+msgid "Location"
+msgstr ""
+
+#: coda_statistics.R:43
+msgid "Covariance"
+msgstr ""
+
+#: coda_statistics.R:47
+msgid "PIP"
+msgstr ""
+
+#: coda_statistics.R:51 coda_statistics.R:221
+msgid "Variation Matrix"
+msgstr ""
+
+#: coda_statistics.R:55
+msgid "Table"
+msgstr ""
+
+#: coda_statistics.R:144
+msgid "Total variation"
+msgstr ""
+
+#: coda_statistics.R:170
+msgid "Compositional Mean"
+msgstr ""
+
+#: coda_statistics.R:179
+msgid "Percentile Table"
+msgstr ""
+
+#: coda_statistics.R:191
+msgid "Centered Log-Ratio Covariance"
+msgstr ""
+
+#: coda_statistics.R:208
+msgid "Proportionality Index of Parts"
+msgstr ""
+
+#: count_diversity_alpha.R:17
+msgid "&#945; Diversity"
+msgstr ""
+
+#: count_diversity_alpha.R:21 count_diversity_alpha.R:95
+msgid "Diversity Measures"
+msgstr ""
+
+#: count_diversity_alpha.R:68
+msgid "Heterogeneity"
+msgstr ""
+
+#: count_diversity_alpha.R:73
+msgid "Dominance"
+msgstr ""
+
+#: count_diversity_alpha.R:78
+msgid "Richness"
+msgstr ""
+
+#: count_diversity_alpha.R:83
+msgid "Sample size"
+msgstr ""
+
+#: count_diversity_alpha.R:84
+msgid "Observed richness"
+msgstr ""
+
+#: count_diversity_beta.R:17
+msgid "&#946; Diversity"
+msgstr ""
+
+#: count_diversity_beta.R:21
+msgid "Principal Coordinates Analysis"
+msgstr ""
+
+#: count_diversity_beta.R:24
+msgid "Dissimilarity measure"
+msgstr ""
+
+#: count_diversity_beta.R:33
+msgid "Download dissimilarity matrix"
+msgstr ""
+
+#: count_diversity_beta.R:37
+msgid "Download PCoA results"
+msgstr ""
+
+#: count_diversity_beta.R:42
+msgid "Display labels"
+msgstr ""
+
+#: count_diversity_beta.R:48
+msgid "Alpha diversity"
+msgstr ""
+
+#: count_diversity_beta.R:52 time_interval.R:38
+msgid "Groups"
+msgstr ""
+
+#: count_diversity_beta.R:56 multivariate.R:67 scatter.R:39 ternary.R:81
+msgid "Convex hull"
+msgstr ""
+
+#: count_diversity_beta.R:64
+msgid "Dissimilarity"
+msgstr ""
+
+#: count_diversity_beta.R:70
+msgid "PCoA"
+msgstr ""
+
+#: count_diversity_beta.R:110 count_diversity_beta.R:126 count_diversity_docs.R:89
+msgid "Beta Diversity"
+msgstr ""
+
+#: count_diversity_docs.R:16
+msgid "Definitions"
+msgstr ""
+
+#: count_diversity_docs.R:20
+msgid "Alpha Diversity"
+msgstr ""
+
+#: count_diversity_docs.R:22
+msgid "Heterogeneity index"
+msgstr ""
+
+#: count_diversity_docs.R:23
+msgid ""
+"The higher the heterogeneity value, the more diverse the individuals are in "
+"the dataset."
+msgstr ""
+
+#: count_diversity_docs.R:37
+msgid "Dominance index"
+msgstr ""
+
+#: count_diversity_docs.R:38
+msgid ""
+"Dominance is a measure of whether a community is dominated by certain types "
+"(an increase in the value means a decrease in diversity)."
+msgstr ""
+
+#: count_diversity_docs.R:54
+msgid "Richness index"
+msgstr ""
+
+#: count_diversity_docs.R:55
+msgid ""
+"Richness quantifies how many different types the dataset of interest "
+"contains, it does not take into account the abundances of the types."
+msgstr ""
+
+#: count_mcd.R:17
+msgid "Date"
+msgstr ""
+
+#: count_mcd.R:21
+msgid "Mean Ceramic Date"
+msgstr ""
+
+#: count_mcd.R:22
+msgid "Set the date midpoint (in years) of each ceramic type."
+msgstr ""
+
+#: count_mcd.R:65 count_mcd.R:86
+msgid "MCD"
+msgstr ""
+
+#: count_occurrence.R:17 count_occurrence.R:21 count_occurrence.R:78 count_occurrence.R:94
+msgid "Co-Occurrence"
+msgstr ""
+
+#: count_occurrence.R:24
+msgid "Method"
+msgstr ""
+
+#: count_occurrence.R:25
+msgid "Absolute frequency"
+msgstr ""
+
+#: count_occurrence.R:26
+msgid "Relative frequency"
+msgstr ""
+
+#: count_occurrence.R:27
+msgid "Z-score"
+msgstr ""
+
+#: graphics.R:19
+msgid "Qualitative scheme"
+msgstr ""
+
+#: graphics.R:28
+msgid "Quantitative scheme"
+msgstr ""
+
+#: graphics.R:38
+msgid "Fixed aspect ratio"
+msgstr ""
+
+#: graphics.R:46
+msgid "Symbol size"
+msgstr ""
+
+#: graphics.R:66
+msgid "Symbol"
+msgstr ""
+
+#: graphics.R:80
+msgid "Line type"
+msgstr ""
+
+#: help.R:101
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY."
+msgstr ""
+
+#: help.R:108
+msgid "You can import your data in CSV format."
+msgstr ""
+
+#: help.R:109 import.R:58
+msgid "It assumes that you keep your data tidy:"
+msgstr ""
+
+#: help.R:110 import.R:59
+msgid ""
+"each variable must be saved in its own column and each sample must be saved "
+"in its own row."
+msgstr ""
+
+#: help.R:118
+msgid ""
+"If you use this application in your research, you must report and cite it "
+"properly to ensure transparency of your results."
+msgstr ""
+
+#: help.R:119
+msgid ""
+"Moreover, authors and maintainers of this project are more likely to "
+"continue their work if they see that it's being used and valued by the "
+"research community."
+msgstr ""
+
+#: help.R:121
+msgid "To cite in your publications, please use:"
+msgstr ""
+
+#: help.R:129
+msgid "This app is distributed as a free and open source R package:"
+msgstr ""
+
+#: help.R:140
+msgid ""
+"This app is a part of the <strong>tesselle</strong> project, a collection of "
+"packages for research and teaching in archaeology."
+msgstr ""
+
+#: help.R:141
+msgid ""
+"The <strong>tesselle</strong> packages focus on quantitative analysis "
+"methods developed for archaeology."
+msgstr ""
+
+#: help.R:142
+msgid ""
+"They can be used to explore and analyze common data types in archaeology."
+msgstr ""
+
+#: help.R:145
+msgid "For more information and relevant links, see"
+msgstr ""
+
+#: home.R:18
+msgid "Home"
+msgstr ""
+
+#: home.R:22
+msgid "Welcome!"
+msgstr ""
+
+#: home.R:37
+msgid "Logo of the tesselle project."
+msgstr ""
+
+#: home.R:45
+msgid "How to cite"
+msgstr ""
+
+#: home.R:49
+msgid "Bookmark"
+msgstr ""
+
+#: home.R:51
+msgid ""
+"You can save the state of the application and get a URL which will restore "
+"the application with that state."
+msgstr ""
+
+#: home.R:52
+msgid ""
+"You can then copy the URL and save it for later, or share it with others so "
+"they can visit the application in the bookmarked state."
+msgstr ""
+
+#: home.R:55
+msgid "This is not intended for long-term storage."
+msgstr ""
+
+#: home.R:56
+msgid "There is no guarantee as to how long your bookmark will last."
+msgstr ""
+
+#: home.R:61
+msgid "Bookmarking is currently disabled."
+msgstr ""
+
+#: home.R:86 home.R:161
+msgid "Session info"
+msgstr ""
+
+#: home.R:89
+msgid "Source code"
+msgstr ""
+
+#: home.R:92
+msgid "Report a bug or request"
+msgstr ""
+
+#: home.R:114
+msgid "Last saved at %s."
+msgstr ""
+
+#: home.R:130
+msgid "Restoring from state bookmarked at %s."
+msgstr ""
+
+#: home.R:165
+msgid "Close"
+msgstr ""
+
+#: import.R:16
+msgid ""
+"Import your data and perform basic data cleansing and preparation steps."
+msgstr ""
+
+#: import.R:19
+msgid "Upload"
+msgstr ""
+
+#: import.R:24
+msgid "Example data"
+msgstr ""
+
+#: import.R:43
+msgid "Import Data"
+msgstr ""
+
+#: import.R:45 plot.R:146
+msgid "Cancel"
+msgstr ""
+
+#: import.R:53
+msgid "Select the location of, and the file you want to upload."
+msgstr ""
+
+#: import.R:54
+msgid "Please check the default settings and adjust them to your data."
+msgstr ""
+
+#: import.R:55
+msgid "This application only supports data encoded in UFT-8."
+msgstr ""
+
+#: import.R:63
+msgid "Choose a CSV or a TSV file:"
+msgstr ""
+
+#: import.R:73
+msgid "Header"
+msgstr ""
+
+#: import.R:79
+msgid "Decimal"
+msgstr ""
+
+#: import.R:80
+msgid "Dot"
+msgstr ""
+
+#: import.R:80 import.R:88
+msgid "Comma"
+msgstr ""
+
+#: import.R:87
+msgid "Separator"
+msgstr ""
+
+#: import.R:88
+msgid "Semicolon"
+msgstr ""
+
+#: import.R:88
+msgid "Tab"
+msgstr ""
+
+#: import.R:95
+msgid "Quote"
+msgstr ""
+
+#: import.R:96
+msgid "Double quote"
+msgstr ""
+
+#: import.R:96
+msgid "Single quote"
+msgstr ""
+
+#: import.R:105
+msgid "Lines of the data file to skip:"
+msgstr ""
+
+#: import.R:113
+msgid "String to be interpreted as missing value:"
+msgstr ""
+
+#: import.R:119
+msgid "Character to be interpreted as comment:"
+msgstr ""
+
+#: import.R:153
+msgid "Reading data from %s..."
+msgstr ""
+
+#: import.R:158
+msgid "Data Input"
+msgstr ""
+
+#: import.R:176
+msgid "Reading data..."
+msgstr ""
+
+#: kinesis-internal.R:33
+msgid "Import a CSV file first."
+msgstr ""
+
+#: kinesis-internal.R:42
+msgid "Your data should not contain missing values."
+msgstr ""
+
+#: kinesis-internal.R:46
+msgid "Your data should not contain zeros."
+msgstr ""
+
+#: kinesis-internal.R:68 time_interval.R:32
+msgid "Calendar"
+msgstr ""
+
+#: kinesis-internal.R:358
+msgid "Your data seem to have changed."
+msgstr ""
+
+#: kinesis-internal.R:359
+msgid "You should perform your analysis again."
+msgstr ""
+
+#: multivariate.R:18
+msgid "Factor maps"
+msgstr ""
+
+#: multivariate.R:22
+msgid "Horizontal axis"
+msgstr ""
+
+#: multivariate.R:29
+msgid "Vertical axis"
+msgstr ""
+
+#: multivariate.R:36
+msgid "Label individuals"
+msgstr ""
+
+#: multivariate.R:41
+msgid "Label variables"
+msgstr ""
+
+#: multivariate.R:46
+msgid "Display supplementary individuals"
+msgstr ""
+
+#: multivariate.R:51
+msgid "Display supplementary variables"
+msgstr ""
+
+#: multivariate.R:56 scatter.R:27 ternary.R:31
+msgid "Extra quantitative variable"
+msgstr ""
+
+#: multivariate.R:60 scatter.R:26 ternary.R:30
+msgid "Extra qualitative variable"
+msgstr ""
+
+#: multivariate.R:65 scatter.R:37 ternary.R:79
+msgid "Wrap:"
+msgstr ""
+
+#: multivariate.R:66 scatter.R:38 ternary.R:80
+msgid "Tolerance ellipse"
+msgstr ""
+
+#: multivariate.R:67 scatter.R:39 ternary.R:81
+msgid "Confidence ellipse"
+msgstr ""
+
+#: multivariate.R:72 scatter.R:44 ternary.R:86
+msgid "Ellipse level:"
+msgstr ""
+
+#: multivariate.R:81
+msgid "Results"
+msgstr ""
+
+#: multivariate.R:83 scatter.R:52 ternary.R:118
+msgid "Click and drag to select an area, then double-click to zoom in."
+msgstr ""
+
+#: multivariate.R:84 scatter.R:53 ternary.R:119
+msgid "Double-click again to reset the zoom."
+msgstr ""
+
+#: multivariate.R:90
+msgid "Individuals factor map"
+msgstr ""
+
+#: multivariate.R:101
+msgid "Variables factor map"
+msgstr ""
+
+#: multivariate.R:113
+msgid "Individuals"
+msgstr ""
+
+#: multivariate.R:122 prepare.R:149 scatter.R:21 ternary.R:24
+msgid "Variables"
+msgstr ""
+
+#: multivariate.R:131 multivariate.R:133
+msgid "Screeplot"
+msgstr ""
+
+#: multivariate.R:373
+msgid "Eigenvalues"
+msgstr ""
+
+#: multivariate.R:374
+msgid "Explained var. (%)"
+msgstr ""
+
+#: multivariate.R:375
+msgid "Cumulative var. (%)"
+msgstr ""
+
+#: multivariate.R:396
+msgid "Coordinates"
+msgstr ""
+
+#: multivariate.R:401
+msgid "Contribution"
+msgstr ""
+
+#: multivariate.R:406
+msgid "Squared cosinus"
+msgstr ""
+
+#: multivariate.R:416
+msgid "Axis"
+msgstr ""
+
+#: pca.R:22 pca.R:89
+msgid "PCA"
+msgstr ""
+
+#: pca.R:26 pca.R:121
+msgid "Principal Components Analysis"
+msgstr ""
+
+#: pca.R:30 ternary.R:65
+msgid "Center"
+msgstr ""
+
+#: pca.R:35 ternary.R:70
+msgid "Scale"
+msgstr ""
+
+#: pca.R:92
+msgid ""
+"PCA is computed on centered log-ratio (CLR), you should check the data "
+"transformation first."
+msgstr ""
+
+#: plot.R:18
+msgid "Tools"
+msgstr ""
+
+#: plot.R:23 prepare.R:115
+msgid "Download"
+msgstr ""
+
+#: plot.R:117
+msgid "Save plot - Preview"
+msgstr ""
+
+#: plot.R:129
+msgid "File name"
+msgstr ""
+
+#: plot.R:134
+msgid "Width (in)"
+msgstr ""
+
+#: plot.R:140
+msgid "Height (in)"
+msgstr ""
+
+#: plot.R:179
+msgid "Unknown graphics device."
+msgstr ""
+
+#: prepare.R:35
+msgid "Table overview"
+msgstr ""
+
+#: prepare.R:100
+msgid "Dimensions"
+msgstr ""
+
+#: prepare.R:104
+msgid "Sparsity"
+msgstr ""
+
+#: prepare.R:112
+msgid "Export your data for futur use."
+msgstr ""
+
+#: prepare.R:147
+msgid "Select data"
+msgstr ""
+
+#: prepare.R:148
+msgid "Sample names"
+msgstr ""
+
+#: prepare.R:179
+msgid "Row names"
+msgstr ""
+
+#: prepare.R:211
+msgid "Clean values"
+msgstr ""
+
+#: prepare.R:215
+msgid "Remove leading/trailing whitespace"
+msgstr ""
+
+#: prepare.R:221
+msgid "Remove rows with zero"
+msgstr ""
+
+#: prepare.R:226
+msgid "Remove columns with zero"
+msgstr ""
+
+#: prepare.R:232
+msgid "Remove constant columns"
+msgstr ""
+
+#: prepare.R:238
+msgid "Remove only if all values meet the condition"
+msgstr ""
+
+#: prepare.R:298
+msgid "Empty string as missing value"
+msgstr ""
+
+#: prepare.R:304
+msgid "Zero as missing value"
+msgstr ""
+
+#: prepare.R:310
+msgid "Remove missing values:"
+msgstr ""
+
+#: prepare.R:312
+msgid "Keep as is"
+msgstr ""
+
+#: prepare.R:313
+msgid "Replace missing values with zeros"
+msgstr ""
+
+#: prepare.R:314
+msgid "Remove rows with missing values"
+msgstr ""
+
+#: prepare.R:315
+msgid "Remove columns with missing values"
+msgstr ""
+
+#: run.R:41
+msgid "Could not find the %s application."
+msgstr ""
+
+#: run.R:87
+msgid "Could not find the configuration file for %s."
+msgstr ""
+
+#: scatter.R:17 scatter.R:60
+msgid "Scatter Plot"
+msgstr ""
+
+#: scatter.R:23 ternary.R:26
+msgid "Component X"
+msgstr ""
+
+#: scatter.R:24 ternary.R:27
+msgid "Component Y"
+msgstr ""
+
+#: scatter.R:31
+msgid "Linear regression"
+msgstr ""
+
+#: scatter.R:49 ternary.R:97
+msgid "Grid"
+msgstr ""
+
+#: scatter.R:70
+msgid "Click the plot to select rows of data."
+msgstr ""
+
+#: seriate.R:17
+msgid "Seriation"
+msgstr ""
+
+#: seriate.R:21
+msgid "Permutation"
+msgstr ""
+
+#: seriate.R:25
+msgid "Permute rows"
+msgstr ""
+
+#: seriate.R:31
+msgid "Permute columns"
+msgstr ""
+
+#: seriate.R:37
+msgid "CA dimension"
+msgstr ""
+
+#: seriate.R:46
+msgid "Export matrix"
+msgstr ""
+
+#: seriate.R:53
+msgid "Rearranged matrix"
+msgstr ""
+
+#: seriate.R:79
+msgid "Compute the seriation order first."
+msgstr ""
+
+#: ternary.R:17 ternary.R:21
+msgid "Ternary Plot"
+msgstr ""
+
+#: ternary.R:28
+msgid "Component Z"
+msgstr ""
+
+#: ternary.R:34
+msgid "Layers"
+msgstr ""
+
+#: ternary.R:38
+msgid "Show points"
+msgstr ""
+
+#: ternary.R:44
+msgid "Density contour"
+msgstr ""
+
+#: ternary.R:50
+msgid "Bin"
+msgstr ""
+
+#: ternary.R:56
+msgid "Number of bins"
+msgstr ""
+
+#: ternary.R:62
+msgid "Transform"
+msgstr ""
+
+#: ternary.R:75
+msgid "Envelopes"
+msgstr ""
+
+#: ternary.R:93
+msgid "Annotations"
+msgstr ""
+
+#: ternary.R:103
+msgid "Labels"
+msgstr ""
+
+#: ternary.R:117
+msgid "Visualize your data in the ternary space."
+msgstr ""
+
+#: time_interval.R:17
+msgid "Intervals"
+msgstr ""
+
+#: time_interval.R:21
+msgid "Time Intervals"
+msgstr ""
+
+#: time_interval.R:24
+msgid "Lower temporal boundary"
+msgstr ""
+
+#: time_interval.R:28
+msgid "Upper temporal boundary"
+msgstr ""
+
+#: kinesis-internal.R:36
+msgid "Select at least %d row."
+msgid_plural "Select at least %d rows."
+msgstr[0] ""
+msgstr[1] ""
+
+#: kinesis-internal.R:37
+msgid "Select at least %d column."
+msgid_plural "Select at least %d columns."
+msgstr[0] ""
+msgstr[1] ""

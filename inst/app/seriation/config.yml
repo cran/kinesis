@@ -1,0 +1,40 @@
+default:
+  production: TRUE
+  verbose: FALSE
+  name: "seriation"
+  title:
+    en: "Matrix Seriation"
+    fr: "Sériation de matrice"
+  description:
+    en: |
+      For a set of archaeological assemblages in tabular form, the problem of
+      seriation comes down to discovering a reordering of rows/columns *inferred*
+      to be chronological. This approach relies on a set of well-defined statistical
+      and archaeological assumptions (Dunnell 1970). This application allows to
+      perform matrix seriation based on correspondence analysis.
+
+      Correspondence analysis is an effective method for the seriation of
+      archaeological assemblages. The order of the rows and columns is given by
+      the coordinates along one dimension of the analysis, assumed to account for
+      temporal variation. Note that the direction of temporal change within the
+      correspondence analysis space is *arbitrary*: additional information is
+      needed to determine the actual order in time.
+    fr: |
+      Pour un ensemble d'assemblages archéologiques sous forme de tableaux, le
+      problème de la sériation se résume à la découverte d'un réarrangement des
+      lignes/colonnes *inféré* comme étant chronologique. Cette approche repose
+      sur un ensemble d'hypothèses statistiques et archéologiques bien définies
+      (Dunnell 1970). Cette application permet de réaliser une sériation de
+      matrice basée sur l'analyse factorielle des correspondances.
+
+      L'analyse factorielle des correspondances est une méthode efficace pour la
+      sériation d'assemblages archéologiques. L'ordre des lignes et des colonnes
+      est donné par les coordonnées le long d'une des dimensions de l'analyse,
+      supposée tenir compte de la variation temporelle. La direction du
+      changement temporel dans l'espace de l'analyse des correspondances est
+      *arbitraire* : des informations supplémentaires sont nécessaires pour
+      déterminer l'ordre réel dans le temps.
+
+test:
+  production: FALSE
+  verbose: TRUE

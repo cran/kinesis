@@ -1,0 +1,20 @@
+default:
+  production: TRUE
+  verbose: FALSE
+  name: "ternary"
+  title:
+    en: "Ternary Plot"
+    fr: "Diagramme ternaire"
+  description:
+    en: |
+      This application allows to create ternary plots. It allows to display
+      the data in the ternary space, to add or tune graphical elements and to
+      display statistical summaries.
+    fr: |
+      Cette application permet de créer des diagrammes ternaires. Elle permet de
+      représenter les données dans l'espace ternaire, d'ajouter ou d'ajuster des
+      éléments graphiques et d'afficher des résumés statistiques.
+
+test:
+  production: FALSE
+  verbose: TRUE
