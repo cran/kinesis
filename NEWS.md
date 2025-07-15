@@ -1,3 +1,7 @@
+# kinesis 0.2.1
+## Internals
+* Skip snapshot tests on CRAN.
+
 # kinesis 0.2.0
 ## Internals
 * Import **aion** (>= 1.5.0).

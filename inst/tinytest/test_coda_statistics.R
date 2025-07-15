@@ -24,14 +24,3 @@ testServer(kinesis:::coda_summary_server, args = list(x = x), {
   expect_identical(dim(data_pip()), c(8L, 8L))
   expect_identical(dim(data_var()), c(8L, 8L))
 })
-
-if (at_home()) {
-  using("tinysnapshot")
-  source("helpers.R")
-
-  testServer(kinesis:::coda_summary_server, args = list(x = x), {
-    session$setInputs("hist_select-selected" = "Cu")
-    plot_coda_hist <- plot_hist()
-    expect_snapshot_plot(plot_coda_hist, "plot_coda_hist")
-  })
-}

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kinesis 0.2.0\n"
-"POT-Creation-Date: 2025-06-26 16:38+0200\n"
+"POT-Creation-Date: 2025-07-01 12:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,7 +63,7 @@ msgstr ""
 msgid "Bertin scalogram"
 msgstr ""
 
-#: bertin.R:27 coda_statistics.R:60 ternary.R:49
+#: bertin.R:27 coda_statistics.R:53 ternary.R:49
 msgid "Heatmap"
 msgstr ""
 
@@ -267,12 +267,20 @@ msgstr ""
 msgid "Download clusters"
 msgstr ""
 
-#: coda_hclust.R:52 coda_statistics.R:65
+#: coda_hclust.R:52 coda_statistics.R:58
 msgid "Dendrogram"
 msgstr ""
 
 #: coda_hclust.R:119
 msgid "Aitchison distance, %s linkage"
+msgstr ""
+
+#: coda_hist.R:17 coda_hist.R:21 coda_hist.R:26
+msgid "Histogram"
+msgstr ""
+
+#: coda_hist.R:22
+msgid "Select a part"
 msgstr ""
 
 #: coda_logratio.R:26
@@ -375,51 +383,43 @@ msgstr ""
 msgid "Download tables"
 msgstr ""
 
-#: coda_statistics.R:27
-msgid "Select a part"
-msgstr ""
-
-#: coda_statistics.R:30
-msgid "Histogram"
-msgstr ""
-
-#: coda_statistics.R:38
+#: coda_statistics.R:31
 msgid "Location"
 msgstr ""
 
-#: coda_statistics.R:43
+#: coda_statistics.R:36
 msgid "Covariance"
 msgstr ""
 
-#: coda_statistics.R:47
+#: coda_statistics.R:40
 msgid "PIP"
 msgstr ""
 
-#: coda_statistics.R:51 coda_statistics.R:221
+#: coda_statistics.R:44 coda_statistics.R:207
 msgid "Variation Matrix"
 msgstr ""
 
-#: coda_statistics.R:55
+#: coda_statistics.R:48
 msgid "Table"
 msgstr ""
 
-#: coda_statistics.R:144
+#: coda_statistics.R:130
 msgid "Total variation"
 msgstr ""
 
-#: coda_statistics.R:170
+#: coda_statistics.R:156
 msgid "Compositional Mean"
 msgstr ""
 
-#: coda_statistics.R:179
+#: coda_statistics.R:165
 msgid "Percentile Table"
 msgstr ""
 
-#: coda_statistics.R:191
+#: coda_statistics.R:177
 msgid "Centered Log-Ratio Covariance"
 msgstr ""
 
-#: coda_statistics.R:208
+#: coda_statistics.R:194
 msgid "Proportionality Index of Parts"
 msgstr ""
 

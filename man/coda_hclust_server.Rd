@@ -25,6 +25,8 @@ Other coda modules:
 \code{\link{coda_barplot_server}()},
 \code{\link{coda_barplot_ui}()},
 \code{\link{coda_hclust_ui}()},
+\code{\link{coda_hist_server}()},
+\code{\link{coda_hist_ui}()},
 \code{\link{coda_outliers_server}()},
 \code{\link{coda_outliers_ui}()},
 \code{\link{coda_server}()},

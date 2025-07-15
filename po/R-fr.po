@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kinesis 0.1.0.9000\n"
-"POT-Creation-Date: 2025-06-26 16:38+0200\n"
+"POT-Creation-Date: 2025-07-01 12:07+0200\n"
 "PO-Revision-Date: 2025-06-03 17:58+0000\n"
 "Last-Translator: nfrerebeau <nicolas.frerebeau@u-bordeaux-montaigne.fr>\n"
 "Language-Team: French <https://translate.codeberg.org/projects/tesselle/"
@@ -67,7 +67,7 @@ msgstr "Diagramme de Bertin"
 msgid "Bertin scalogram"
 msgstr "Scalogramme"
 
-#: bertin.R:27 coda_statistics.R:60 ternary.R:49
+#: bertin.R:27 coda_statistics.R:53 ternary.R:49
 msgid "Heatmap"
 msgstr "Carte de chaleur"
 
@@ -288,13 +288,21 @@ msgstr "Télécharger la matrice de distance"
 msgid "Download clusters"
 msgstr "Télécharger les groupes"
 
-#: coda_hclust.R:52 coda_statistics.R:65
+#: coda_hclust.R:52 coda_statistics.R:58
 msgid "Dendrogram"
 msgstr "Dendrogramme"
 
 #: coda_hclust.R:119
 msgid "Aitchison distance, %s linkage"
 msgstr "Distance d'Aitchison (aggrégation : %s)"
+
+#: coda_hist.R:17 coda_hist.R:21 coda_hist.R:26
+msgid "Histogram"
+msgstr "Histogramme"
+
+#: coda_hist.R:22
+msgid "Select a part"
+msgstr "Sélectionnez une partie"
 
 #: coda_logratio.R:26
 msgid "Compute log-ratio transformation of compositional data."
@@ -398,51 +406,43 @@ msgstr "Résumé des données et statistiques descriptives."
 msgid "Download tables"
 msgstr "Télécharger les tableaux"
 
-#: coda_statistics.R:27
-msgid "Select a part"
-msgstr "Sélectionnez une partie"
-
-#: coda_statistics.R:30
-msgid "Histogram"
-msgstr "Histogramme"
-
-#: coda_statistics.R:38
+#: coda_statistics.R:31
 msgid "Location"
 msgstr "Position"
 
-#: coda_statistics.R:43
+#: coda_statistics.R:36
 msgid "Covariance"
 msgstr "Covariance"
 
-#: coda_statistics.R:47
+#: coda_statistics.R:40
 msgid "PIP"
 msgstr ""
 
-#: coda_statistics.R:51 coda_statistics.R:221
+#: coda_statistics.R:44 coda_statistics.R:207
 msgid "Variation Matrix"
 msgstr "Matrice de variation"
 
-#: coda_statistics.R:55
+#: coda_statistics.R:48
 msgid "Table"
 msgstr "Tableau"
 
-#: coda_statistics.R:144
+#: coda_statistics.R:130
 msgid "Total variation"
 msgstr "Variation totale"
 
-#: coda_statistics.R:170
+#: coda_statistics.R:156
 msgid "Compositional Mean"
 msgstr "Moyenne compositionnelle"
 
-#: coda_statistics.R:179
+#: coda_statistics.R:165
 msgid "Percentile Table"
 msgstr "Tableau des quantiles"
 
-#: coda_statistics.R:191
+#: coda_statistics.R:177
 msgid "Centered Log-Ratio Covariance"
 msgstr ""
 
-#: coda_statistics.R:208
+#: coda_statistics.R:194
 msgid "Proportionality Index of Parts"
 msgstr "Indice de proportionnalité des parties"
 

@@ -12,6 +12,7 @@ function(request) {
     kinesis::coda_summary_ui("coda_summary"),
     bslib::nav_menu(
       title = "Plot",
+      kinesis::coda_hist_ui("hist"),
       kinesis::coda_barplot_ui("barplot"),
       kinesis::ternary_ui("ternary")
     ),

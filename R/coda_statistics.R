@@ -23,13 +23,6 @@ coda_summary_ui <- function(id) {
         downloadButton(
           outputId = ns("download"),
           label = tr_("Download tables")
-        ),
-        selectize_ui(id = ns("hist_select"), label = tr_("Select a part")),
-        output_plot(
-          id = ns("hist"),
-          title = tr_("Histogram"),
-          note = info_article(author = "Filzmoser et al.", year = "2009",
-                              doi = "10.1016/j.scitotenv.2009.08.008")
         )
       ),
       navset_card_pill(
@@ -107,13 +100,6 @@ coda_summary_server <- function(id, x) {
     data_quant <- reactive({
       req(x())
       nexus::quantile(x(), probs = seq(0, 1, 0.25))
-    })
-
-    ## Histogram -----
-    col_hist <- update_selectize_variables("hist_select", x = x, preserve = FALSE, none = FALSE)
-    plot_hist <- reactive({
-      req(x(), col_hist())
-      function() nexus::hist(x(), select = col_hist())
     })
 
     ## CLR covariance -----
@@ -225,7 +211,6 @@ coda_summary_server <- function(id, x) {
     ## Render plot -----
     render_plot("heatmap", x = plot_heatmap)
     render_plot("dendrogram", x = plot_clust)
-    render_plot("hist", x = plot_hist)
 
     ## Download -----
     output$download <- export_multiple(

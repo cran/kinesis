@@ -5,12 +5,34 @@
 
 <!-- badges: start -->
 
-[![Code
-coverage](https://packages.tesselle.org/kinesis/coverage/badge.svg)](https://packages.tesselle.org/kinesis/coverage/)
+<a href="https://ci.codeberg.org/repos/14694" class="pkgdown-devel"><img
+src="https://ci.codeberg.org/api/badges/14694/status.svg"
+alt="status-badge" /></a>
+<a href="https://packages.tesselle.org/kinesis/coverage/"
+class="pkgdown-devel"><img
+src="https://packages.tesselle.org/kinesis/coverage/badge.svg"
+alt="Code coverage" /></a>
+<a href="https://cran.r-project.org/package=kinesis"
+class="pkgdown-devel"><img
+src="https://tinyverse.netlify.app/badge/kinesis"
+alt="Dependencies" /></a>
+
 <a href="https://tesselle.r-universe.dev/kinesis"
 class="pkgdown-devel"><img
 src="https://tesselle.r-universe.dev/badges/kinesis"
 alt="r-universe" /></a>
+<a href="https://cran.r-project.org/package=kinesis"
+class="pkgdown-release"><img
+src="https://www.r-pkg.org/badges/version/kinesis"
+alt="CRAN Version" /></a> <a
+href="https://cran.r-project.org/web/checks/check_results_kinesis.html"
+class="pkgdown-release"><img
+src="https://badges.cranchecks.info/worst/kinesis.svg"
+alt="CRAN checks" /></a>
+<a href="https://cran.r-project.org/package=kinesis"
+class="pkgdown-release"><img
+src="https://cranlogs.r-pkg.org/badges/kinesis"
+alt="CRAN Downloads" /></a>
 
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
@@ -42,7 +64,7 @@ Practice*, *12*(4), 424-430. <doi:10.1017/aap.2024.10>
 Frerebeau N (2025). *kinesis: ‘shiny’ Applications for the ‘tesselle’
 Packages*. Université Bordeaux Montaigne, Pessac, France.
 <doi:10.5281/zenodo.14645671> <https://doi.org/10.5281/zenodo.14645671>,
-R package version 0.2.0, <https://packages.tesselle.org/kinesis/>.
+R package version 0.2.1, <https://packages.tesselle.org/kinesis/>.
 
 This package is a part of the tesselle project
 <https://www.tesselle.org>.
@@ -56,13 +78,10 @@ Shiny server: <https://analytics.huma-num.fr/tesselle/>.
 
 ### Installation
 
-You can install the released version of **kinesis** from [our
-repository](https://tesselle.r-universe.dev) with:
+You can install the released version of **kinesis** from
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-options(repos = c(CRAN = "https://cloud.r-project.org",
-                  tesselle = "https://tesselle.r-universe.dev"))
-
 install.packages("kinesis")
 ```
 
