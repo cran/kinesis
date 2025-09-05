@@ -25,9 +25,3 @@
 #' @import shiny
 #' @import bslib
 NULL
-
-# Suppress R CMD check note "All declared Imports should be used."
-unused <- function() {
-  folio::boves
-  datasets::iris
-}

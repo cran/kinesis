@@ -8,12 +8,11 @@
 #' @noRd
 function(input, output, session) {
   ## Data
-  data <- kinesis::prepare_server("prepare", select = is.numeric, demo = "zuni")
+  data <- kinesis::count_server("prepare", demo = "zuni")
 
   ## MCD
   kinesis::mcd_server("mcd", x = data)
 
   kinesis::home_server("home")
   kinesis::footer_server("footer")
-  session$onSessionEnded(stopApp)
 }

@@ -66,7 +66,7 @@ export_multiple <- function(..., name = "archive") {
       )
 
       ## Create Zip file
-      utils::zip(zipfile = file, files = fs, flags = "-r9Xj")
+      utils::zip(zipfile = file, files = fs, flags = "-r9Xjq")
     },
     contentType = "application/zip"
   )

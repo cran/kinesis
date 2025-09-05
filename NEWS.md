@@ -1,3 +1,11 @@
+# kinesis 0.3.0
+## Bugfixes & changes
+* The apps no longer stop when the current session ends.
+
+## Internals
+* Import **dimensio** (>= 0.14.1).
+* Import **tabula** (>= 3.3.2).
+
 # kinesis 0.2.1
 ## Internals
 * Skip snapshot tests on CRAN.

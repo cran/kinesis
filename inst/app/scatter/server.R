@@ -11,9 +11,11 @@ function(input, output, session) {
   data <- kinesis::prepare_server("prepare", demo = "iris")
 
   ## Plot
-  results <- kinesis::scatter_server("scatter", x = data)
+  kinesis::scatter_server("scatter", x = data)
+
+  ## Linear model
+  model <- kinesis::lm_server("lm", x = data)
 
   kinesis::home_server("home")
   kinesis::footer_server("footer")
-  session$onSessionEnded(stopApp)
 }

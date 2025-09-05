@@ -171,6 +171,7 @@ graphics_server <- function(id) {
 
     observe({
       pch <- as.integer(input$pch) %|||% 16
+      param$pal_pch <- input$pch
       if (isTruthy(input$pch)) {
         param$pch <- protect(khroma::palette_shape, pch[[1L]], pch)
       } else {
@@ -181,6 +182,7 @@ graphics_server <- function(id) {
 
     observe({
       lty <- as.integer(input$lty) %|||% 1
+      param$pal_lty <- input$lty
       if (isTruthy(input$lty)) {
         param$lty <- protect(khroma::palette_line, lty[[1L]], lty)
       } else {
@@ -191,6 +193,7 @@ graphics_server <- function(id) {
 
     observe({
       cex <- range(as.integer(input$cex)) %|||% 1
+      param$pal_cex <- input$cex
       if (isTruthy(input$cex)) {
         param$cex <- protect(khroma::palette_size_sequential, cex[[1L]], cex)
       } else {

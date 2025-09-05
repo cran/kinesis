@@ -16,5 +16,4 @@ function(input, output, session) {
 
   kinesis::home_server("home")
   kinesis::footer_server("footer")
-  session$onSessionEnded(stopApp)
 }

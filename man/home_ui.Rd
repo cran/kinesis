@@ -4,7 +4,7 @@
 \alias{home_ui}
 \title{About UI}
 \usage{
-home_ui(id, package)
+home_ui(id, package = NULL)
 }
 \arguments{
 \item{id}{A \code{\link{character}} vector to be used for the namespace.}

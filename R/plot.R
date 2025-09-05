@@ -71,8 +71,6 @@ render_plot <- function(id, x, ...) {
     observe({ showModal(download_plot(session$ns)) }) |>
       bindEvent(input$download)
 
-    setBookmarkExclude(c("download", "name", "width", "height"))
-
     ## Plot
     output$plot <- renderPlot(x()(), ...)
 

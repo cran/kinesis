@@ -7,9 +7,9 @@ default:
     fr: "Diagramme de dispersion"
   description:
     en: |
-      This application allows to draw a scatter plot.
+      This application allows to draw a scatter plot and perform simple or multiple linear regression.
     fr: |
-      Cette application permet de réaliser un diagramme de dispersion.
+      Cette application permet de tracer un diagramme de dispersion et de réaliser une régression linéaire multiple.
 
 test:
   production: FALSE

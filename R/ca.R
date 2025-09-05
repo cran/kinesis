@@ -64,10 +64,12 @@ ca_server <- function(id, x) {
 
   moduleServer(id, function(input, output, session) {
     ## Update UI -----
-    row_names <- reactive({ rownames(x()) })
-    sup_row <- update_selectize_values("sup_row", x = row_names)
-    sup_col <- update_selectize_variables("sup_col", x = x, find = is.numeric)
-    sup_quali <- update_selectize_variables("sup_quali", x = x, find = Negate(is.numeric))
+    quanti <- subset_quantitative(x)
+    quali <- subset_qualitative(x)
+
+    sup_row <- update_selectize_rownames("sup_row", x = x)
+    sup_col <- update_selectize_colnames("sup_col", x = quanti)
+    sup_quali <- update_selectize_colnames("sup_quali", x = quali, select = TRUE)
 
     ## Check data -----
     old <- reactive({ x() }) |> bindEvent(input$go)
@@ -79,10 +81,8 @@ ca_server <- function(id, x) {
         mirai::mirai({
           param <- list(object = x, rank = rank,
                         sup_row = arkhe::seek_rows(x, names = sup_row),
-                        sup_col = arkhe::seek_columns(x, names = sup_col))
-          if (is.data.frame(x)) {
-            param$sup_quali <- arkhe::seek_columns(x, names = sup_quali)
-          }
+                        sup_col = sup_col)
+          if (is.data.frame(x)) param$sup_quali <- sup_quali
           do.call(dimensio::ca, param)
         }, environment())
       }

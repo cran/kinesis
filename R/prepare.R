@@ -20,9 +20,7 @@ prepare_ui <- function(id) {
       sidebar = sidebar(
         width = 400,
         title = tr_("Data"),
-        import_ui(ns("import")),
-        select_ui(ns("select")),
-        clean_ui(ns("clean"))
+        import_ui(ns("import"))
       ), # sidebar
       ## Output: value box
       box_ui(ns("box")),
@@ -35,6 +33,10 @@ prepare_ui <- function(id) {
             label = tr_("Table overview"),
             value = TRUE),
           gt::gt_output(outputId = ns("table"))
+        ),
+        nav_panel(
+          title = tr_("Clean values"),
+          clean_ui(ns("clean"))
         ),
         nav_panel(
           title = tr_("Missing values"),
@@ -52,8 +54,6 @@ prepare_ui <- function(id) {
 #'
 #' @param id An ID string that corresponds with the ID used to call the module's
 #'  UI function.
-#' @param choose A predicate [`function`] used to select columns.
-#' @param select A predicate [`function`] used to select columns.
 #' @param demo A [`character`] string specifying the name of a dataset (see
 #'  [import_server()]).
 #' @return A reactive [`data.frame`].
@@ -61,26 +61,24 @@ prepare_ui <- function(id) {
 #' @family generic modules
 #' @keywords internal
 #' @export
-prepare_server <- function(id, choose = \(...) TRUE, select = \(...) TRUE,
-                           demo = NULL) {
+prepare_server <- function(id, demo = NULL) {
   moduleServer(id, function(input, output, session) {
     ## Prepare data -----
-    data_clean <- import_server("import", demo = demo) |>
-      select_server("select", x = _, find_col = choose, use_col = select) |>
-      clean_server("clean", x = _) |>
-      missing_server("missing", x = _)
+    data_raw <- import_server("import", demo = demo)
+    data_clean <- clean_server("clean", x = data_raw)
+    data_miss <- missing_server("missing", x = data_clean)
 
     ## Render description -----
-    box_server("box", x = data_clean)
+    box_server("box", x = data_miss)
 
     ## Render table -----
     output$table <- gt::render_gt({
-      tbl <- if (isTRUE(input$head)) utils::head(data_clean()) else data_clean()
+      tbl <- if (isTRUE(input$head)) utils::head(data_miss()) else data_miss()
       gt::gt(tbl, rownames_to_stub = TRUE) |>
         gt::tab_options(table.width = "100%")
     })
 
-    data_clean
+    data_miss
   })
 }
 
@@ -98,15 +96,15 @@ box_ui <- function(id) {
     fill = FALSE,
     value_box(
       title = tr_("Dimensions"),
-      value = textOutput(outputId = ns("value_dimensions"))
+      uiOutput(outputId = ns("value_dimensions"))
     ),
     value_box(
       title = tr_("Sparsity"),
-      value = textOutput(outputId = ns("value_sparsity"))
+      uiOutput(outputId = ns("value_sparsity"))
     ),
     value_box(
       title = tr_("Missing values"),
-      value = textOutput(outputId = ns("value_missing"))
+      uiOutput(outputId = ns("value_missing"))
     ),
     card(
       helpText(tr_("Export your data for futur use.")),
@@ -121,15 +119,15 @@ box_server <- function(id, x) {
   stopifnot(is.reactive(x))
 
   moduleServer(id, function(input, output, session) {
-    output$value_dimensions <- renderText({
+    output$value_dimensions <- renderUI({
       req(x())
       paste0(dim(x()), collapse = " x ")
     })
-    output$value_sparsity <- renderText({
+    output$value_sparsity <- renderUI({
       req(x())
       paste0(round(arkhe::sparsity(x()) * 100, 2), "%")
     })
-    output$value_missing <- renderText({
+    output$value_missing <- renderUI({
       req(x())
       sum(is.na(x()))
     })
@@ -139,98 +137,37 @@ box_server <- function(id, x) {
   })
 }
 
-## Select ----------------------------------------------------------------------
-select_ui <- function(id) {
-  ns <- NS(id)
-
-  tags$div(
-    h5(tr_("Select data")),
-    selectize_ui(id = ns("rownames"), label = tr_("Sample names")),
-    selectize_ui(id = ns("colnames"), label = tr_("Variables"), multiple = TRUE)
-  )
-}
-
-#' @param id A [`character`] string specifying the namespace.
-#' @param x A reactive `matrix`-like object.
-#' @param find_col A predicate [`function`] for column detection
-#'  (see [arkhe::detect()]).
-#' @param use_col A predicate [`function`] for column selection
-#'  (see [arkhe::detect()]).
-#' @param min_row An [`interger`] specifying the expected minimum number of rows.
-#' @param min_col An [`interger`] specifying the expected minimum number of columns.
-#' @return A reactive [`data.frame`].
-#' @noRd
-select_server <- function(id, x, find_col = NULL, use_col = NULL,
-                          min_row = 1, min_col = 1) {
-  stopifnot(is.reactive(x))
-
-  moduleServer(id, function(input, output, session) {
-    ## Update UI
-    row_names <- update_selectize_variables(id = "rownames", x = x)
-
-    ## Assign row names
-    named <- reactive({
-      req(x())
-      out <- notify(
-        {
-          column <- arkhe::seek_columns(x(), names = row_names())
-          arkhe::assign_rownames(x(), column = column %|||% 0, remove = TRUE)
-        },
-        title = tr_("Row names")
-      )
-      out
-    }) |>
-      bindEvent(row_names())
-
-    ## Update UI
-    col_names <- update_selectize_variables(
-      id = "colnames",
-      x = named,
-      find = find_col,
-      use = use_col
-    )
-
-    ## Select variables
-    selected <- reactive({
-      out <- arkhe::get_columns(named(), names = col_names())
-      validate_dim(out, i = min_row, j = min_col)
-      out
-    }) |>
-      bindEvent(col_names(), ignoreNULL = FALSE) |>
-      debounce(500)
-
-    selected
-  })
-}
-
 ## Clean -----------------------------------------------------------------------
 clean_ui <- function(id) {
   ns <- NS(id)
 
-  tags$div(
-    h5(tr_("Clean values")),
+  list(
     ## Input: remove whitespace
     checkboxInput(
       inputId = ns("remove_whitespace"),
       label = tr_("Remove leading/trailing whitespace"),
-      value = FALSE
+      value = FALSE,
+      width = "100%"
     ),
     ## Input: remove zero
     checkboxInput(
       inputId = ns("remove_zero_row"),
       label = tr_("Remove rows with zero"),
-      value = FALSE
+      value = FALSE,
+      width = "100%"
     ),
     checkboxInput(
       inputId = ns("remove_zero_column"),
       label = tr_("Remove columns with zero"),
-      value = FALSE
+      value = FALSE,
+      width = "100%"
     ),
     ## Input: remove constant
     checkboxInput(
       inputId = ns("remove_constant_column"),
       label = tr_("Remove constant columns"),
-      value = FALSE
+      value = FALSE,
+      width = "100%"
     ),
     ## Input: remove all?
     checkboxInput(
@@ -252,36 +189,37 @@ clean_server <- function(id, x, verbose = get_option("verbose", FALSE)) {
   stopifnot(is.reactive(x))
 
   moduleServer(id, function(input, output, session) {
-    reactive({
-      out <- x()
-
-      ## Clean whitespace
-      if (isTruthy(out) && isTRUE(input$remove_whitespace)) {
-        out <- arkhe::clean_whitespace(out, squish = TRUE)
-      }
-
-      ## Remove rows
-      ## If only zeros
-      if (isTruthy(out) && isTRUE(input$remove_zero_row)) {
-        out <- arkhe::remove_zero(out, margin = 1, all = input$all,
-                                  verbose = verbose)
-      }
-
-      ## Remove columns
-      ## If only zeros
-      if (isTruthy(out) && isTRUE(input$remove_zero_column)) {
-        out <- arkhe::remove_zero(out, margin = 2, all = input$all,
-                                  verbose = verbose)
-      }
-      ## If constant
-      if (isTruthy(out) && isTRUE(input$remove_constant_column)) {
-        out <- arkhe::remove_constant(out, verbose = verbose)
-      }
-
-      validate_dim(out)
-
-      out
+    ## Clean whitespace
+    no_ws <- reactive({
+      req(x())
+      if (!isTRUE(input$remove_whitespace)) return(x())
+      arkhe::clean_whitespace(x(), squish = TRUE)
     })
+
+    ## Remove (all) rows with zeros
+    no_zero_row <- reactive({
+      req(no_ws())
+      if (!isTRUE(input$remove_zero_row)) return(no_ws())
+      arkhe::remove_zero(no_ws(), margin = 1, all = isTRUE(input$all),
+                         verbose = verbose)
+    })
+
+    ## Remove (all) columns with zeros
+    no_zero_col <- reactive({
+      req(no_zero_row())
+      if (!isTRUE(input$remove_zero_column)) return(no_zero_row())
+      arkhe::remove_zero(no_zero_row(), margin = 2, all = isTRUE(input$all),
+                         verbose = verbose)
+    })
+
+    ## Remove constant columns
+    no_cte <- reactive({
+      req(no_zero_col())
+      if (!isTRUE(input$remove_constant_column)) return(no_zero_col())
+      arkhe::remove_constant(no_zero_col(), verbose = verbose)
+    })
+
+    no_cte
   })
 }
 
@@ -331,26 +269,24 @@ missing_server <- function(id, x, verbose = get_option("verbose", FALSE)) {
   stopifnot(is.reactive(x))
 
   moduleServer(id, function(input, output, session) {
-    data_replace <- reactive({
-      out <- x()
-
-      ## Replace empty strings
-      if (isTRUE(input$empty_as_NA)) {
-        out <- arkhe::replace_empty(out, value = NA)
-      }
-
-      ## Replace zeros
-      if (isTRUE(input$zero_as_NA)) {
-        out <- arkhe::replace_zero(out, value = NA)
-      }
-
-      out
+    ## Replace empty strings
+    empty_as_na <- reactive({
+      req(x())
+      if (!isTRUE(input$empty_as_NA)) return(x())
+      arkhe::replace_empty(x(), value = NA)
     })
 
-    data_missing <- reactive({
-      out <- data_replace()
+    ## Replace zeros
+    zero_as_na <- reactive({
+      req(empty_as_na())
+      if (!isTRUE(input$zero_as_NA)) return(empty_as_na())
+      arkhe::replace_zero(empty_as_na(), value = NA)
+    })
 
-      ## Remove missing values
+    ## Remove missing values
+    no_missing <- reactive({
+      req(zero_as_na())
+
       choice <- input$remove %|||% ""
       fun <- switch(
         choice,
@@ -365,24 +301,21 @@ missing_server <- function(id, x, verbose = get_option("verbose", FALSE)) {
         },
         function(x) { x }
       )
-      out <- fun(out)
 
-      validate_dim(out)
-
-      out
+      fun(zero_as_na())
     })
 
     ## Render plot
     plot_missing <- reactive({
-      req(data_missing())
+      req(all(dim(no_missing()) > 0))
       function() {
-        col <- if (anyNA(data_missing())) c("#DDDDDD", "#BB5566") else "#DDDDDD"
-        tabula::plot_heatmap(object = is.na(data_missing()), color = col,
+        col <- if (anyNA(no_missing())) c("#DDDDDD", "#BB5566") else "#DDDDDD"
+        tabula::plot_heatmap(object = is.na(no_missing()), color = col,
                              fixed_ratio = FALSE)
       }
     })
     render_plot("heatmap", x = plot_missing)
 
-    data_missing
+    no_missing
   })
 }

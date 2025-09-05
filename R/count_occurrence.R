@@ -17,8 +17,7 @@ occurrence_ui <- function(id) {
     title = tr_("Co-Occurrence"),
     layout_sidebar(
       sidebar = sidebar(
-        width = 400,
-        h5(tr_("Co-Occurrence")),
+        title = tr_("Co-Occurrence"),
         radioButtons(
           inputId = ns("method"),
           label = tr_("Method"),
@@ -54,7 +53,7 @@ occurrence_ui <- function(id) {
 #'
 #' @param id An ID string that corresponds with the ID used to call the module's
 #'  UI function.
-#' @param x A reactive `data.frame` (typically returned by [import_server()]).
+#' @param x A reactive `data.frame` returned by [diversity_server()].
 #' @param verbose A [`logical`] scalar: should \R report extra information on
 #'  progress?
 #' @return
@@ -67,15 +66,9 @@ occurrence_server <- function(id, x, verbose = get_option("verbose", FALSE)) {
   stopifnot(is.reactive(x))
 
   moduleServer(id, function(input, output, session) {
-    ## Get count data -----
-    counts <- reactive({
-      req(x())
-      arkhe::keep_columns(x(), f = is.numeric, verbose = verbose)
-    })
-
     ## Check data -----
-    old <- reactive({ counts() }) |> bindEvent(input$go)
-    notify_change(session$ns("change"), counts, old, title = tr_("Co-Occurrence"))
+    old <- reactive({ x() }) |> bindEvent(input$go)
+    notify_change(session$ns("change"), x, old, title = tr_("Co-Occurrence"))
 
     ## Compute index -----
     compute_occur <- ExtendedTask$new(
@@ -86,7 +79,7 @@ occurrence_server <- function(id, x, verbose = get_option("verbose", FALSE)) {
       bslib::bind_task_button("go")
 
     observe({
-      compute_occur$invoke(x = counts(), method = input$method)
+      compute_occur$invoke(x = x(), method = input$method)
     }) |>
       bindEvent(input$go)
 
@@ -105,16 +98,18 @@ occurrence_server <- function(id, x, verbose = get_option("verbose", FALSE)) {
 
     ## Render table -----
     output$table <- gt::render_gt({
-        req(results())
-        tbl <- as.data.frame(as.matrix(results()))
-        gt::gt(tbl, rownames_to_stub = TRUE) |>
-          gt::tab_options(table.width = "100%")
-      })
+      req(results())
+      tbl <- as.data.frame(as.matrix(results()))
+      gt::gt(tbl, rownames_to_stub = TRUE) |>
+        gt::tab_options(table.width = "100%")
+    })
 
     ## Render plot -----
     render_plot("plot", x = map)
 
     ## Download -----
     output$download <- export_table(results, "occurrence")
+
+    results
   })
 }

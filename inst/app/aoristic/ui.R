@@ -7,7 +7,7 @@ function(request) {
   bslib::page_navbar(
     title = toupper(kinesis::get_option("name")),
     id = "main",
-    kinesis::home_ui("home", package = "kairos"),
+    kinesis::home_ui("home"),
     kinesis::prepare_ui("prepare"),
     kinesis::time_interval_ui("intervals"),
     kinesis::aoristic_ui("aoristic"),

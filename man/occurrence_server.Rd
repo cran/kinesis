@@ -10,7 +10,7 @@ occurrence_server(id, x, verbose = get_option("verbose", FALSE))
 \item{id}{An ID string that corresponds with the ID used to call the module's
 UI function.}
 
-\item{x}{A reactive \code{data.frame} (typically returned by \code{\link[=import_server]{import_server()}}).}
+\item{x}{A reactive \code{data.frame} returned by \code{\link[=diversity_server]{diversity_server()}}.}
 
 \item{verbose}{A \code{\link{logical}} scalar: should \R report extra information on
 progress?}
@@ -27,11 +27,15 @@ Co-Occurrence Server
 Other count data modules: 
 \code{\link{bertin_server}()},
 \code{\link{bertin_ui}()},
+\code{\link{count_server}()},
+\code{\link{count_ui}()},
 \code{\link{diversity_alpha_server}()},
 \code{\link{diversity_alpha_ui}()},
 \code{\link{diversity_beta_server}()},
 \code{\link{diversity_beta_ui}()},
 \code{\link{diversity_docs_ui}()},
+\code{\link{diversity_server}()},
+\code{\link{diversity_ui}()},
 \code{\link{occurrence_ui}()}
 }
 \concept{count data modules}

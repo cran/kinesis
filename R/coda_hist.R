@@ -49,7 +49,7 @@ coda_hist_server <- function(id, x) {
 
   moduleServer(id, function(input, output, session) {
     ## Select column -----
-    col_hist <- update_selectize_variables("select", x = x, preserve = FALSE, none = FALSE)
+    col_hist <- update_selectize_colnames("select", x = x, placeholder = FALSE)
 
     ## Histogram -----
     plot_hist <- reactive({

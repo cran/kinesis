@@ -15,30 +15,29 @@ testServer(kinesis:::build_numeric_input, args = list(x = x), {
 
 x <- reactiveVal(iris)
 
-testServer(kinesis:::update_selectize_variables, args = list(x = x), {
+testServer(kinesis:::update_checkbox_colnames, args = list(x = x), {
   val <- session$getReturned()
-  session$elapse(2000)
   expect_equal(val(), NULL)
 
-  session$setInputs("selected" = "species")
+  session$setInputs(names = c("Sepal.Length", "Sepal.Width"))
   val <- session$getReturned()
-  session$elapse(2000)
-  expect_equal(val(), "species")
+  expect_equal(val(), c("Sepal.Length", "Sepal.Width"))
 })
 
-x <- reactiveVal(colnames(iris))
-
-testServer(kinesis:::update_selectize_values, args = list(x = x), {
+testServer(kinesis:::update_selectize_colnames, args = list(x = x), {
   val <- session$getReturned()
   expect_equal(val(), NULL)
 
-  session$setInputs("selected" = "species")
+  session$setInputs("names" = "species")
   val <- session$getReturned()
   expect_equal(val(), "species")
 })
 
-# TODO
-# y <- reactiveVal("species")
+testServer(kinesis:::update_selectize_rownames, args = list(x = x), {
+  val <- session$getReturned()
+  expect_equal(val(), NULL)
 
-# testServer(kinesis:::update_selectize_values, args = list(x = x, exclude = y), {
-# })
+  session$setInputs("names" = "species")
+  val <- session$getReturned()
+  expect_equal(val(), "species")
+})

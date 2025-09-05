@@ -27,12 +27,7 @@ time_interval_ui <- function(id) {
           id = ns("upper"),
           label = tr_("Upper temporal boundary")
         ),
-        selectizeInput(
-          inputId = ns("calendar"),
-          label = tr_("Calendar"),
-          choices = c("CE", "BCE", "BP"),
-          selected = "CE"
-        ),
+        select_calendar(ns("calendar")),
         selectize_ui(
           id = ns("groups"),
           label = tr_("Groups")
@@ -63,25 +58,17 @@ time_interval_server <- function(id, x) {
 
   moduleServer(id, function(input, output, session) {
     ## Update UI -----
-    col_lower <- update_selectize_variables("lower", x = x, find = is.numeric)
-    col_upper <- update_selectize_variables("upper", x = x, find = is.numeric)
-    col_groups <- update_selectize_variables("groups", x = x, find = Negate(is.numeric))
+    quanti <- subset_quantitative(x)
+    quali <- subset_qualitative(x)
+    col_lower <- update_selectize_colnames("lower", x = quanti)
+    col_upper <- update_selectize_colnames("upper", x = quanti, exclude = col_lower)
+    col_groups <- update_selectize_colnames("groups", x = quali)
 
-    lower <- reactive({
-      req(col_lower())
-      x()[[col_lower()]]
-    })
-    upper <- reactive({
-      req(col_upper())
-      x()[[col_upper()]]
-    })
-    groups <- reactive({
-      if (isTruthy(col_groups())) x()[[col_groups()]] else NULL
-    })
-    calendar <- reactive({
-      req(input$calendar)
-      aion::calendar(input$calendar)
-    })
+    lower <- select_data(x, col_lower, drop = TRUE)
+    upper <- select_data(x, col_upper, drop = TRUE)
+    groups <- select_data(x, col_groups, drop = TRUE)
+
+    calendar <- get_calendar("calendar")
 
     ## Time Intervals -----
     results <- reactive({
@@ -103,15 +90,16 @@ time_interval_server <- function(id, x) {
       req(results())
       grp <- NULL
       col <- "black"
-      if (length(groups()) > 0) {
+
+      if (isTruthy(groups())) {
         grp <- groups()
         col <- param$col_quali(grp)
       }
+
       function() {
         aion::plot(results(), calendar = aion::CE(), groups = grp, col = col)
-        if (length(groups()) > 0) {
-          graphics::legend(x = "topleft", legend = unique(grp),
-                           fill = unique(col))
+        if (isTruthy(groups())) {
+          graphics::legend(x = "topleft", legend = unique(grp), fill = unique(col))
         }
       }
     })

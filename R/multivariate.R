@@ -21,15 +21,13 @@ multivariate_ui <- function(id) {
         inputId = ns("axis1"),
         label = tr_("Horizontal axis"),
         choices = NULL,
-        selected = NULL,
         multiple = FALSE
       ),
       selectizeInput(
         inputId = ns("axis2"),
         label = tr_("Vertical axis"),
         choices = NULL,
-        selected = NULL,
-        multiple = FALSE,
+        multiple = FALSE
       ),
       checkboxInput(
         inputId = ns("lab_ind"),
@@ -113,7 +111,8 @@ multivariate_ui <- function(id) {
       title = tr_("Individuals"),
       layout_column_wrap(
         output_plot(id = ns("plot_cos2_1")),
-        output_plot(id = ns("plot_cos2_2"))
+        output_plot(id = ns("plot_cos2_2")),
+        min_height = "50%"
       ),
       gt::gt_output(outputId = ns("info_ind"))
     ),
@@ -122,7 +121,8 @@ multivariate_ui <- function(id) {
       title = tr_("Variables"),
       layout_column_wrap(
         output_plot(id = ns("plot_contrib_1")),
-        output_plot(id = ns("plot_contrib_2"))
+        output_plot(id = ns("plot_contrib_2")),
+        min_height = "50%"
       ),
       gt::gt_output(outputId = ns("info_var"))
     ),
@@ -158,11 +158,15 @@ multivariate_server <- function(id, x, y) {
     ## Illustrative variables -----
     ## Set group_var for nexus::GroupedComposition objects
     extra <- reactive({ as.data.frame(y(), group_var = tr_("Group")) })
-    col_quali <- update_selectize_variables("extra_quali", x = extra,
-                                            find = Negate(is.numeric),
-                                            selected = tr_("Group"))
-    col_quanti <- update_selectize_variables("extra_quanti", x = extra,
-                                             find = is.numeric)
+    quanti <- subset_quantitative(extra)
+    quali <- subset_qualitative(extra)
+
+    col_quali <- update_selectize_colnames("extra_quali", x = quali)
+    col_quanti <- update_selectize_colnames("extra_quanti", x = quanti)
+
+    ## Extra variables -----
+    extra_quali <- select_data(quali, col_quali, drop = TRUE)
+    extra_quanti <- select_data(quanti, col_quanti, drop = TRUE)
 
     ## Eigenvalues -----
     eigen <- reactive({
@@ -187,14 +191,6 @@ multivariate_server <- function(id, x, y) {
       updateSelectizeInput(inputId = "axis2", choices = choices)
     }) |>
       bindEvent(axis1())
-
-    ## Bookmark -----
-    onRestored(function(state) {
-      updateSelectizeInput(session, inputId = "axis1",
-                           selected = state$input$axis1)
-      updateSelectizeInput(session, inputId = "axis2",
-                           selected = state$input$axis2)
-    })
 
     ## Select axes -----
     axis1 <- reactive({
@@ -230,23 +226,15 @@ multivariate_server <- function(id, x, y) {
 
     ## Individuals
     plot_ind <- reactive({
-      req(x(), extra())
+      req(x())
 
-      ## Extra variables
-      extra_quanti <- arkhe::seek_columns(extra(), names = col_quanti())
-      if (!is.null(extra_quanti)) extra_quanti <- extra()[[extra_quanti]]
-      extra_quali <- arkhe::seek_columns(extra(), names = col_quali())
-      if (!is.null(extra_quali)) extra_quali <- extra()[[extra_quali]]
-
-      col <- "black"
-      if (isTruthy(extra_quanti)) {
-        col <- param_ind$col_quant(extra_quanti)
+      default_quali <- "observation"
+      if (!isTruthy(extra_quali()) && isTruthy(extra_quanti())) {
+        default_quali <- NULL
+        col <- param_ind$pal_quanti
+      } else {
+        col <- param_ind$pal_quali
       }
-      if (isTruthy(extra_quali)) {
-        col <- param_ind$col_quali(extra_quali)
-      }
-      cex <- param_ind$cex(extra_quanti)
-      pch <- param_ind$pch(extra_quali)
 
       add_ellipses <- any(input$wrap %in% c("confidence", "tolerance"))
       add_hull <- isTRUE(input$wrap == "hull")
@@ -256,13 +244,13 @@ multivariate_server <- function(id, x, y) {
           x = x(),
           axes = c(axis1(), axis2()),
           active = TRUE,
-          sup = input$sup_ind,
-          labels = input$lab_ind,
-          extra_quali = extra_quali %|||% "observation",
-          extra_quanti = extra_quanti,
-          col = col,
-          pch = pch,
-          cex = cex,
+          sup = isTRUE(input$sup_ind),
+          labels = isTRUE(input$lab_ind),
+          extra_quali = extra_quali() %|||% default_quali,
+          extra_quanti = extra_quanti(),
+          color = col,
+          symbol = param_ind$pal_pch,
+          size = param_ind$pal_cex,
           xlim = range_ind$x,
           ylim = range_ind$y,
           panel.first = graphics::grid()
@@ -271,7 +259,7 @@ multivariate_server <- function(id, x, y) {
         if (add_ellipses) {
           dimensio::viz_ellipses(
             x = x(),
-            group = extra_quali,
+            group = extra_quali(),
             type = input$wrap,
             level = as.numeric(input$ellipse_level),
             color = param_ind$pal_quali
@@ -280,7 +268,7 @@ multivariate_server <- function(id, x, y) {
         if (add_hull) {
           dimensio::viz_hull(
             x = x(),
-            group = extra_quali,
+            group = extra_quali(),
             color = param_ind$pal_quali
           )
         }
@@ -296,8 +284,8 @@ multivariate_server <- function(id, x, y) {
           x = x(),
           axes = c(axis1(), axis2()),
           active = TRUE,
-          sup = input$sup_var,
-          labels = input$lab_var,
+          sup = isTRUE(input$sup_var),
+          labels = isTRUE(input$lab_var),
           extra_quali = "observation",
           color = param_var$pal_quali,
           symbol = c(1, 3),
@@ -408,7 +396,8 @@ multivariate_summary <- function(x, axes, margin) {
       id = "cos2"
     ) |>
     gt::cols_label(
-      dist = tr_("Distance")
+      gt::matches("dist") ~ tr_("Distance"),
+      gt::matches("inertia") ~ tr_("Inertia")
     ) |>
     gt::cols_label_with(
       columns = gt::starts_with("F"),

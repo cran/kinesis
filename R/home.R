@@ -10,7 +10,7 @@
 #' @family page modules
 #' @keywords internal
 #' @export
-home_ui <- function(id, package) {
+home_ui <- function(id, package = NULL) {
   # Create a namespace function using the provided id
   ns <- NS(id)
 
@@ -44,22 +44,6 @@ home_ui <- function(id, package) {
         nav_panel(
           title = tr_("How to cite"),
           help_cite(package)
-        ),
-        nav_panel(
-          title = tr_("Bookmark"),
-          tags$p(
-            tr_("You can save the state of the application and get a URL which will restore the application with that state."),
-            tr_("You can then copy the URL and save it for later, or share it with others so they can visit the application in the bookmarked state.")
-          ),
-          tags$p(
-            tr_("This is not intended for long-term storage."),
-            tr_("There is no guarantee as to how long your bookmark will last.")
-          ),
-          if (get_option("bookmark", FALSE)) {
-            tags$div(class = "d-grid d-md-block", bookmarkButton())
-          } else {
-            tags$p(tr_("Bookmarking is currently disabled."))
-          }
         )
       ) # navset_card_pill
     ) # layout_sidebar
@@ -107,37 +91,6 @@ footer_ui <- function(id) {
 #' @export
 home_server <- function(id) {
   moduleServer(id, function(input, output, session) {
-    ## Bookmark -----
-    onBookmark(function(state) {
-      saved_time <- Sys.time()
-
-      msg <- sprintf(tr_("Last saved at %s."), saved_time)
-      showNotification(
-        ui = msg,
-        duration = 5,
-        closeButton = TRUE,
-        type = "message",
-        session = session
-      )
-      message(msg)
-
-      # state is a mutable reference object,
-      # we can add arbitrary values to it.
-      state$values$time <- saved_time
-    })
-
-    onRestore(function(state) {
-      msg <- sprintf(tr_("Restoring from state bookmarked at %s."), state$values$time)
-      showNotification(
-        ui = msg,
-        duration = 5,
-        closeButton = TRUE,
-        type = "message",
-        session = session
-      )
-      message(msg)
-    })
-
     ## Render -----
     output$session <- renderPrint({ utils::sessionInfo() })
   })

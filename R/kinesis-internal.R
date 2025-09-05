@@ -32,11 +32,17 @@ theme_ui <- function(version = "5", ...) {
 validate_csv <- function(x) {
   validate(need(x, message = tr_("Import a CSV file first.")))
 }
+validate_rows <- function(x, n = 1) {
+  rows <- ngettext(n, "Select at least %d row.", "Select at least %d rows.")
+  validate(need(NROW(x) >= n, sprintf(rows, n)), errorClass = "kinesis")
+}
+validate_columns <- function(x, n = 1) {
+  cols <- ngettext(n, "Select at least %d column.", "Select at least %d columns.")
+  validate(need(NCOL(x) >= n, sprintf(cols, n)), errorClass = "kinesis")
+}
 validate_dim <- function(x, i = 1, j = 1) {
-  rows <- ngettext(i, "Select at least %d row.", "Select at least %d rows.")
-  cols <- ngettext(j, "Select at least %d column.", "Select at least %d columns.")
-  validate(need(NROW(x) >= i, sprintf(rows, i)), errorClass = "kinesis")
-  validate(need(NCOL(x) >= j, sprintf(cols, j)), errorClass = "kinesis")
+  validate_rows(x, n = i)
+  validate_columns(x, n = j)
 }
 validate_na <- function(x) {
   validate(need(!anyNA(x), tr_("Your data should not contain missing values.")),
@@ -54,7 +60,8 @@ validate_zero <- function(x) {
 #' @return If `x` is not [truthy][shiny::isTruthy()], returns `y`;
 #'  otherwise returns `x`.
 #' @keywords internal
-#' @noRd
+#' @name falsy
+#' @rdname falsy
 `%|||%` <- function(x, y) {
   if (isTruthy(x)) x else y
 }
@@ -133,159 +140,6 @@ render_numeric_input <- function(id) {
   uiOutput(NS(id, "controls"))
 }
 
-#' Updatable Select List
-#'
-#' @param id A [`character`] string specifying the namespace.
-#' @return
-#'  A select list control that can be added to a UI definition
-#'  (see [shiny::selectizeInput()]).
-#' @keywords internal
-selectize_ui <- function(id, label = "Choose", multiple = FALSE) {
-  ns <- NS(id)
-  plugins <- ifelse(isTRUE(multiple), "remove_button", "clear_button")
-  options <- list(plugins = plugins)
-
-  selectizeInput(
-    inputId = ns("selected"),
-    label = label,
-    choices = NULL,
-    selected = NULL,
-    multiple = multiple,
-    options = options
-  )
-}
-
-#' Update a Select List with Column Names
-#'
-#' @param id A [`character`] string specifying the namespace (must match
-#'  [selectize_ui()]).
-#' @param x A reactive `matrix`-like object.
-#' @param find A predicate [`function`] for column detection
-#'  (see [arkhe::detect()]).
-#' @param find A predicate [`function`] for column selection
-#'  (see [arkhe::detect()]).
-#' @param selected A [`character`] vector specifying the initially selected
-#'  value(s).
-#' @param preserve A [`logical`] scalar: should existing selection be preserved
-#'  on update?
-#' @param none A [`logical`] scalar: should a placeholder be added as the first
-#'  element?
-#' @param server A [`logical`] scalar: should server-side selectize be used?
-#' @return
-#'  A reactive [`character`] vector of column names.
-#'
-#'  Side effect: change the value of a select input on the client.
-#' @seealso [selectize_ui()]
-#' @keywords internal
-update_selectize_variables <- function(id, x, find = NULL, use = NULL,
-                                       selected = NULL, preserve = TRUE,
-                                       none = TRUE, server = TRUE) {
-  stopifnot(is.reactive(x))
-
-  moduleServer(id, function(input, output, session) {
-    ## Update UI
-    observe({
-      choices <- colnames(x())
-      found <- rep(TRUE, length(choices))
-      if (!is.null(choices) && is.function(find)) {
-        found <- which(arkhe::detect(x = x(), f = find, margin = 2))
-        choices <- choices[found]
-      }
-      if (length(choices) > 0 && is.function(use)) {
-        used <- arkhe::detect(x = x(), f = use, margin = 2)
-        selected <- choices[which(found & used)]
-      }
-      if (isTRUE(preserve)) {
-        ## Try to keep previous selection, if any
-        keep <- intersect(choices, input$selected)
-        if (length(keep) > 0) selected <- keep
-      }
-      if (isTRUE(none)) {
-        choices <- c(Choose = "", choices)
-      }
-
-      freezeReactiveValue(input, "selected")
-      updateSelectizeInput(
-        inputId = "selected",
-        choices = choices,
-        selected = selected,
-        server = server
-      )
-    }) |>
-      bindEvent(x())
-
-    ## Bookmark
-    onRestored(function(state) {
-      updateSelectizeInput(session, "selected", selected = state$input$selected)
-    })
-
-    reactive({
-      req(x()) # Allow to display validation message
-      input$selected[which(input$selected != "")] # Remove placeholder
-    }) |>
-      debounce(500)
-  })
-}
-
-#' Update a Select List with a Vector
-#'
-#' @param id A [`character`] string specifying the namespace (must match
-#'  [selectize_ui()]).
-#' @param x A reactive [`character`] vector.
-#' @param exclude A reactive [`character`] vector of values to exclude.
-#' @param preserve A [`logical`] scalar: should existing selection be preserved
-#'  on update?
-#' @param none A [`logical`] scalar: should a placeholder be added as the first
-#'  element?
-#' @param server A [`logical`] scalar: should server-side selectize be used?
-#' @return
-#'  A reactive [`character`] vector of column names.
-#'
-#'  Side effect: change the value of a select input on the client.
-#' @seealso [selectize_ui()]
-#' @keywords internal
-update_selectize_values <- function(id, x, exclude = reactive({ NULL }),
-                                    preserve = TRUE, none = TRUE,
-                                    server = TRUE) {
-  stopifnot(is.reactive(x))
-  stopifnot(is.reactive(exclude))
-
-  moduleServer(id, function(input, output, session) {
-    ## Update UI
-    observe({
-      choices <- x()
-      selected <- NULL
-      if (!is.null(exclude())) {
-        choices <- setdiff(choices, exclude())
-      }
-      if (isTRUE(preserve)) {
-        ## Try to keep previous selection, if any
-        keep <- intersect(choices, input$selected)
-        if (length(keep) > 0) selected <- keep
-      }
-      if (isTRUE(none)) {
-        choices <- c(Choose = "", choices)
-      }
-
-      freezeReactiveValue(input, "selected")
-      updateSelectizeInput(
-        inputId = "selected",
-        choices = choices,
-        selected = selected,
-        server = server
-      )
-    }) |>
-      bindEvent(x(), exclude())
-
-    ## Bookmark
-    onRestored(function(state) {
-      updateSelectizeInput(session, "selected", selected = state$input$selected)
-    })
-
-    reactive({ input$selected })
-  })
-}
-
 # Notification =================================================================
 show_notification <- function(text, title = NULL, id = NULL, duration = 5,
                               closeButton = TRUE, type = "default") {
@@ -328,10 +182,13 @@ notify <- function(expr, title = NULL) {
     }
   )
 
-  if (!is.null(err))
+  if (!is.null(err)) {
     show_notification(text = err, title = title, type = "error")
-  if (!is.null(warn))
+  }
+  if (!is.null(warn)) {
+    warn <- unique(warn)
     show_notification(text = warn, title = title, type = "warning")
+  }
 
   res
 }

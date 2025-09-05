@@ -100,7 +100,7 @@ coda_barplot_server <- function(id, x) {
     })
 
     ## Select column -----
-    col_bar <- update_selectize_variables("order_rows", x = data_bar)
+    col_bar <- update_selectize_colnames("order_rows", x = data_bar)
 
     ## Graphical parameters -----
     param <- graphics_server("par")

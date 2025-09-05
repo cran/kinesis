@@ -8,17 +8,11 @@
 #' @noRd
 function(input, output, session) {
   ## Data
-  data <- kinesis::prepare_server("prepare", select = is.numeric, demo = "zuni")
-
-  ## Plot
-  kinesis::bertin_server("bertin", x = data)
+  data <- kinesis::prepare_server("prepare", demo = "zuni")
 
   ## Diversity
-  alpha <- kinesis::diversity_alpha_server("alpha", x = data)
-  kinesis::diversity_beta_server("beta", x = data, y = alpha)
-  kinesis::occurrence_server("occurrence", x = data)
+  kinesis::diversity_server("diversity", x = data)
 
   kinesis::home_server("home")
   kinesis::footer_server("footer")
-  session$onSessionEnded(stopApp)
 }

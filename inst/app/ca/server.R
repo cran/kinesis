@@ -8,12 +8,11 @@
 #' @noRd
 function(input, output, session) {
   ## Data
-  data <- kinesis::prepare_server("prepare", demo = "zuni")
+  data <- kinesis::count_server("prepare", demo = "zuni")
 
   ## CA
   results <- kinesis::ca_server("ca", x = data)
 
   kinesis::home_server("home")
   kinesis::footer_server("footer")
-  session$onSessionEnded(stopApp)
 }

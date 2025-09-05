@@ -7,16 +7,12 @@
 run_app(
   app = c("diversity", "seriation", "aoristic", "mcd", "source", "scatter", "ternary",
     "ca", "pca"),
-  bookmark = FALSE,
   options = list(launch.browser = interactive())
 )
 }
 \arguments{
 \item{app}{A \code{\link{character}} string specifying the \pkg{Shiny} application
 to run (see details). Any unambiguous substring can be given.}
-
-\item{bookmark}{A \code{\link{logical}} scalar: should server-side bookmarking of the
-application be enabled (see \code{\link[shiny:enableBookmarking]{shiny::enableBookmarking()}})?}
 
 \item{options}{A \code{\link{list}} of named options that should be passed to the
 \code{\link[shiny:shinyApp]{shiny::shinyAppDir()}} call.}

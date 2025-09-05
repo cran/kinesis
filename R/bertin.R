@@ -82,18 +82,12 @@ bertin_server  <- function(id, x, verbose = get_option("verbose", FALSE)) {
   stopifnot(is.reactive(x))
 
   moduleServer(id, function(input, output, session) {
-    ## Get count data -----
-    counts <- reactive({
-      req(x())
-      arkhe::keep_columns(x(), f = is.numeric, verbose = verbose)
-    })
-
     ## Graphical parameters -----
     param <- graphics_server("par")
 
     ## Plot -----
     plot_permute <- reactive({
-      req(counts())
+      req(x())
 
       threshold <- switch(
         input$threshold,
@@ -105,13 +99,13 @@ bertin_server  <- function(id, x, verbose = get_option("verbose", FALSE)) {
       switch(
         input$type,
         ford = function()
-          tabula::plot_ford(counts(), weights = input$weights, EPPM = input$eppm),
+          tabula::plot_ford(x(), weights = input$weights, EPPM = input$eppm),
         barplot = function()
-          tabula::plot_bertin(counts(), threshold = threshold),
+          tabula::plot_bertin(x(), threshold = threshold),
         scalogram = function()
-          tabula::plot_spot(counts(), color = "black", legend = FALSE),
+          tabula::plot_spot(x(), color = "black", legend = FALSE),
         heatmap = function()
-          tabula::plot_heatmap(counts(), color = param$pal_quant, fixed_ratio = FALSE)
+          tabula::plot_heatmap(x(), color = param$pal_quant, fixed_ratio = FALSE)
       )
     })
 

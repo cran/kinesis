@@ -26,18 +26,3 @@ testServer(kinesis:::logratio_server, args = list(x = x, method = "alr"), {
   # title <- session$getOutput("title")
   # expect_identical(title, "Additive Log-Ratio")
 })
-
-if (at_home()) {
-  using("tinysnapshot")
-  source("helpers.R")
-
-  coda <- nexus::as_composition(bronze, parts = parts, group = "dynasty")
-  x <- reactiveVal(coda)
-
-  testServer(kinesis:::logratio_server, args = list(x = x, method = "clr"), {
-    session$setInputs("type" = "boxplot")
-    session$setInputs("par-col_quali" = "discreterainbow")
-    plot_logratio_default <- plot_log()
-    expect_snapshot_plot(plot_logratio_default, "plot_logratio_default")
-  })
-}

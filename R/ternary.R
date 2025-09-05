@@ -149,26 +149,21 @@ ternary_server <- function(id, x) {
   stopifnot(is.reactive(x))
 
   moduleServer(id, function(input, output, session) {
-    ## Select columns -----
-    data_raw <- reactive({
-      as.data.frame(x())
-    })
-    quanti <- reactive({
-      req(data_raw())
-      i <- which(arkhe::detect(x = data_raw(), f = is.numeric, margin = 2))
-      colnames(data_raw())[i]
-    })
-    quali <- reactive({
-      req(data_raw())
-      i <- which(arkhe::detect(x = data_raw(), f = Negate(is.numeric), margin = 2))
-      colnames(data_raw())[i]
-    })
-    axis1 <- update_selectize_values("axis1", x = quanti)
-    axis2 <- update_selectize_values("axis2", x = quanti, exclude = axis1)
+    ## Update UI -----
+    data_raw <- reactive({ as.data.frame(x()) })
+    quanti <- subset_quantitative(data_raw)
+    quali <- subset_qualitative(data_raw)
+
+    axis1 <- update_selectize_colnames("axis1", x = quanti)
+    axis2 <- update_selectize_colnames("axis2", x = quanti, exclude = axis1)
     axis12 <- reactive({ c(axis1(), axis2()) })
-    axis3 <- update_selectize_values("axis3", x = quanti, exclude = axis12)
-    extra_quali <- update_selectize_values("extra_quali", x = quali)
-    extra_quanti <- update_selectize_values("extra_quanti", x = quanti)
+    axis3 <- update_selectize_colnames("axis3", x = quanti, exclude = axis12)
+    col_quali <- update_selectize_colnames("extra_quali", x = quali)
+    col_quanti <- update_selectize_colnames("extra_quanti", x = quanti)
+
+    ## Extra variables -----
+    extra_quali <- select_data(data_raw, col_quali, drop = TRUE)
+    extra_quanti <- select_data(data_raw, col_quanti, drop = TRUE)
 
     ## Interactive zoom -----
     ## When a double-click happens, check if there's a brush on the plot.
@@ -190,6 +185,28 @@ ternary_server <- function(id, x) {
     ## Graphical parameters -----
     param <- graphics_server("par")
 
+    ## Heatmap
+    tile <- reactive({
+      switch(
+        input$tile,
+        bin = isopleuros::tile_bin,
+        dens = isopleuros::tile_density,
+        NULL
+      )
+    })
+
+    ## Envelope
+    wrap <- reactive({
+      level <- as.numeric(input$level)
+      switch(
+        input$wrap,
+        tol = function(x, ...) isopleuros::ternary_tolerance(x, level = level, ...),
+        conf = function(x, ...) isopleuros::ternary_confidence(x, level = level, ...),
+        hull = function(x, ...) isopleuros::ternary_hull(x, ...),
+        NULL
+      )
+    })
+
     ## Build plot -----
     plot_ternary <- reactive({
       ## Select data
@@ -202,14 +219,12 @@ ternary_server <- function(id, x) {
 
       ## Graphical parameters
       if (isTruthy(extra_quali())) {
-        symbol_group <- data_raw()[[extra_quali()]]
-        col <- param$col_quali(symbol_group)
+        col <- param$col_quali(extra_quali())
       } else {
-        symbol_group <- rep("", n)
-        col <- param$col_quant(data_raw()[[extra_quanti()]])
+        col <- param$col_quant(extra_quanti())
       }
-      pch <- param$pch(data_raw()[[extra_quali()]])
-      cex <- param$cex(data_raw()[[extra_quanti()]])
+      pch <- param$pch(extra_quali())
+      cex <- param$cex(extra_quanti())
 
       ## Window
       range_coord <- list(x = NULL, y = NULL, z = NULL)
@@ -218,25 +233,6 @@ ternary_server <- function(id, x) {
         y_pts <- c(range_ternplot$y, sqrt(3) * diff(range_ternplot$y) / 2)
         range_coord <- isopleuros::coordinates_cartesian(x = x_pts, y = y_pts)
       }
-
-      ## Heatmap
-      bin <- as.numeric(input$bin)
-      fun_tile <- switch(
-        input$tile,
-        bin = isopleuros::tile_bin(tern),
-        dens = isopleuros::tile_density(tern),
-        NULL
-      )
-
-      ## Envelope
-      level <- as.numeric(input$level)
-      fun_wrap <- switch(
-        input$wrap,
-        tol = function(x, ...) isopleuros::ternary_tolerance(x, level = level, ...),
-        conf = function(x, ...) isopleuros::ternary_confidence(x, level = level, ...),
-        hull = function(x, ...) isopleuros::ternary_hull(x, ...),
-        function(...) invisible()
-      )
 
       ## Build plot
       function() {
@@ -263,10 +259,10 @@ ternary_server <- function(id, x) {
 
         if (no_scale) {
           ## Heatmap
-          if (isTruthy(fun_tile)) {
+          if (isTruthy(tile())) {
             isopleuros::ternary_image(
-              f = fun_tile,
-              n = bin,
+              f = tile()(tern),
+              n = as.numeric(input$bin),
               palette = param$col_quant
             )
           }
@@ -277,10 +273,12 @@ ternary_server <- function(id, x) {
           }
 
           ## Envelope
-          for (i in split(seq_len(n), f = symbol_group)) {
-            z <- tern[i, , drop = FALSE]
-            if (nrow(z) < 3) next
-            fun_wrap(z, lty = 1, border = col[i])
+          if (isTruthy(extra_quali()) && isTruthy(wrap())) {
+            for (i in split(seq_len(n), f = extra_quali())) {
+              z <- tern[i, , drop = FALSE]
+              if (nrow(z) < 3) next
+              wrap()(z, lty = 1, border = col[i])
+            }
           }
         }
 
@@ -298,11 +296,15 @@ ternary_server <- function(id, x) {
 
         ## Add legend
         if (isTruthy(extra_quali())) {
+          labels <- unique(extra_quali())
+          keep <- !is.na(labels)
+          cols <- unique(col)
+          symb <- unique(pch)
           graphics::legend(
             x = "topleft",
-            legend = unique(symbol_group),
-            col = unique(col),
-            pch = unique(pch),
+            legend = labels[keep],
+            col = if (length(cols) == 1) cols else cols[keep],
+            pch = if (length(symb) == 1) symb else symb[keep],
             bty = "n"
           )
         }

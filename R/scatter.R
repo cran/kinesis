@@ -20,17 +20,11 @@ scatter_ui <- function(id) {
         width = 400,
         title = tr_("Variables"),
         ## Input: select axes
-        selectize_ui(id = ns("axis1"), label = tr_("Component X")),
-        selectize_ui(id = ns("axis2"), label = tr_("Component Y")),
+        selectize_ui(ns("axis1"), label = tr_("Component X")),
+        selectize_ui(ns("axis2"), label = tr_("Component Y")),
         ## Input: aesthetics mapping
-        selectize_ui(id = ns("extra_quali"), label = tr_("Extra qualitative variable")),
-        selectize_ui(id = ns("extra_quanti"), label = tr_("Extra quantitative variable")),
-        ## Input: linear regression
-        checkboxInput(
-          inputId = ns("regression"),
-          label = tr_("Linear regression"),
-          value = FALSE
-        ),
+        selectize_ui(ns("extra_quali"), label = tr_("Extra qualitative variable")),
+        selectize_ui(ns("extra_quanti"), label = tr_("Extra quantitative variable")),
         ## Input: add ellipses
         radioButtons(
           inputId = ns("wrap"),
@@ -91,21 +85,18 @@ scatter_server <- function(id, x) {
   stopifnot(is.reactive(x))
 
   moduleServer(id, function(input, output, session) {
-    ## Select columns -----
-    quanti <- reactive({
-      req(x())
-      i <- which(arkhe::detect(x = x(), f = is.numeric, margin = 2))
-      colnames(x())[i]
-    })
-    quali <- reactive({
-      req(x())
-      i <- which(arkhe::detect(x = x(), f = is.numeric, margin = 2, negate = TRUE))
-      colnames(x())[i]
-    })
-    axis1 <- update_selectize_values("axis1", x = quanti)
-    axis2 <- update_selectize_values("axis2", x = quanti, exclude = axis1)
-    extra_quali <- update_selectize_values("extra_quali", x = quali)
-    extra_quanti <- update_selectize_values("extra_quanti", x = quanti)
+    ## Update UI -----
+    quanti <- subset_quantitative(x)
+    quali <- subset_qualitative(x)
+
+    axis1 <- update_selectize_colnames("axis1", x = quanti)
+    axis2 <- update_selectize_colnames("axis2", x = quanti, exclude = axis1)
+    col_quali <- update_selectize_colnames("extra_quali", x = quali)
+    col_quanti <- update_selectize_colnames("extra_quanti", x = quanti)
+
+    ## Extra variables -----
+    extra_quali <- select_data(quali, col_quali, drop = TRUE)
+    extra_quanti <- select_data(quanti, col_quanti, drop = TRUE)
 
     ## Interactive zoom -----
     ## When a double-click happens, check if there's a brush on the plot.
@@ -122,36 +113,14 @@ scatter_server <- function(id, x) {
                  threshold = 5)
     })
 
-    ## Linear regression -----
-    model <- reactive({
-      req(x(), axis2(), axis1())
-      if (!isTRUE(input$regression)) return(NULL)
-
-      n <- nrow(x())
-      group <- if (isTruthy(extra_quali())) x()[[extra_quali()]] else rep("", n)
-      by(
-        data = x(),
-        INDICES = group,
-        FUN = function(x) {
-          vars <- stats::as.formula(sprintf("%s~%s", axis2(), axis1()))
-          fit <- stats::lm(vars, data = x)
-          pred <- stats::predict(fit, interval = "confidence", level = as.numeric(input$level))
-          list(model = fit, predict = pred, response = x[[axis1()]])
-        },
-        simplify = FALSE
-      )
-    })
-
     ## Ellipses -----
     wrap <- reactive({
-      req(x())
       level <- as.numeric(input$level)
-      group <- if (isTruthy(extra_quali())) x()[[extra_quali()]] else NULL
       switch(
         input$wrap,
-        tol = function(x, y, ...) dimensio::viz_tolerance(x, y, group = group, level = level, ...),
-        conf = function(x, y, ...) dimensio::viz_confidence(x, y, group = group, level = level, ...),
-        hull = function(x, y, ...) dimensio::viz_hull(x, y, group = group, ...),
+        tol = function(x, y, z, ...) dimensio::viz_tolerance(x, y, group = z, level = level, ...),
+        conf = function(x, y, z, ...) dimensio::viz_confidence(x, y, group = z, level = level, ...),
+        hull = function(x, y, z, ...) dimensio::viz_hull(x, y, group = z, ...),
         function(...) invisible()
       )
     })
@@ -164,15 +133,18 @@ scatter_server <- function(id, x) {
       ## Select data
       req(x(), axis1(), axis2())
 
-      col <- param$col_quali(x()[[extra_quali()]])
-      pch <- param$pch(x()[[extra_quali()]])
-      cex <- param$cex(x()[[extra_quanti()]])
+      coord_x <- x()[[axis1()]]
+      coord_y <- x()[[axis2()]]
+
+      col <- param$col_quali(extra_quali())
+      pch <- param$pch(extra_quali())
+      cex <- param$cex(extra_quanti())
 
       ## Build plot
       function() {
         graphics::plot(
-          x = x()[[axis1()]],
-          y = x()[[axis2()]],
+          x = coord_x,
+          y = coord_y,
           type = "p",
           xlim = range_plot$x,
           ylim = range_plot$y,
@@ -186,27 +158,20 @@ scatter_server <- function(id, x) {
           las = 1
         )
 
-        ## Add regression
-        if (length(model()) > 0) {
-          col_lines <- param$col_quali(names(model()))
-          for (i in seq_along(model())) {
-            fit <- model()[[i]]
-            k <- order(fit$response)
-            graphics::lines(x = fit$response[k], y = fit$predict[k, 1],
-                            col = col_lines[i], lwd = 2)
-          }
-        }
-
-        ## Add ellipses
-        wrap()(x = x()[[axis1()]], y = x()[[axis2()]], color = param$pal_quali)
-
-        ## Add legend
         if (isTruthy(extra_quali())) {
+          ## Add ellipses
+          wrap()(x = coord_x, y = coord_y, z = extra_quali(), color = param$pal_quali)
+
+          ## Add legend
+          labels <- unique(extra_quali())
+          keep <- !is.na(labels)
+          cols <- unique(col)
+          symb <- unique(pch)
           graphics::legend(
             x = "topleft",
-            legend = unique(x()[[extra_quali()]]),
-            col = unique(col),
-            pch = unique(pch)
+            legend = labels[keep],
+            col = if (length(cols) == 1) cols else cols[keep],
+            pch = if (length(symb) == 1) symb else symb[keep]
           )
         }
       }

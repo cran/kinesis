@@ -214,10 +214,11 @@ coda_summary_server <- function(id, x) {
 
     ## Download -----
     output$download <- export_multiple(
-      location = data_loc,
+      mean = data_loc,
       quantiles = data_quant,
       covariance = data_cov,
       variation = data_var,
+      pip = data_pip,
       name = "coda_summary"
     )
   })

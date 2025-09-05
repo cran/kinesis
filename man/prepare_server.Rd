@@ -4,20 +4,11 @@
 \alias{prepare_server}
 \title{Prepare Data Server}
 \usage{
-prepare_server(
-  id,
-  choose = function(...) TRUE,
-  select = function(...) TRUE,
-  demo = NULL
-)
+prepare_server(id, demo = NULL)
 }
 \arguments{
 \item{id}{An ID string that corresponds with the ID used to call the module's
 UI function.}
-
-\item{choose}{A predicate \code{\link{function}} used to select columns.}
-
-\item{select}{A predicate \code{\link{function}} used to select columns.}
 
 \item{demo}{A \code{\link{character}} string specifying the name of a dataset (see
 \code{\link[=import_server]{import_server()}}).}

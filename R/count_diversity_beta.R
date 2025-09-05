@@ -17,8 +17,7 @@ diversity_beta_ui <- function(id) {
     title = HTML(tr_("&#946; Diversity")),
     layout_sidebar(
       sidebar = sidebar(
-        width = 400,
-        h5(tr_("Principal Coordinates Analysis")),
+        title = tr_("Principal Coordinates Analysis"),
         selectInput(
           inputId = ns("method"),
           label = tr_("Dissimilarity measure"),
@@ -81,33 +80,32 @@ diversity_beta_ui <- function(id) {
 #'
 #' @param id An ID string that corresponds with the ID used to call the module's
 #'  UI function.
-#' @param x A reactive `data.frame` (typically returned by [import_server()]).
-#' @param y A reactive `data.frame` returned by [diversity_alpha_server()].
-#' @param verbose A [`logical`] scalar: should \R report extra information on
-#'  progress?
+#' @param x A reactive `data.frame` returned by [diversity_server()].
+#' @param quanti A reactive `data.frame` returned by [diversity_alpha_server()].
+#' @param quali A reactive `data.frame` (typically returned by [import_server()]).
 #' @return
 #'  No return value, called for side effects.
 #' @seealso [diversity_beta_ui()]
 #' @family count data modules
 #' @keywords internal
 #' @export
-diversity_beta_server <- function(id, x, y, verbose = get_option("verbose", FALSE)) {
+diversity_beta_server <- function(id, x, quanti, quali) {
   stopifnot(is.reactive(x))
+  stopifnot(is.reactive(quanti))
+  stopifnot(is.reactive(quali))
 
   moduleServer(id, function(input, output, session) {
     ## Update UI -----
-    col_quali <- update_selectize_variables("extra_quali", x = x, find = Negate(is.numeric))
-    col_quanti <- update_selectize_variables("extra_quanti", x = y, find = is.numeric)
+    col_quali <- update_selectize_colnames("extra_quali", x = quali)
+    col_quanti <- update_selectize_colnames("extra_quanti", x = quanti)
 
-    ## Get count data -----
-    counts <- reactive({
-      req(x())
-      arkhe::keep_columns(x(), f = is.numeric, verbose = verbose)
-    })
+    ## Extra variables -----
+    extra_quali <- select_data(quali, col_quali, drop = TRUE)
+    extra_quanti <- select_data(quanti, col_quanti, drop = TRUE)
 
     ## Check data -----
-    old <- reactive({ counts() }) |> bindEvent(input$go)
-    notify_change(session$ns("change"), counts, old, title = tr_("Beta Diversity"))
+    old <- reactive({ x() }) |> bindEvent(input$go)
+    notify_change(session$ns("change"), x, old, title = tr_("Beta Diversity"))
 
     ## Compute similarity -----
     compute_beta <- ExtendedTask$new(
@@ -118,7 +116,7 @@ diversity_beta_server <- function(id, x, y, verbose = get_option("verbose", FALS
       bslib::bind_task_button("go")
 
     observe({
-      compute_beta$invoke(x = counts(), method = input$method)
+      compute_beta$invoke(x = x(), method = input$method)
     }) |>
       bindEvent(input$go)
 
@@ -153,39 +151,32 @@ diversity_beta_server <- function(id, x, y, verbose = get_option("verbose", FALS
     })
 
     plot_pcoa <- reactive({
-      req(analysis(), x(), y())
+      req(analysis())
 
-      ## Extra variables
-      extra_quanti <- arkhe::seek_columns(y(), names = col_quanti())
-      if (!is.null(extra_quanti)) extra_quanti <- y()[[extra_quanti]]
-      extra_quali <- arkhe::seek_columns(x(), names = col_quali())
-      if (!is.null(extra_quali)) extra_quali <- x()[[extra_quali]]
-
-      col <- "black"
-      if (isTruthy(extra_quanti)) {
-        col <- param_pcoa$col_quant(extra_quanti)
+      if (!isTruthy(extra_quali()) && isTruthy(extra_quanti())) {
+        col <- param_pcoa$pal_quanti
+      } else {
+        col <- param_pcoa$pal_quali
       }
-      if (isTruthy(extra_quali)) {
-        col <- param_pcoa$col_quali(extra_quali)
-      }
-      cex <- param_pcoa$cex(extra_quanti)
-      pch <- param_pcoa$pch(extra_quali)
 
       function() {
         dimensio::plot(
           x = analysis(),
           labels = input$pcoa_labels,
-          extra_quali = extra_quali,
-          extra_quanti = extra_quanti,
-          col = col,
-          pch = pch,
-          cex = cex,
+          extra_quali = extra_quali(),
+          extra_quanti = extra_quanti(),
+          color = col,
+          symbol = param_pcoa$pal_pch,
+          size = param_pcoa$pal_cex,
           panel.first = graphics::grid()
         )
 
         if (isTRUE(input$hull)) {
-          dimensio::viz_hull(analysis(), group = extra_quali,
-                             color = param_pcoa$pal_quali)
+          dimensio::viz_hull(
+            x = analysis(),
+            group = extra_quali(),
+            color = param_pcoa$pal_quali
+          )
         }
       }
     })

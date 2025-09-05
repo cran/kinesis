@@ -1,37 +1,32 @@
 Sys.setenv(LANGUAGE = "en") # Force locale
 library("shiny")
 
-bronze <- read.csv("bronze.csv")
-path <- system.file("tinytest", "bronze.csv", package = "kinesis")
 parts <- c("Cu", "Sn", "Pb", "Zn", "Au", "Ag", "As", "Sb")
 
-testServer(kinesis:::coda_server, {
-  session$setInputs("import-file" = list(datapath = path),
-                    "import-header" = TRUE,
-                    "import-sep" = ",", "import-dec" = ".",
-                    "import-quote" = "\"'",
-                    "import-na.strings" = "NA", "import-skip" = 0,
-                    "import-comment" = "#", "import-go" = 1)
+testServer(kinesis:::coda_server, args = list(demo = "bronze"), {
+  session$flushReact()
+  session$setInputs("import-demo" = 1)
+  expect_equal(dim(data_raw()), c(369L, 12L))
 
-  expect_equal(data_raw(), bronze)
-  session$setInputs("select-rownames-selected" = "", "select-colnames-selected" = parts, groups = "", condense = "")
+  session$setInputs("parts-names" = parts, "group-names" = NULL, "condense-names" = NULL)
   session$elapse(2000)
-  expect_equal(dim(coda()), c(369L, 8L))
+  expect_equal(var_parts(), parts)
+  expect_equal(dim(data_coda()), c(369L, 8L))
+  expect_null(var_group())
   expect_equal(dim(data_group()), c(369L, 8L))
+  expect_null(var_condense())
   expect_equal(dim(data_condense()), c(369L, 8L))
   dataset <- session$getReturned()
-  expect_false(nexus::is_grouped(dataset()))
+  expect_false(nexus::is_grouped(data_valid()))
 
-  session$setInputs("group-selected" = "dynasty")
-  session$elapse(2000)
-  expect_equal(col_group(), c("dynasty"))
+  session$setInputs("group-names" = "dynasty")
+  expect_equal(var_group(), "dynasty")
   dataset <- session$getReturned()
   expect_equal(dim(dataset()), c(369L, 8L))
   expect_true(nexus::is_grouped(dataset()))
 
-  session$setInputs("condense-selected" = c("dynasty", "reference"))
-  session$elapse(2000)
-  expect_equal(col_condense(), c("dynasty", "reference"))
+  session$setInputs("condense-names" = c("dynasty", "reference"))
+  expect_equal(var_condense(), c("dynasty", "reference"))
   dataset <- session$getReturned()
   expect_equal(dim(dataset()), c(300L, 8L))
   expect_true(nexus::is_grouped(dataset()))

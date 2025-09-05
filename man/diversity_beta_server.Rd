@@ -4,18 +4,17 @@
 \alias{diversity_beta_server}
 \title{Beta Diversity Server}
 \usage{
-diversity_beta_server(id, x, y, verbose = get_option("verbose", FALSE))
+diversity_beta_server(id, x, quanti, quali)
 }
 \arguments{
 \item{id}{An ID string that corresponds with the ID used to call the module's
 UI function.}
 
-\item{x}{A reactive \code{data.frame} (typically returned by \code{\link[=import_server]{import_server()}}).}
+\item{x}{A reactive \code{data.frame} returned by \code{\link[=diversity_server]{diversity_server()}}.}
 
-\item{y}{A reactive \code{data.frame} returned by \code{\link[=diversity_alpha_server]{diversity_alpha_server()}}.}
+\item{quanti}{A reactive \code{data.frame} returned by \code{\link[=diversity_alpha_server]{diversity_alpha_server()}}.}
 
-\item{verbose}{A \code{\link{logical}} scalar: should \R report extra information on
-progress?}
+\item{quali}{A reactive \code{data.frame} (typically returned by \code{\link[=import_server]{import_server()}}).}
 }
 \value{
 No return value, called for side effects.
@@ -29,10 +28,14 @@ Beta Diversity Server
 Other count data modules: 
 \code{\link{bertin_server}()},
 \code{\link{bertin_ui}()},
+\code{\link{count_server}()},
+\code{\link{count_ui}()},
 \code{\link{diversity_alpha_server}()},
 \code{\link{diversity_alpha_ui}()},
 \code{\link{diversity_beta_ui}()},
 \code{\link{diversity_docs_ui}()},
+\code{\link{diversity_server}()},
+\code{\link{diversity_ui}()},
 \code{\link{occurrence_server}()},
 \code{\link{occurrence_ui}()}
 }

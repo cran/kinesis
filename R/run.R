@@ -5,8 +5,6 @@
 #' A wrapper for [shiny::shinyAppDir()].
 #' @param app A [`character`] string specifying the \pkg{Shiny} application
 #'  to run (see details). Any unambiguous substring can be given.
-#' @param bookmark A [`logical`] scalar: should server-side bookmarking of the
-#'  application be enabled (see [shiny::enableBookmarking()])?
 #' @param options A [`list`] of named options that should be passed to the
 #'  [`shiny::shinyAppDir()`] call.
 #' @details
@@ -32,7 +30,6 @@
 #' @export
 run_app <- function(app = c("diversity", "seriation", "aoristic", "mcd",
                             "source", "scatter", "ternary", "ca", "pca"),
-                    bookmark = FALSE,
                     options = list(launch.browser = interactive())) {
   ## App selection
   app <- match.arg(app, several.ok = FALSE)
@@ -42,16 +39,11 @@ run_app <- function(app = c("diversity", "seriation", "aoristic", "mcd",
     stop(msg, call. = FALSE)
   }
 
-  ## Enable bookmarking
-  bookmark <- isTRUE(bookmark)
-  shiny::enableBookmarking(store = ifelse(bookmark, "server", "disable"))
-
   ## Create a Shiny app object
   obj <- shiny::shinyAppDir(appDir = app_dir, options = options)
 
   ## Bundle the options inside the shinyApp object
   opt <- get_config(app, file = NULL)
-  opt$bookmark <- bookmark
   obj$appOptions$kinesis_options <- opt
 
   obj
@@ -134,7 +126,7 @@ get_language <- function(default = NULL) {
 #' Get App Title
 #'
 #' @param default A [`character`] string specifying the default language
-#'  (see [get_language()]).
+#'  (see `get_language()`).
 #' @return A [`character`] string.
 #' @author N. Frerebeau
 #' @keywords internal
@@ -149,7 +141,7 @@ get_title <- function(default = NULL) {
 #' Get App Description
 #'
 #' @param default A [`character`] string specifying the default language
-#'  (see [get_language()]).
+#'  (see `get_language()`).
 #' @return A [`character`] string.
 #' @author N. Frerebeau
 #' @keywords internal

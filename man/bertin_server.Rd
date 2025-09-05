@@ -26,11 +26,15 @@ Bertin Diagrams Server
 
 Other count data modules: 
 \code{\link{bertin_ui}()},
+\code{\link{count_server}()},
+\code{\link{count_ui}()},
 \code{\link{diversity_alpha_server}()},
 \code{\link{diversity_alpha_ui}()},
 \code{\link{diversity_beta_server}()},
 \code{\link{diversity_beta_ui}()},
 \code{\link{diversity_docs_ui}()},
+\code{\link{diversity_server}()},
+\code{\link{diversity_ui}()},
 \code{\link{occurrence_server}()},
 \code{\link{occurrence_ui}()}
 }

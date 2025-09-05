@@ -23,6 +23,11 @@ import_ui <- function(id) {
       inputId = ns("demo"),
       label = tr_("Example data"),
       icon = icon("book")
+    ),
+    selectize_ui(
+      id = ns("rownames"),
+      label = tr_("Row names"),
+      multiple = FALSE
     )
   )
 }
@@ -138,73 +143,101 @@ import_modal <- function(ns) {
 #' @export
 import_server <- function(id, demo = NULL) {
   moduleServer(id, function(input, output, session) {
-    data <- reactiveValues(values = NULL)
+    ## Store data -----
+    values <- reactiveVal()
 
     ## Show modal dialog -----
     observe({ showModal(import_modal(session$ns)) }) |>
       bindEvent(input$upload)
 
     ## Read from connection -----
-    obs <- observe({
+    ## Parse query parameters
+    data_url <- reactive({
       params <- parseQueryString(session$clientData$url_search)
-      query <- params[["data"]]
-
-      if (!is.null(query)) {
-        msg <- sprintf(tr_("Reading data from %s..."), query)
-        id <- showNotification(msg, duration = NULL, closeButton = FALSE,
-                               type = "message")
-        on.exit(removeNotification(id), add = TRUE)
-
-        data$values <- notify(utils::read.csv(file = url(query)), tr_("Data Input"))
-      }
-      obs$destroy()
+      params[["data"]]
     })
+    observe({
+      msg <- tr_("Reading data...")
+      # detail <- tags$a(href = data_url(), target = "_blank", data_url())
+      # id <- showNotification(msg, action = detail, duration = 3, type = "message")
+      # on.exit(removeNotification(id), add = TRUE)
+
+      csv <- notify(
+        withProgress(
+          utils::read.csv(file = url(data_url())),
+          message = msg
+        ),
+        title = tr_("Data Input")
+      )
+
+      values(csv)
+    }) |>
+      bindEvent(data_url())
 
     ## Load example data -----
     observe({
       req(demo)
-      tmp <- new.env(parent = emptyenv())
-      on.exit(rm(tmp), add = TRUE)
 
-      data(list = demo, package = c("folio", "datasets"), envir = tmp)
-      data$values <- get(demo, envir = tmp)
+      msg <- sprintf(tr_("Loading \"%s\" data..."), demo)
+      # id <- showNotification(msg, duration = 3, type = "message")
+      # on.exit(removeNotification(id), add = TRUE)
+
+      path <- system.file("extdata", paste0(demo, ".csv"), package = "kinesis")
+      csv <- notify(
+        withProgress(
+          utils::read.csv(file = path),
+          message = msg
+        ),
+        title = tr_("Data Upload")
+      )
+
+      values(csv)
     }) |>
       bindEvent(input$demo)
 
     ## Read data file -----
     observe({
-      id <- showNotification(tr_("Reading data..."), duration = NULL,
-                             closeButton = FALSE, type = "message")
-      on.exit(removeNotification(id), add = TRUE)
+      msg <- tr_("Reading data...")
+      # id <- showNotification(msg, duration = 3, type = "message")
+      # on.exit(removeNotification(id), add = TRUE)
 
-      x <- notify({
-        utils::read.table(
-          file = input$file$datapath,
-          header = input$header,
-          sep = input$sep,
-          dec = input$dec,
-          quote = input$quote,
-          row.names = NULL,
-          na.strings = input$na.strings,
-          skip = if (!is.na(input$skip)) input$skip else 0,
-          comment.char = input$comment
-        )},
-        title = "Data Upload"
+      csv <- notify(
+        withProgress(
+          utils::read.table(
+            file = input$file$datapath,
+            header = input$header,
+            sep = input$sep,
+            dec = input$dec,
+            quote = input$quote,
+            row.names = NULL,
+            na.strings = input$na.strings,
+            skip = if (!is.na(input$skip)) input$skip else 0,
+            comment.char = input$comment
+          ),
+          message = msg
+        ),
+        title = tr_("Data Upload")
       )
 
-      if (!is.null(x)) removeModal()
-      data$values <- x
+      if (!is.null(csv)) removeModal()
+      values(csv)
     }) |>
       bindEvent(input$go)
 
-    ## Bookmark -----
-    setBookmarkExclude(c("upload", "go"))
-    onBookmark(function(state) state$values$data <- data$values)
-    onRestore(function(state) data$values <- state$values$data)
+    ## Update UI -----
+    rows <- update_selectize_colnames("rownames", values)
 
+    ## Assign row names -----
     reactive({
-      validate_csv(data$values)
-      data$values
+      if (!isTruthy(rows())) return(values())
+
+      notify(
+        {
+          column <- arkhe::seek_columns(values(), names = rows())
+          arkhe::assign_rownames(values(), column = column %|||% 0, remove = TRUE)
+        },
+        title = tr_("Row names")
+      )
     })
   })
 }

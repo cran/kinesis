@@ -17,12 +17,11 @@ diversity_alpha_ui <- function(id) {
     title = HTML(tr_("&#945; Diversity")),
     layout_sidebar(
       sidebar = sidebar(
-        width = 400,
-        h5(tr_("Diversity Measures")),
+        title = tr_("Diversity Measures"),
         downloadButton(
           outputId = ns("download"),
           label = tr_("Download results")
-        )
+        ),
       ), # sidebar
       card(
         gt::gt_output(outputId = ns("measures"))
@@ -36,7 +35,7 @@ diversity_alpha_ui <- function(id) {
 #'
 #' @param id An ID string that corresponds with the ID used to call the module's
 #'  UI function.
-#' @param x A reactive `data.frame` (typically returned by [import_server()]).
+#' @param x A reactive `data.frame` returned by [diversity_server()].
 #' @param verbose A [`logical`] scalar: should \R report extra information on
 #'  progress?
 #' @return A reactive [`data.frame`] (see [tabula::diversity()]).
@@ -48,21 +47,16 @@ diversity_alpha_server <- function(id, x, verbose = get_option("verbose", FALSE)
   stopifnot(is.reactive(x))
 
   moduleServer(id, function(input, output, session) {
-    ## Get count data -----
-    counts <- reactive({
-      req(x())
-      arkhe::keep_columns(x(), f = is.numeric, verbose = verbose)
-    })
-
     ## Compute index -----
-    alpha <- reactive({
-      req(counts())
-      notify({ tabula::diversity(counts()) }, title = "Alpha diversity")
+    results <- reactive({
+      req(x())
+      notify(tabula::diversity(x()), title = tr_("Alpha Diversity"))
     })
 
     ## Render table -----
     output$measures <- gt::render_gt({
-      alpha() |>
+      req(results())
+      results() |>
         gt::gt(rownames_to_stub = TRUE) |>
         gt::tab_spanner(
           label = tr_("Heterogeneity"),
@@ -98,8 +92,8 @@ diversity_alpha_server <- function(id, x, verbose = get_option("verbose", FALSE)
     })
 
     ## Download -----
-    output$download <- export_table(alpha, "alpha")
+    output$download <- export_table(results, "alpha")
 
-    alpha
+    results
   })
 }
