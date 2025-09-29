@@ -42,19 +42,18 @@ coda_summary_ui <- function(id) {
         ),
         nav_panel(
           title = tr_("Variation Matrix"),
-          tabsetPanel(
-            type = c("pills"),
-            tabPanel(
+          navset_pill(
+            nav_panel(
               title = tr_("Table"),
               class = "pt-3",
               gt::gt_output(outputId = ns("variation"))
             ),
-            tabPanel(
+            nav_panel(
               title = tr_("Heatmap"),
               class = "pt-3",
               output_plot(id = ns("heatmap"))
             ),
-            tabPanel(
+            nav_panel(
               title = tr_("Dendrogram"),
               class = "pt-3",
               output_plot(id = ns("dendrogram"))

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: kinesis 0.2.1.9000\n"
-"POT-Creation-Date: 2025-09-04 15:54+0200\n"
+"Project-Id-Version: kinesis 0.3.0.9000\n"
+"POT-Creation-Date: 2025-09-23 17:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,7 +185,7 @@ msgstr ""
 msgid "Missing values"
 msgstr ""
 
-#: coda.R:171 multivariate.R:158
+#: coda.R:171 multivariate.R:160
 msgid "Group"
 msgstr ""
 
@@ -259,7 +259,7 @@ msgstr ""
 msgid "Hierarchical Clustering"
 msgstr ""
 
-#: coda_hclust.R:24 multivariate.R:397
+#: coda_hclust.R:24 multivariate.R:400
 msgid "Distance"
 msgstr ""
 
@@ -1004,39 +1004,43 @@ msgstr ""
 msgid "Individuals"
 msgstr ""
 
-#: multivariate.R:120 scatter.R:21 ternary.R:24
+#: multivariate.R:121 scatter.R:21 ternary.R:24
 msgid "Variables"
 msgstr ""
 
-#: multivariate.R:129 multivariate.R:131
+#: multivariate.R:131 multivariate.R:133
 msgid "Screeplot"
 msgstr ""
 
-#: multivariate.R:359
+#: multivariate.R:361
 msgid "Eigenvalues"
 msgstr ""
 
-#: multivariate.R:360
+#: multivariate.R:362
 msgid "Explained var. (%)"
 msgstr ""
 
-#: multivariate.R:361
+#: multivariate.R:363
 msgid "Cumulative var. (%)"
 msgstr ""
 
-#: multivariate.R:382
+#: multivariate.R:384
 msgid "Coordinates"
 msgstr ""
 
-#: multivariate.R:387
+#: multivariate.R:389
 msgid "Contribution"
 msgstr ""
 
-#: multivariate.R:392
+#: multivariate.R:394
 msgid "Squared cosinus"
 msgstr ""
 
-#: multivariate.R:402
+#: multivariate.R:404
+msgid "Inertia"
+msgstr ""
+
+#: multivariate.R:409
 msgid "Axis"
 msgstr ""
 

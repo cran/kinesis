@@ -1,6 +1,6 @@
 Package: kinesis
 Title: 'shiny' Applications for the 'tesselle' Packages
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: c(
     person("Nicolas", "Frerebeau", , "nicolas.frerebeau@u-bordeaux-montaigne.fr", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-5759-4944")),
@@ -37,7 +37,7 @@ X-schema.org-isPartOf: https://www.tesselle.org
 X-schema.org-keywords: archaeology, archaeological-science,
         archaeometry, shiny-apps, r-package
 NeedsCompilation: no
-Packaged: 2025-09-05 11:42:57 UTC; nfrerebeau
+Packaged: 2025-09-29 16:55:42 UTC; nfrerebeau
 Author: Nicolas Frerebeau [aut, cre] (ORCID:
     <https://orcid.org/0000-0001-5759-4944>),
   Brice Lebrun [art] (ORCID: <https://orcid.org/0000-0001-7503-8685>,
@@ -45,4 +45,4 @@ Author: Nicolas Frerebeau [aut, cre] (ORCID:
   Université Bordeaux Montaigne [fnd] (ROR: <https://ror.org/03pbgwk21>),
   CNRS [fnd] (ROR: <https://ror.org/02feahw73>)
 Repository: CRAN
-Date/Publication: 2025-09-05 18:10:02 UTC
+Date/Publication: 2025-09-29 17:10:02 UTC

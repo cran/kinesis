@@ -395,9 +395,13 @@ multivariate_summary <- function(x, axes, margin) {
       columns = gt::ends_with("cos2"),
       id = "cos2"
     ) |>
-    gt::cols_label(
-      gt::matches("dist") ~ tr_("Distance"),
-      gt::matches("inertia") ~ tr_("Inertia")
+    gt::cols_label_with(
+      columns = gt::matches("dist"),
+      fn = function(x) tr_("Distance")
+    ) |>
+    gt::cols_label_with(
+      columns = gt::matches("inertia"),
+      fn = function(x) tr_("Inertia")
     ) |>
     gt::cols_label_with(
       columns = gt::starts_with("F"),

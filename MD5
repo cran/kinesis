@@ -1,6 +1,6 @@
-c55bc8a3814d3ef5a07ab78a8236ac07 *DESCRIPTION
+352804aed8fce00b728fc164d693e5c1 *DESCRIPTION
 b39277ec34491293e4bb5daac4611317 *NAMESPACE
-9e0c4f6137cd5bb9df25617b28d2affb *NEWS.md
+f9fa6f7ab5312985aeb261d2ba684488 *NEWS.md
 29a31c8a012ef71f2387a9044d2f5cf4 *R/aorisitc.R
 1700312b659aff0c0188fff61038e6ba *R/bertin.R
 7eb2d71ce65208466ff18bf625e60810 *R/ca.R
@@ -10,7 +10,7 @@ a600b0c06f0d787ca6c0391d11ea8349 *R/coda_hclust.R
 41267d4ed29f446a119eb580449f719b *R/coda_hist.R
 7f865a4d3cbae930be02aba22a96d99c *R/coda_logratio.R
 d2023e46b6025920f7def0da58f8d85f *R/coda_outliers.R
-8a81af2eb3c53f575be6cea515b238ad *R/coda_statistics.R
+2e153ccf6abaf501bc3019e4ed14b5e5 *R/coda_statistics.R
 a8eabd50499cfe54c5a8f86d3fcbef97 *R/count.R
 e06f0105523e0aefcc5db935d5454043 *R/count_diversity_alpha.R
 9f966e430a7e117dff9edb64dfce9eae *R/count_diversity_beta.R
@@ -23,9 +23,9 @@ a0851879204451efaa09640d161910b0 *R/diversity.R
 d8b75307fc9aa0caaa609b58f86fcebd *R/home.R
 9f970d65265a954d4466f51c5ca99186 *R/import.R
 def8794ca4a70a5b84494d5a7e440aff *R/kinesis-internal.R
-14eed43190252978cf108b55cfcb4cc1 *R/kinesis-package.R
+3ed7197a9cf32660d6d34bf1a01ea778 *R/kinesis-package.R
 545bfc454c993a4880dda2f1eeb1e772 *R/lm.R
-0bd43bb2483f803f4f2d5043666519ed *R/multivariate.R
+cf26a3dea5bc4b3aa4ca98f62d7dd7db *R/multivariate.R
 7bea9c7c892d43099f0087de7cb2c29f *R/pca.R
 c39dd872603bcfc4e015fbcce0b20551 *R/plot.R
 64b1df1b352d9f531558e1fdd4466c97 *R/prepare.R
@@ -37,7 +37,7 @@ be3512654c90f1aac2260fffdf823bbc *R/ternary.R
 f69f4712436acde83b3ed9c997d3da75 *R/time_interval.R
 eb5f280a71ebdaca4c11104f0bdb4a88 *R/variables.R
 132054cba8a99c6405dc514d78b86887 *R/zzz.R
-a444d24aed3e96f2a125bf59027d08c0 *README.md
+b98eea880d754d78956424c7c812fd54 *README.md
 1bf18d9c216b8d95033f0bd2fe2906b2 *build/partial.rdb
 0545a7ba88e6e339525589b658d3c9dc *inst/CITATION
 3a1776ffe8ab76d0517b702b2e327599 *inst/app/aoristic/config.yml
@@ -80,7 +80,7 @@ cfc7b9d481d47a04ad277406e4dc6179 *inst/app/ternary/server.R
 5fe92fe6a2c1928ef5a67b8939fdaf8d *inst/extdata/iris.csv
 bd75e73e16a7a0e741acda2327889bed *inst/extdata/loire.csv
 d267361da08c38784a7c450be29fda0d *inst/extdata/zuni.csv
-dc60ab81d30029756772bd146b57fc54 *inst/po/fr/LC_MESSAGES/R-kinesis.mo
+ecc07977758e98e40c1dc1750417cbac *inst/po/fr/LC_MESSAGES/R-kinesis.mo
 f5e60c0c08e52d2c5150fd668da2d5a6 *inst/static/custom.scss
 dacd07eda5f7cd81fa7006d4ebaf2405 *inst/static/logo-archeosciences.svg
 a21f09f0f0f9bf1707ff17baeb7c427f *inst/static/logo-humanum.svg
@@ -140,7 +140,7 @@ bbf01def7f2e8dd2747559dc6da944d3 *man/home_server.Rd
 782d37bbfde42752400c5cf234e697c0 *man/home_ui.Rd
 53f93052191a7055a2c47bbeec21ccba *man/import_server.Rd
 3ad2ed585b944a85146e35afa69a3e1c *man/import_ui.Rd
-09a61404a480aec36af09cc5b887d5b2 *man/kinesis-package.Rd
+7e2a42a9c14a8306e7e9048087c1f1d6 *man/kinesis-package.Rd
 2aa88e0ef96015d02db93739f933342f *man/lm_server.Rd
 25a431f636c98c441be6b9b0458c3595 *man/lm_ui.Rd
 f5ddd4531c2a64d92ea18d6ff4154266 *man/logratio_server.Rd
@@ -172,6 +172,6 @@ ee120affc1ef693c09a66d820f0d9c20 *man/update_checkbox_colnames.Rd
 8fb7f4a330fd1fed57b3dce5c7c8a992 *man/update_input.Rd
 587f95353f247c79a45ba93cd52638fe *man/update_selectize_colnames.Rd
 bb02a8f2825c0e2425475bac943f0c28 *man/update_selectize_rownames.Rd
-be60558ed2b7bbd5c910c53def3805b0 *po/R-fr.po
-808613e9c6a89180fdf86da7325283cb *po/R-kinesis.pot
+649c7d48909920f7799a34b77cf90a41 *po/R-fr.po
+a9ad663bd65e1ee18ff6f59bf34e12f5 *po/R-kinesis.pot
 cda7040b890ddf8f869983917282268c *tests/tinytest.R

@@ -12,7 +12,7 @@ A collection of 'shiny' applications for the 'tesselle' packages \url{https://ww
 }
 \details{
 \tabular{ll}{
-\strong{Version} \tab 0.2.1 \cr
+\strong{Version} \tab 0.3.1 \cr
 \strong{License} \tab GPL-3 \cr
 \strong{Zenodo DOI} \tab \doi{10.5281/zenodo.14645671} \cr
 }
