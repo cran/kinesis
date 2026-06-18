@@ -44,10 +44,7 @@ aoristic_ui <- function(id) {
         ),
         info_article("Ratcliffe", "2002", "10.1023/A:1013240828824"),
         bslib::input_task_button(id = ns("go"), label = tr_("(Re)Compute")),
-        downloadButton(
-          outputId = ns("download"),
-          label = tr_("Download results")
-        )
+        render_export_button(ns("export"))
       ), # sidebar
       output_plot(id = ns("plot_ao"))
     ) # layout_sidebar
@@ -90,11 +87,6 @@ aoristic_server <- function(id, x, y) {
     }) |>
       bindEvent(upper())
 
-
-    ## Check data -----
-    old <- reactive({ x() }) |> bindEvent(input$go)
-    notify_change(session$ns("change"), x, old, title = tr_("Aoristic Analysis"))
-
     ## Compute analysis -----
     compute_ao <- ExtendedTask$new(
       function(x, y, step, start, end, calendar, weight, groups) {
@@ -113,7 +105,9 @@ aoristic_server <- function(id, x, y) {
     }) |>
       bindEvent(input$go)
 
+    old <- reactive({ x() }) |> bindEvent(input$go)
     results <- reactive({
+      if (!identical(x(), old())) return(NULL) # Invalidate
       notify(compute_ao$result(), title = tr_("Aoristic Analysis"))
     })
 
@@ -129,7 +123,7 @@ aoristic_server <- function(id, x, y) {
     render_plot("plot_ao", x = plot_ao)
 
     ## Export -----
-    output$download <- export_table(results, "aoristic")
+    export_table("export", results, name = "aoristic")
 
     results
   })

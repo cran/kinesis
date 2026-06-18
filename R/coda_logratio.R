@@ -37,8 +37,7 @@ logratio_ui <- function(id, title) {
           choiceNames = c(tr_("Scatter plot"), tr_("Boxplot")),
           choiceValues = c("scatter", "boxplot")
         ),
-        downloadButton(outputId = ns("download_table"),
-                       label = tr_("Download log-ratio")),
+        render_export_button(ns("export_results")),
         ## Output: graph
         plotOutput(outputId = ns("graph"))
       ), # sidebar
@@ -159,7 +158,7 @@ logratio_server <- function(id, x, method) {
     })
 
     ## Download -----
-    output$download_table <- export_table(logratio, name = paste0("coda_", method))
+    export_table("export_results", logratio, name = paste0("coda_", method), label = tr_("Download log-ratio"))
 
     logratio
   })

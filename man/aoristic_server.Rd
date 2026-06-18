@@ -21,12 +21,14 @@ Aoristic Analysis Server
 \seealso{
 \code{\link[=aoristic_ui]{aoristic_ui()}}
 
-Other chronology modules: 
-\code{\link{aoristic_ui}()},
-\code{\link{seriate_server}()},
-\code{\link{seriate_ui}()},
-\code{\link{time_interval_server}()},
-\code{\link{time_interval_ui}()}
+Other chronology modules:
+\code{\link[=aoristic_ui]{aoristic_ui()}},
+\code{\link[=calibrate_server]{calibrate_server()}},
+\code{\link[=calibrate_ui]{calibrate_ui()}},
+\code{\link[=seriate_server]{seriate_server()}},
+\code{\link[=seriate_ui]{seriate_ui()}},
+\code{\link[=time_interval_server]{time_interval_server()}},
+\code{\link[=time_interval_ui]{time_interval_ui()}}
 }
 \concept{chronology modules}
 \keyword{internal}

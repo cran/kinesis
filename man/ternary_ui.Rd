@@ -11,7 +11,7 @@ ternary_ui(id)
 }
 \value{
 A nav item that may be passed to a nav container
-(e.g. \code{\link[bslib:navset]{bslib::navset_tab()}}).
+(e.g. \code{\link[bslib:navset_tab]{bslib::navset_tab()}}).
 }
 \description{
 Ternary Plot UI
@@ -19,12 +19,12 @@ Ternary Plot UI
 \seealso{
 \code{\link[=ternary_server]{ternary_server()}}
 
-Other plot modules: 
-\code{\link{graphics_server}()},
-\code{\link{graphics_ui}()},
-\code{\link{scatter_server}()},
-\code{\link{scatter_ui}()},
-\code{\link{ternary_server}()}
+Other plot modules:
+\code{\link[=graphics_server]{graphics_server()}},
+\code{\link[=graphics_ui]{graphics_ui()}},
+\code{\link[=scatter_server]{scatter_server()}},
+\code{\link[=scatter_ui]{scatter_ui()}},
+\code{\link[=ternary_server]{ternary_server()}}
 }
 \concept{plot modules}
 \keyword{internal}

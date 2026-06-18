@@ -51,10 +51,7 @@ pca_ui <- function(id, center = TRUE, scale = TRUE, help = NULL) {
           multiple = TRUE
         ),
         bslib::input_task_button(id = ns("go"), label = tr_("(Re)Compute")),
-        downloadButton(
-          outputId = ns("download"),
-          label = tr_("Download results")
-        )
+        uiOutput(outputId = ns("download_button"))
       ), # sidebar
       multivariate_ui(ns("pca")),
       border_radius = FALSE,
@@ -87,8 +84,6 @@ pca_server <- function(id, x) {
     sup_quali <- update_selectize_colnames("sup_quali", x = quali, select = TRUE)
 
     ## Check data -----
-    old <- reactive({ x() }) |> bindEvent(input$go)
-    notify_change(session$ns("change"), x, old, title = tr_("PCA"))
     output$help <- renderText({
       if (inherits(x(), "LogRatio")) {
         txt <- tr_("PCA is computed on centered log-ratio (CLR), you should check the data transformation first.")
@@ -119,16 +114,26 @@ pca_server <- function(id, x) {
     }) |>
       bindEvent(input$go)
 
+    old <- reactive({ x() }) |> bindEvent(input$go)
     results <- reactive({
+      if (!identical(x(), old())) return(NULL) # Invalidate
       notify(compute_pca$result(), title = tr_("Principal Components Analysis"))
     })
 
     multivariate_server("pca", x = results, y = x)
 
     ## Export -----
+    output$download_button <- renderUI({
+      req(results())
+      downloadButton(
+        outputId = session$ns("download"),
+        label = tr_("Download results")
+      )
+    })
     output$download <- downloadHandler(
       filename = function() { make_file_name("pca", "zip") },
       content = function(file) {
+        req(results())
         dimensio::export(results(), file = file, flags = "-r9Xj")
       },
       contentType = "application/zip"

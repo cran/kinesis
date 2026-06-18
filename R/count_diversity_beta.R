@@ -27,14 +27,8 @@ diversity_beta_ui <- function(id) {
           multiple = FALSE
         ),
         bslib::input_task_button(id = ns("go"), label = tr_("(Re)Compute")),
-        downloadButton(
-          outputId = ns("download_beta"),
-          label = tr_("Download dissimilarity matrix")
-        ),
-        downloadButton(
-          outputId = ns("download_pcoa"),
-          label = tr_("Download PCoA results")
-        ),
+        render_export_button(ns("export_beta")),
+        uiOutput(outputId = ns("download_button")),
         hr(),
         checkboxInput(
           inputId = ns("pcoa_labels"),
@@ -103,10 +97,6 @@ diversity_beta_server <- function(id, x, quanti, quali) {
     extra_quali <- select_data(quali, col_quali, drop = TRUE)
     extra_quanti <- select_data(quanti, col_quanti, drop = TRUE)
 
-    ## Check data -----
-    old <- reactive({ x() }) |> bindEvent(input$go)
-    notify_change(session$ns("change"), x, old, title = tr_("Beta Diversity"))
-
     ## Compute similarity -----
     compute_beta <- ExtendedTask$new(
       function(x, method) {
@@ -120,7 +110,9 @@ diversity_beta_server <- function(id, x, quanti, quali) {
     }) |>
       bindEvent(input$go)
 
+    old <- reactive({ x() }) |> bindEvent(input$go)
     results <- reactive({
+      if (!identical(x(), old())) return(NULL) # Invalidate
       notify(compute_beta$result(), title = tr_("Beta Diversity"))
     })
 
@@ -186,8 +178,15 @@ diversity_beta_server <- function(id, x, quanti, quali) {
     render_plot("plot_pcoa", x = plot_pcoa)
 
     ## Download -----
-    output$download_beta <- export_table(results, "beta")
-    output$download_pcoa <- downloadHandler(
+    export_table("export_beta", results, name = "beta", label = tr_("Download dissimilarity matrix"))
+    output$download_button <- renderUI({
+      req(results())
+      downloadButton(
+        outputId = session$ns("download"),
+        label = tr_("Download PCoA results")
+      )
+    })
+    output$download <- downloadHandler(
       filename = function() { make_file_name("pcoa", "zip") },
       content = function(file) {
         dimensio::export(analysis(), file = file, flags = "-r9Xj")

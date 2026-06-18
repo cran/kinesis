@@ -12,7 +12,7 @@ multivariate_ui(id)
 \value{
 A tab that can be passed to \code{\link[shiny:tabsetPanel]{shiny::tabsetPanel()}}.
 
-A navigation container (see \code{\link[bslib:navset]{bslib::navset_card_pill()}}).
+A navigation container (see \code{\link[bslib:navset_card_pill]{bslib::navset_card_pill()}}).
 }
 \description{
 Mutlivariate Analysis UI
@@ -20,12 +20,12 @@ Mutlivariate Analysis UI
 \seealso{
 \code{\link[=multivariate_server]{multivariate_server()}}
 
-Other multivariate analysis modules: 
-\code{\link{ca_server}()},
-\code{\link{ca_ui}()},
-\code{\link{multivariate_server}()},
-\code{\link{pca_server}()},
-\code{\link{pca_ui}()}
+Other multivariate analysis modules:
+\code{\link[=ca_server]{ca_server()}},
+\code{\link[=ca_ui]{ca_ui()}},
+\code{\link[=multivariate_server]{multivariate_server()}},
+\code{\link[=pca_server]{pca_server()}},
+\code{\link[=pca_ui]{pca_ui()}}
 }
 \concept{multivariate analysis modules}
 \keyword{internal}

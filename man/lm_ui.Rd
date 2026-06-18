@@ -11,7 +11,7 @@ lm_ui(id)
 }
 \value{
 A nav item that may be passed to a nav container
-(e.g. \code{\link[bslib:navset]{bslib::navset_tab()}}).
+(e.g. \code{\link[bslib:navset_tab]{bslib::navset_tab()}}).
 }
 \description{
 Linear Model UI
@@ -19,8 +19,8 @@ Linear Model UI
 \seealso{
 \code{\link[=lm_server]{lm_server()}}
 
-Other modeling modules: 
-\code{\link{lm_server}()}
+Other modeling modules:
+\code{\link[=lm_server]{lm_server()}}
 }
 \concept{modeling modules}
 \keyword{internal}

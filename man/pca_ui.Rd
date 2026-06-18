@@ -19,7 +19,7 @@ variance?}
 }
 \value{
 A nav item that may be passed to a nav container
-(e.g. \code{\link[bslib:navset]{bslib::navset_tab()}}).
+(e.g. \code{\link[bslib:navset_tab]{bslib::navset_tab()}}).
 }
 \description{
 Principal Components Analysis UI
@@ -27,12 +27,12 @@ Principal Components Analysis UI
 \seealso{
 \code{\link[=pca_server]{pca_server()}}
 
-Other multivariate analysis modules: 
-\code{\link{ca_server}()},
-\code{\link{ca_ui}()},
-\code{\link{multivariate_server}()},
-\code{\link{multivariate_ui}()},
-\code{\link{pca_server}()}
+Other multivariate analysis modules:
+\code{\link[=ca_server]{ca_server()}},
+\code{\link[=ca_ui]{ca_ui()}},
+\code{\link[=multivariate_server]{multivariate_server()}},
+\code{\link[=multivariate_ui]{multivariate_ui()}},
+\code{\link[=pca_server]{pca_server()}}
 }
 \concept{multivariate analysis modules}
 \keyword{internal}

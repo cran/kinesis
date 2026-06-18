@@ -108,10 +108,7 @@ box_ui <- function(id) {
     ),
     card(
       helpText(tr_("Export your data for futur use.")),
-      downloadButton(
-        outputId = ns("download"),
-        label = tr_("Download")
-      )
+      render_export_button(ns("export"))
     )
   )
 }
@@ -133,7 +130,7 @@ box_server <- function(id, x) {
     })
 
     ## Download -----
-    output$download <- export_table(x, "data")
+    export_table("export", x, name = "data", label = tr_("Download"))
   })
 }
 

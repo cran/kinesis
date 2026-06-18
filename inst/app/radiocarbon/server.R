@@ -1,0 +1,18 @@
+#' Radiocarbon Shiny App Server Function
+#'
+#' @param input Provided by \pkg{Shiny}.
+#' @param output Provided by \pkg{Shiny}.
+#' @param session Provided by \pkg{Shiny}.
+#' @author N. Frerebeau
+#' @keywords internal
+#' @noRd
+function(input, output, session) {
+  ## Data
+  data <- kinesis::prepare_server("prepare", demo = "ksarakil")
+
+  ## Calibration
+  results <- kinesis::calibrate_server("calibrate", data)
+
+  kinesis::home_server("home")
+  kinesis::footer_server("footer")
+}

@@ -1,7 +1,8 @@
 #' @details
 #'  \tabular{ll}{
-#'   **Version** \tab 0.3.1 \cr
+#'   **Version** \tab 0.4.0 \cr
 #'   **License** \tab GPL-3 \cr
+#'   **CRAN DOI** \tab \doi{10.32614/CRAN.package.kinesis} \cr
 #'   **Zenodo DOI** \tab \doi{10.5281/zenodo.14645671} \cr
 #'  }
 #'
@@ -10,11 +11,6 @@
 #'  Université Bordeaux Montaigne\cr
 #'  F-33607 Pessac cedex\cr
 #'  France
-#'
-#' @section Package options:
-#'  \pkg{kinesis} uses the following [options()] to configure behavior:
-#'  * `kinesis.workers`: an [`integer`] specifying the number of \R sessions
-#'  to be used for asynchronous (parallel) computing. Defaults to 1.
 #'
 #' @name kinesis-package
 #' @aliases kinesis-package kinesis

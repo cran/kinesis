@@ -40,6 +40,7 @@ public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostat
 
 [![DOI
 Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.14645671.svg)](https://doi.org/10.5281/zenodo.14645671)
+[![SWH](https://archive.softwareheritage.org/badge/origin/https://codeberg.org/tesselle/kinesis/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://codeberg.org/tesselle/kinesis)
 <!-- badges: end -->
 
 ## Overview
@@ -61,17 +62,18 @@ for Research and Teaching in Archaeology.” *Advances in Archaeological
 Practice*, *12*(4), 424-430. <doi:10.1017/aap.2024.10>
 <https://doi.org/10.1017/aap.2024.10>.
 
-Frerebeau N (2025). *kinesis: ‘shiny’ Applications for the ‘tesselle’
+Frerebeau N (2026). *kinesis: ‘shiny’ Applications for the ‘tesselle’
 Packages*. Université Bordeaux Montaigne, Pessac, France.
-<doi:10.5281/zenodo.14645671> <https://doi.org/10.5281/zenodo.14645671>,
-R package version 0.3.1, <https://packages.tesselle.org/kinesis/>.
+<doi:10.5281/zenodo.14645671> <https://doi.org/10.5281/zenodo.14645671>.
+R package version 0.4.0, <https://packages.tesselle.org/kinesis/>.
 
 This package is a part of the tesselle project
 <https://www.tesselle.org>.
 
 ## Remote use
 
-The applications are deployed on <https://shiny.archaeo.science>.
+The applications are [deployed
+online](https://www.tesselle.org/apps.html).
 
 ## Local use
 
@@ -101,17 +103,18 @@ library(kinesis)
 run_app("seriation")
 ```
 
-| Keyword     | Application name              |
-|:------------|:------------------------------|
-| `aoristic`  | Aoristic Analysis             |
-| `ca`        | Correspondence Analysis       |
-| `pca`       | Principal Components Analysis |
-| `diversity` | Diversity Measures            |
-| `mcd`       | Mean Ceramic Date             |
-| `scatter`   | Scatter Plot                  |
-| `seriation` | Matrix Seriation              |
-| `source`    | Compositional Data Analysis   |
-| `ternary`   | Ternary Plot                  |
+| Keyword       | Application name              |
+|:--------------|:------------------------------|
+| `aoristic`    | Aoristic Analysis             |
+| `ca`          | Correspondence Analysis       |
+| `pca`         | Principal Components Analysis |
+| `diversity`   | Diversity Measures            |
+| `mcd`         | Mean Ceramic Date             |
+| `radiocarbon` | Radiocarbon Calibration       |
+| `scatter`     | Scatter Plot                  |
+| `seriation`   | Matrix Seriation              |
+| `source`      | Compositional Data Analysis   |
+| `ternary`     | Ternary Plot                  |
 
 ### Asynchronous backend
 

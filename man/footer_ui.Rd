@@ -11,7 +11,7 @@ footer_ui(id)
 }
 \value{
 A \code{\link{list}} that can be converted into an HTML \verb{<footer>} tag
-(see \code{\link[htmltools:builder]{htmltools::tags()}}).
+(see \code{\link[htmltools:tags]{htmltools::tags()}}).
 }
 \description{
 Footer UI
@@ -19,10 +19,10 @@ Footer UI
 \seealso{
 \code{\link[=footer_server]{footer_server()}}
 
-Other page modules: 
-\code{\link{footer_server}()},
-\code{\link{home_server}()},
-\code{\link{home_ui}()}
+Other page modules:
+\code{\link[=footer_server]{footer_server()}},
+\code{\link[=home_server]{home_server()}},
+\code{\link[=home_ui]{home_ui()}}
 }
 \concept{page modules}
 \keyword{internal}

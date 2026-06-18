@@ -21,8 +21,8 @@ MCD Server
 \seealso{
 \code{\link[=mcd_ui]{mcd_ui()}}
 
-Other ceramic data modules: 
-\code{\link{mcd_ui}()}
+Other ceramic data modules:
+\code{\link[=mcd_ui]{mcd_ui()}}
 }
 \concept{ceramic data modules}
 \keyword{internal}

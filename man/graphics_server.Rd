@@ -22,7 +22,7 @@ returns a character vector of symbols.}
 \item{\code{cex}}{A palette function that when called with a single argument
 returns a numeric vector giving the amount by which plotting text and
 symbols should be magnified relative to the default.}
-\item{\code{asp}}{}
+\item{\code{asp}}{A \code{\link{numeric}} giving the aspect ratio y/x.}
 }
 }
 \description{
@@ -31,12 +31,12 @@ Graphical Parameters Server
 \seealso{
 \code{\link[=graphics_ui]{graphics_ui()}}
 
-Other plot modules: 
-\code{\link{graphics_ui}()},
-\code{\link{scatter_server}()},
-\code{\link{scatter_ui}()},
-\code{\link{ternary_server}()},
-\code{\link{ternary_ui}()}
+Other plot modules:
+\code{\link[=graphics_ui]{graphics_ui()}},
+\code{\link[=scatter_server]{scatter_server()}},
+\code{\link[=scatter_ui]{scatter_ui()}},
+\code{\link[=ternary_server]{ternary_server()}},
+\code{\link[=ternary_ui]{ternary_ui()}}
 }
 \concept{plot modules}
 \keyword{internal}

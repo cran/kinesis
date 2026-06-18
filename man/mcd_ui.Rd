@@ -11,7 +11,7 @@ mcd_ui(id)
 }
 \value{
 A nav item that may be passed to a nav container
-(e.g. \code{\link[bslib:navset]{bslib::navset_tab()}}).
+(e.g. \code{\link[bslib:navset_tab]{bslib::navset_tab()}}).
 }
 \description{
 MCD UI
@@ -19,8 +19,8 @@ MCD UI
 \seealso{
 \code{\link[=mcd_server]{mcd_server()}}
 
-Other ceramic data modules: 
-\code{\link{mcd_server}()}
+Other ceramic data modules:
+\code{\link[=mcd_server]{mcd_server()}}
 }
 \concept{ceramic data modules}
 \keyword{internal}

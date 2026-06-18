@@ -19,10 +19,10 @@ Footer Server
 \seealso{
 \code{\link[=footer_ui]{footer_ui()}}
 
-Other page modules: 
-\code{\link{footer_ui}()},
-\code{\link{home_server}()},
-\code{\link{home_ui}()}
+Other page modules:
+\code{\link[=footer_ui]{footer_ui()}},
+\code{\link[=home_server]{home_server()}},
+\code{\link[=home_ui]{home_ui()}}
 }
 \concept{page modules}
 \keyword{internal}

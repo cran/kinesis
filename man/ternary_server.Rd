@@ -21,12 +21,12 @@ Ternary Plot Server
 \seealso{
 \code{\link[=ternary_ui]{ternary_ui()}}
 
-Other plot modules: 
-\code{\link{graphics_server}()},
-\code{\link{graphics_ui}()},
-\code{\link{scatter_server}()},
-\code{\link{scatter_ui}()},
-\code{\link{ternary_ui}()}
+Other plot modules:
+\code{\link[=graphics_server]{graphics_server()}},
+\code{\link[=graphics_ui]{graphics_ui()}},
+\code{\link[=scatter_server]{scatter_server()}},
+\code{\link[=scatter_ui]{scatter_ui()}},
+\code{\link[=ternary_ui]{ternary_ui()}}
 }
 \concept{plot modules}
 \keyword{internal}

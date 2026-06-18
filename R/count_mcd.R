@@ -23,10 +23,7 @@ mcd_ui <- function(id) {
         render_numeric_input(ns("dates")),
         select_calendar(ns("calendar_input")),
         bslib::input_task_button(id = ns("go"), label = tr_("(Re)Compute")),
-        downloadButton(
-          outputId = ns("download"),
-          label = tr_("Download results")
-        )
+        render_export_button(ns("export_results")),
       ), # sidebar
       layout_columns(
         col_widths = breakpoints(xs = c(12, 12), lg = c(6, 6)),
@@ -60,10 +57,6 @@ mcd_server <- function(id, x) {
   stopifnot(is.reactive(x))
 
   moduleServer(id, function(input, output, session) {
-    ## Check data -----
-    old <- reactive({ x() }) |> bindEvent(input$go)
-    notify_change(session$ns("change"), x, old, title = tr_("MCD"))
-
     ## Update UI -----
     dates <- build_numeric_input("dates", x)
     cal_in <- get_calendar("calendar_input")
@@ -82,7 +75,9 @@ mcd_server <- function(id, x) {
     }) |>
       bindEvent(input$go)
 
+    old <- reactive({ x() }) |> bindEvent(input$go)
     results <- reactive({
+      if (!identical(x(), old())) return(NULL) # Invalidate
       notify(compute_mcd$result(), title = tr_("MCD"))
     })
 
@@ -111,6 +106,6 @@ mcd_server <- function(id, x) {
     render_plot("plot", x = map)
 
     ## Download -----
-    output$download <- export_table(tbl, "mcd")
+    export_table("export_results", tbl, name = "mcd")
   })
 }

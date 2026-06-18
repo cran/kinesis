@@ -1,0 +1,23 @@
+default:
+  production: TRUE
+  verbose: FALSE
+  name: "radiocarbon"
+  title:
+    en: "Radiocarbone Calibration"
+    fr: "Calibration d'âges radicarbone"
+  description:
+    en: |
+      This application allows the calibration of radiocarbon ages and modern
+      carbon fraction values using multiple calibration curves. It allows the
+      calculation of highest density region intervals and it provides tools for
+      visualising results and estimating statistical summaries.
+    fr: |
+      Cette application permet de calibrer des âges radiocarbone et des valeurs
+      de fraction de carbone moderne à l'aide de plusieurs courbes de
+      calibration. Elle permet de calculer les intervalles de densité maximale
+      et fournit des outils pour visualiser les résultats et estimer des
+      résumés statistiques.
+
+test:
+  production: FALSE
+  verbose: TRUE

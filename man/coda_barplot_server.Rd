@@ -21,20 +21,20 @@ Bar Plot Server
 \seealso{
 \code{\link[=coda_barplot_ui]{coda_barplot_ui()}}
 
-Other coda modules: 
-\code{\link{coda_barplot_ui}()},
-\code{\link{coda_hclust_server}()},
-\code{\link{coda_hclust_ui}()},
-\code{\link{coda_hist_server}()},
-\code{\link{coda_hist_ui}()},
-\code{\link{coda_outliers_server}()},
-\code{\link{coda_outliers_ui}()},
-\code{\link{coda_server}()},
-\code{\link{coda_summary_server}()},
-\code{\link{coda_summary_ui}()},
-\code{\link{coda_ui}()},
-\code{\link{logratio_server}()},
-\code{\link{logratio_ui}()}
+Other coda modules:
+\code{\link[=coda_barplot_ui]{coda_barplot_ui()}},
+\code{\link[=coda_hclust_server]{coda_hclust_server()}},
+\code{\link[=coda_hclust_ui]{coda_hclust_ui()}},
+\code{\link[=coda_hist_server]{coda_hist_server()}},
+\code{\link[=coda_hist_ui]{coda_hist_ui()}},
+\code{\link[=coda_outliers_server]{coda_outliers_server()}},
+\code{\link[=coda_outliers_ui]{coda_outliers_ui()}},
+\code{\link[=coda_server]{coda_server()}},
+\code{\link[=coda_summary_server]{coda_summary_server()}},
+\code{\link[=coda_summary_ui]{coda_summary_ui()}},
+\code{\link[=coda_ui]{coda_ui()}},
+\code{\link[=logratio_server]{logratio_server()}},
+\code{\link[=logratio_ui]{logratio_ui()}}
 }
 \concept{coda modules}
 \keyword{internal}

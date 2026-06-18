@@ -37,14 +37,8 @@ coda_hclust_ui <- function(id) {
           label = tr_("Desired number of clusters"),
           value = 1, min = 1, max = NA, step = 1
         ),
-        downloadButton(
-          outputId = ns("download_dist"),
-          label = tr_("Download distances")
-        ),
-        downloadButton(
-          outputId = ns("download_clust"),
-          label = tr_("Download clusters")
-        )
+        render_export_button(ns("export_dist")),
+        render_export_button(ns("export_clust"))
       ), # sidebar
       output_plot(
         id = ns("plot_dendro"),
@@ -73,10 +67,6 @@ coda_hclust_server <- function(id, x) {
   stopifnot(is.reactive(x))
 
   moduleServer(id, function(input, output, session) {
-    ## Check data -----
-    old <- reactive({ x() }) |> bindEvent(input$go)
-    notify_change(session$ns("change"), x, old, title = tr_("HCLUST"))
-
     ## Compute cluster -----
     compute_hclust <- ExtendedTask$new(
       function(x, method, clust) {
@@ -97,14 +87,16 @@ coda_hclust_server <- function(id, x) {
     }) |>
       bindEvent(input$go)
 
+    old <- reactive({ x() }) |> bindEvent(input$go)
     results <- reactive({
+      if (!identical(x(), old())) return(NULL) # Invalidate
       notify(compute_hclust$result(), title = tr_("Hierarchical Clustering"))
     })
     distances <- reactive({
       results()$dist
     })
     groups <- reactive({
-      req(input$cut)
+      req(results(), input$cut)
       stats::cutree(results(), k = input$cut)
     })
 
@@ -153,7 +145,7 @@ coda_hclust_server <- function(id, x) {
     render_plot("plot_dendro", x = plot_dendro)
 
     ## Download -----
-    output$download_dist <- export_table(distances, name = "distances")
-    output$download_clust <- export_table(groups, name = "clusters")
+    export_table("export_dist", distances, name = "distances", label = tr_("Download distances"))
+    export_table("export_clust", groups, name = "clusters", label = tr_("Download clusters"))
   })
 }

@@ -20,10 +20,7 @@ coda_summary_ui <- function(id) {
         width = 400,
         title = tr_("Descriptive Statistics"),
         helpText(tr_("Data summary and descriptive statistics.")),
-        downloadButton(
-          outputId = ns("download"),
-          label = tr_("Download tables")
-        )
+        render_export_button(ns("export"))
       ),
       navset_card_pill(
         placement = "above",
@@ -212,13 +209,15 @@ coda_summary_server <- function(id, x) {
     render_plot("dendrogram", x = plot_clust)
 
     ## Download -----
-    output$download <- export_multiple(
+    export_multiple(
+      "export",
       mean = data_loc,
       quantiles = data_quant,
       covariance = data_cov,
       variation = data_var,
       pip = data_pip,
-      name = "coda_summary"
+      name = "coda_summary",
+      label = tr_("Download tables")
     )
   })
 }

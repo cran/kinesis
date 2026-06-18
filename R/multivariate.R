@@ -228,16 +228,22 @@ multivariate_server <- function(id, x, y) {
     plot_ind <- reactive({
       req(x())
 
-      default_quali <- "observation"
-      if (!isTruthy(extra_quali()) && isTruthy(extra_quanti())) {
-        default_quali <- NULL
+      col <- param_ind$pal_quali
+      pch <- NULL
+      if (isTruthy(extra_quali())) {
+        quali <- qualiNA <- extra_quali()
+        ## Workaround to display symbols even if NAs
+        qualiNA[is.na(qualiNA)] <- "...NA..."
+        pch <- param_ind$pch(qualiNA)
+      } else if (isTruthy(extra_quanti())) {
+        quali <- NULL
         col <- param_ind$pal_quanti
       } else {
-        col <- param_ind$pal_quali
+        quali <- "observation"
       }
 
       add_ellipses <- any(input$wrap %in% c("confidence", "tolerance"))
-      add_hull <- isTRUE(input$wrap == "hull")
+      add_hull <- identical(input$wrap, "hull")
 
       function() {
         dimensio::viz_rows(
@@ -246,11 +252,12 @@ multivariate_server <- function(id, x, y) {
           active = TRUE,
           sup = isTRUE(input$sup_ind),
           labels = isTRUE(input$lab_ind),
-          extra_quali = extra_quali() %|||% default_quali,
+          extra_quali = quali,
           extra_quanti = extra_quanti(),
           color = col,
           symbol = param_ind$pal_pch,
           size = param_ind$pal_cex,
+          pch = pch,
           xlim = range_ind$x,
           ylim = range_ind$y,
           panel.first = graphics::grid()

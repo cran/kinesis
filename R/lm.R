@@ -60,7 +60,7 @@ lm_ui <- function(id) {
               ),
               radioButtons(
                 inputId = ns("level"),
-                label = tr_("Level"),
+                label = tr_("Level:"),
                 selected = "0.95",
                 choiceNames = c("68%", "95%", "99%"),
                 choiceValues = c("0.68", "0.95", "0.99")

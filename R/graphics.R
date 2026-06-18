@@ -9,7 +9,8 @@
 #' @keywords internal
 #' @export
 graphics_ui <- function(id, col_quali = TRUE, col_quant = TRUE,
-                        pch = TRUE, lty = TRUE, cex = TRUE, asp = FALSE) {
+                        pch = TRUE, lty = TRUE, cex = TRUE, asp = FALSE,
+                        size_range = TRUE) {
   ## Create a namespace function using the provided id
   ns <- NS(id)
 
@@ -32,9 +33,10 @@ graphics_ui <- function(id, col_quali = TRUE, col_quant = TRUE,
     col_quant <- NULL
   }
 
+  size <- if (isTRUE(size_range)) c(1L, 2L) else 1L
   pch <- if (isTRUE(pch)) select_pch(ns("pch"), default = NULL) else NULL
   lty <- if (isTRUE(lty)) select_lty(ns("lty"), default = NULL) else NULL
-  cex <- if (isTRUE(cex)) select_cex(ns("cex")) else NULL
+  cex <- if (isTRUE(cex)) select_cex(ns("cex"), default = size) else NULL
   asp <- if (isTRUE(asp)) checkboxInput(ns("asp"), label = tr_("Fixed aspect ratio"), value = FALSE) else NULL
 
   list(col_quali, col_quant, pch, lty, cex, asp)
@@ -130,7 +132,7 @@ select_color <- function(inputId, label,
 #'   \item{`cex`}{A palette function that when called with a single argument
 #'    returns a numeric vector giving the amount by which plotting text and
 #'    symbols should be magnified relative to the default.}
-#'   \item{`asp`}{}
+#'   \item{`asp`}{A [`numeric`] giving the aspect ratio y/x.}
 #'  }
 #' @seealso [graphics_ui()]
 #' @family plot modules
@@ -142,9 +144,9 @@ graphics_server <- function(id) {
     param <- reactiveValues(
       col_quali = recycle("black"),
       col_quant = recycle("black"),
-      pch = recycle(16),
-      lty = recycle(1),
-      cex = recycle(1),
+      pch = recycle(16L),
+      lty = recycle(1L),
+      cex = recycle(1L),
       asp = NA
     )
 
@@ -170,29 +172,35 @@ graphics_server <- function(id) {
       bindEvent(input$col_quant, ignoreNULL = TRUE)
 
     observe({
-      pch <- as.integer(input$pch) %|||% 16
-      param$pal_pch <- input$pch
+      pch_in <- as.integer(input$pch)
+      pch <- pch_in %|||% 16L
       if (isTruthy(input$pch)) {
         param$pch <- protect(khroma::palette_shape, pch[[1L]], pch)
       } else {
         param$pch <- recycle(pch[[1L]])
       }
+      if (!is.null(input$pch)) {
+        param$pal_pch <- pch_in
+      }
     }) |>
       bindEvent(input$pch, ignoreNULL = FALSE)
 
     observe({
-      lty <- as.integer(input$lty) %|||% 1
-      param$pal_lty <- input$lty
+      lty_in <- as.integer(input$lty)
+      lty <- lty_in %|||% 1L
       if (isTruthy(input$lty)) {
         param$lty <- protect(khroma::palette_line, lty[[1L]], lty)
       } else {
         param$lty <- recycle(lty[[1L]])
       }
+      if (!is.null(input$lty)) {
+        param$pal_lty <- lty_in
+      }
     }) |>
       bindEvent(input$lty, ignoreNULL = FALSE)
 
     observe({
-      cex <- range(as.integer(input$cex)) %|||% 1
+      cex <- range(as.integer(input$cex)) %|||% 1L
       param$pal_cex <- input$cex
       if (isTruthy(input$cex)) {
         param$cex <- protect(khroma::palette_size_sequential, cex[[1L]], cex)

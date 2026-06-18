@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: kinesis 0.3.0.9000\n"
-"POT-Creation-Date: 2025-09-23 17:12+0200\n"
+"Project-Id-Version: kinesis 0.4.0\n"
+"POT-Creation-Date: 2026-06-18 14:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 msgid "Analysis"
 msgstr ""
 
-#: aorisitc.R:21 aorisitc.R:96 aorisitc.R:117 time_interval.R:81
+#: aorisitc.R:21 aorisitc.R:111 time_interval.R:81
 msgid "Aoristic Analysis"
 msgstr ""
 
@@ -39,11 +39,7 @@ msgstr ""
 msgid "(Re)Compute"
 msgstr ""
 
-#: aorisitc.R:49 ca.R:40 coda_outliers.R:41 count_diversity_alpha.R:23 count_mcd.R:28 count_occurrence.R:33 pca.R:56
-msgid "Download results"
-msgstr ""
-
-#: bertin.R:18 coda_barplot.R:62 coda_outliers.R:47 diversity.R:25 ternary.R:124
+#: bertin.R:18 calibrate.R:124 coda_barplot.R:62 coda_outliers.R:47 diversity.R:25 ternary.R:124
 msgid "Plot"
 msgstr ""
 
@@ -63,7 +59,7 @@ msgstr ""
 msgid "Bertin scalogram"
 msgstr ""
 
-#: bertin.R:27 coda_statistics.R:53 ternary.R:49
+#: bertin.R:27 coda_statistics.R:49 ternary.R:49
 msgid "Heatmap"
 msgstr ""
 
@@ -87,11 +83,11 @@ msgstr ""
 msgid "Median"
 msgstr ""
 
-#: ca.R:17 ca.R:76
+#: ca.R:17
 msgid "CA"
 msgstr ""
 
-#: ca.R:21 ca.R:99
+#: ca.R:21 ca.R:94
 msgid "Correspondence Analysis"
 msgstr ""
 
@@ -107,28 +103,212 @@ msgstr ""
 msgid "Supplementary qualitative variables"
 msgstr ""
 
-#: ca.R:126
+#: ca.R:121
 msgid "Chi-squared Test"
 msgstr ""
 
-#: ca.R:129
+#: ca.R:124
 msgid "Statistic: %.0f"
 msgstr ""
 
-#: ca.R:132
+#: ca.R:127
 msgid "Degrees of freedom: %.0f"
 msgstr ""
 
-#: ca.R:135
+#: ca.R:130
 msgid "p-value: %s"
 msgstr ""
 
-#: ca.R:138
+#: ca.R:133
 msgid "Cramer's V: %.2f"
 msgstr ""
 
-#: coda.R:17 coda.R:30 count.R:17 count.R:22 count.R:30 prepare.R:17 prepare.R:22 prepare.R:30
+#: ca.R:144 pca.R:130 table.R:20 table.R:56
+msgid "Download results"
+msgstr ""
+
+#: calibrate.R:17 calibrate.R:21 calibrate.R:260
+msgid "Calibration"
+msgstr ""
+
+#: calibrate.R:27
+msgid "Should the calibration be carried out in F<sup>14</sup>C space?"
+msgstr ""
+
+#: calibrate.R:28
+msgid "If so, your data must be expressed as F<sup>14</sup>C."
+msgstr ""
+
+#: calibrate.R:34 coda.R:17 coda.R:30 count.R:17 count.R:22 count.R:30 prepare.R:17 prepare.R:22 prepare.R:30
 msgid "Data"
+msgstr ""
+
+#: calibrate.R:37
+msgid "Select the corresponding columns from your data set."
+msgstr ""
+
+#: calibrate.R:38
+msgid "Leave blank to use the default parameters."
+msgstr ""
+
+#: calibrate.R:40
+msgid "Laboratory codes"
+msgstr ""
+
+#: calibrate.R:41
+msgid "Values"
+msgstr ""
+
+#: calibrate.R:42
+msgid "BP ages or F<sup>14</sup>C values to be calibrated."
+msgstr ""
+
+#: calibrate.R:43
+msgid "Errors"
+msgstr ""
+
+#: calibrate.R:44
+msgid "Errors associated to the values to be calibrated."
+msgstr ""
+
+#: calibrate.R:45
+msgid "Reservoir offsets"
+msgstr ""
+
+#: calibrate.R:46
+msgid "Offset values for any marine reservoir effect."
+msgstr ""
+
+#: calibrate.R:47
+msgid "Reservoir errors"
+msgstr ""
+
+#: calibrate.R:48
+msgid "Offset value errors for any marine reservoir effect."
+msgstr ""
+
+#: calibrate.R:49
+msgid "Curves"
+msgstr ""
+
+#: calibrate.R:50
+msgid "Calibration curves to be used."
+msgstr ""
+
+#: calibrate.R:51
+msgid "Positions"
+msgstr ""
+
+#: calibrate.R:52
+msgid "Position values (e.g. depths) for each age."
+msgstr ""
+
+#: calibrate.R:55
+msgid "Default parameters"
+msgstr ""
+
+#: calibrate.R:58
+msgid "Calibration curve:"
+msgstr ""
+
+#: calibrate.R:64
+msgid "Reservoir offset"
+msgstr ""
+
+#: calibrate.R:69
+msgid "Reservoir error"
+msgstr ""
+
+#: calibrate.R:75 calibrate.R:280
+msgid "From"
+msgstr ""
+
+#: calibrate.R:76
+msgid "Earliest date to calibrate for, in cal. BP years."
+msgstr ""
+
+#: calibrate.R:83 calibrate.R:281
+msgid "To"
+msgstr ""
+
+#: calibrate.R:84
+msgid "Latest date to calibrate for, in cal. BP years."
+msgstr ""
+
+#: calibrate.R:91
+msgid "Resolution"
+msgstr ""
+
+#: calibrate.R:92
+msgid "Temporal resolution of the calibration, in years."
+msgstr ""
+
+#: calibrate.R:98
+msgid "(Re)Calibrate"
+msgstr ""
+
+#: calibrate.R:103
+msgid "Options"
+msgstr ""
+
+#: calibrate.R:107 lm.R:63
+msgid "Level:"
+msgstr ""
+
+#: calibrate.R:112
+msgid "Fixed scale"
+msgstr ""
+
+#: calibrate.R:113
+msgid "Decreasing order"
+msgstr ""
+
+#: calibrate.R:116 multivariate.R:58 scatter.R:26 ternary.R:30
+msgid "Extra qualitative variable"
+msgstr ""
+
+#: calibrate.R:120 multivariate.R:79
+msgid "Results"
+msgstr ""
+
+#: calibrate.R:137 time_interval.R:17
+msgid "Intervals"
+msgstr ""
+
+#: calibrate.R:221
+msgid "Radiocarbon Calibration"
+msgstr ""
+
+#: calibrate.R:248
+msgid "Conventional Age"
+msgstr ""
+
+#: calibrate.R:256
+msgid "Marine Reservoir"
+msgstr ""
+
+#: calibrate.R:264
+msgid "Value"
+msgstr ""
+
+#: calibrate.R:265 calibrate.R:267
+msgid "Error"
+msgstr ""
+
+#: calibrate.R:266
+msgid "Offset"
+msgstr ""
+
+#: calibrate.R:268
+msgid "Curve"
+msgstr ""
+
+#: calibrate.R:269
+msgid "HDR"
+msgstr ""
+
+#: calibrate.R:282
+msgid "p"
 msgstr ""
 
 #: coda.R:22 coda.R:127
@@ -251,15 +431,15 @@ msgstr ""
 msgid "Gutter"
 msgstr ""
 
-#: coda_hclust.R:17 coda_hclust.R:78
+#: coda_hclust.R:17
 msgid "HCLUST"
 msgstr ""
 
-#: coda_hclust.R:21 coda_hclust.R:101
+#: coda_hclust.R:21 coda_hclust.R:93
 msgid "Hierarchical Clustering"
 msgstr ""
 
-#: coda_hclust.R:24 multivariate.R:400
+#: coda_hclust.R:24 multivariate.R:407
 msgid "Distance"
 msgstr ""
 
@@ -271,20 +451,20 @@ msgstr ""
 msgid "Desired number of clusters"
 msgstr ""
 
-#: coda_hclust.R:42
-msgid "Download distances"
-msgstr ""
-
-#: coda_hclust.R:46
-msgid "Download clusters"
-msgstr ""
-
-#: coda_hclust.R:52 coda_statistics.R:58
+#: coda_hclust.R:46 coda_statistics.R:54
 msgid "Dendrogram"
 msgstr ""
 
-#: coda_hclust.R:119
+#: coda_hclust.R:111
 msgid "Aitchison distance, %s linkage"
+msgstr ""
+
+#: coda_hclust.R:148
+msgid "Download distances"
+msgstr ""
+
+#: coda_hclust.R:149
+msgid "Download clusters"
 msgstr ""
 
 #: coda_hist.R:17 coda_hist.R:21 coda_hist.R:26
@@ -311,36 +491,36 @@ msgstr ""
 msgid "Boxplot"
 msgstr ""
 
-#: coda_logratio.R:41
-msgid "Download log-ratio"
-msgstr ""
-
-#: coda_logratio.R:50 ternary.R:50
+#: coda_logratio.R:49 ternary.R:50
 msgid "Density"
 msgstr ""
 
-#: coda_logratio.R:77
+#: coda_logratio.R:76
 msgid "Rationing part:"
 msgstr ""
 
-#: coda_logratio.R:78
+#: coda_logratio.R:77
 msgid "Pivotal variable:"
 msgstr ""
 
-#: coda_logratio.R:141
+#: coda_logratio.R:140
 msgid "Centered Log-Ratio"
 msgstr ""
 
-#: coda_logratio.R:142
+#: coda_logratio.R:141
 msgid "Additive Log-Ratio"
 msgstr ""
 
-#: coda_logratio.R:143
+#: coda_logratio.R:142
 msgid "Isometric Log-Ratio"
 msgstr ""
 
-#: coda_logratio.R:144
+#: coda_logratio.R:143
 msgid "Pivot Log-Ratio"
+msgstr ""
+
+#: coda_logratio.R:161
+msgid "Download log-ratio"
 msgstr ""
 
 #: coda_outliers.R:17
@@ -391,48 +571,48 @@ msgstr ""
 msgid "Data summary and descriptive statistics."
 msgstr ""
 
-#: coda_statistics.R:25
-msgid "Download tables"
-msgstr ""
-
-#: coda_statistics.R:31
+#: coda_statistics.R:28
 msgid "Location"
 msgstr ""
 
-#: coda_statistics.R:36
+#: coda_statistics.R:33
 msgid "Covariance"
 msgstr ""
 
-#: coda_statistics.R:40
+#: coda_statistics.R:37
 msgid "PIP"
 msgstr ""
 
-#: coda_statistics.R:44 coda_statistics.R:207
+#: coda_statistics.R:41 coda_statistics.R:203
 msgid "Variation Matrix"
 msgstr ""
 
-#: coda_statistics.R:48
+#: coda_statistics.R:44
 msgid "Table"
 msgstr ""
 
-#: coda_statistics.R:130
+#: coda_statistics.R:126
 msgid "Total variation"
 msgstr ""
 
-#: coda_statistics.R:156
+#: coda_statistics.R:152
 msgid "Compositional Mean"
 msgstr ""
 
-#: coda_statistics.R:165
+#: coda_statistics.R:161
 msgid "Percentile Table"
 msgstr ""
 
-#: coda_statistics.R:177
+#: coda_statistics.R:173
 msgid "Centered Log-Ratio Covariance"
 msgstr ""
 
-#: coda_statistics.R:194
+#: coda_statistics.R:190
 msgid "Proportionality Index of Parts"
+msgstr ""
+
+#: coda_statistics.R:220
+msgid "Download tables"
 msgstr ""
 
 #: count.R:37 diversity.R:22
@@ -443,31 +623,31 @@ msgstr ""
 msgid "&#945; Diversity"
 msgstr ""
 
-#: count_diversity_alpha.R:20 count_diversity_alpha.R:89
+#: count_diversity_alpha.R:20 count_diversity_alpha.R:86
 msgid "Diversity Measures"
 msgstr ""
 
-#: count_diversity_alpha.R:53 count_diversity_docs.R:20
+#: count_diversity_alpha.R:50 count_diversity_docs.R:20
 msgid "Alpha Diversity"
 msgstr ""
 
-#: count_diversity_alpha.R:62
+#: count_diversity_alpha.R:59
 msgid "Heterogeneity"
 msgstr ""
 
-#: count_diversity_alpha.R:67
+#: count_diversity_alpha.R:64
 msgid "Dominance"
 msgstr ""
 
-#: count_diversity_alpha.R:72
+#: count_diversity_alpha.R:69
 msgid "Richness"
 msgstr ""
 
-#: count_diversity_alpha.R:77
+#: count_diversity_alpha.R:74
 msgid "Sample size"
 msgstr ""
 
-#: count_diversity_alpha.R:78
+#: count_diversity_alpha.R:75
 msgid "Observed richness"
 msgstr ""
 
@@ -483,40 +663,40 @@ msgstr ""
 msgid "Dissimilarity measure"
 msgstr ""
 
-#: count_diversity_beta.R:32
-msgid "Download dissimilarity matrix"
-msgstr ""
-
-#: count_diversity_beta.R:36
-msgid "Download PCoA results"
-msgstr ""
-
-#: count_diversity_beta.R:41
+#: count_diversity_beta.R:35
 msgid "Display labels"
 msgstr ""
 
-#: count_diversity_beta.R:47
+#: count_diversity_beta.R:41
 msgid "Alpha diversity"
 msgstr ""
 
-#: count_diversity_beta.R:51 time_interval.R:33
+#: count_diversity_beta.R:45 time_interval.R:33
 msgid "Groups"
 msgstr ""
 
-#: count_diversity_beta.R:55 multivariate.R:65 scatter.R:33 ternary.R:81
+#: count_diversity_beta.R:49 multivariate.R:65 scatter.R:33 ternary.R:81
 msgid "Convex hull"
 msgstr ""
 
-#: count_diversity_beta.R:63
+#: count_diversity_beta.R:57
 msgid "Dissimilarity"
 msgstr ""
 
-#: count_diversity_beta.R:69
+#: count_diversity_beta.R:63
 msgid "PCoA"
 msgstr ""
 
-#: count_diversity_beta.R:108 count_diversity_beta.R:124 count_diversity_docs.R:89
+#: count_diversity_beta.R:116 count_diversity_docs.R:89
 msgid "Beta Diversity"
+msgstr ""
+
+#: count_diversity_beta.R:181
+msgid "Download dissimilarity matrix"
+msgstr ""
+
+#: count_diversity_beta.R:186
+msgid "Download PCoA results"
 msgstr ""
 
 #: count_diversity_docs.R:16
@@ -565,11 +745,11 @@ msgstr ""
 msgid "Set the date midpoint (in years) of each ceramic type."
 msgstr ""
 
-#: count_mcd.R:65 count_mcd.R:86
+#: count_mcd.R:81
 msgid "MCD"
 msgstr ""
 
-#: count_occurrence.R:17 count_occurrence.R:20 count_occurrence.R:71 count_occurrence.R:87
+#: count_occurrence.R:17 count_occurrence.R:20 count_occurrence.R:82
 msgid "Co-Occurrence"
 msgstr ""
 
@@ -593,27 +773,27 @@ msgstr ""
 msgid "Indices"
 msgstr ""
 
-#: graphics.R:19
+#: graphics.R:20
 msgid "Qualitative scheme"
 msgstr ""
 
-#: graphics.R:28
+#: graphics.R:29
 msgid "Quantitative scheme"
 msgstr ""
 
-#: graphics.R:38
+#: graphics.R:40
 msgid "Fixed aspect ratio"
 msgstr ""
 
-#: graphics.R:46
+#: graphics.R:48
 msgid "Symbol size"
 msgstr ""
 
-#: graphics.R:66
+#: graphics.R:68
 msgid "Symbol"
 msgstr ""
 
-#: graphics.R:80
+#: graphics.R:82
 msgid "Line type"
 msgstr ""
 
@@ -840,14 +1020,6 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
-#: kinesis-internal.R:215
-msgid "Your data seem to have changed."
-msgstr ""
-
-#: kinesis-internal.R:216
-msgid "You should perform your analysis again."
-msgstr ""
-
 #: lm.R:17 lm.R:21
 msgid "Linear Model"
 msgstr ""
@@ -904,10 +1076,6 @@ msgstr ""
 msgid "Confidence interval"
 msgstr ""
 
-#: lm.R:63
-msgid "Level"
-msgstr ""
-
 #: lm.R:171
 msgid "Prediction interval"
 msgstr ""
@@ -960,10 +1128,6 @@ msgstr ""
 msgid "Extra quantitative variable"
 msgstr ""
 
-#: multivariate.R:58 scatter.R:26 ternary.R:30
-msgid "Extra qualitative variable"
-msgstr ""
-
 #: multivariate.R:63 scatter.R:31 ternary.R:79
 msgid "Wrap:"
 msgstr ""
@@ -978,10 +1142,6 @@ msgstr ""
 
 #: multivariate.R:70 scatter.R:38 ternary.R:86
 msgid "Ellipse level:"
-msgstr ""
-
-#: multivariate.R:79
-msgid "Results"
 msgstr ""
 
 #: multivariate.R:81 scatter.R:46 ternary.R:118
@@ -1012,43 +1172,43 @@ msgstr ""
 msgid "Screeplot"
 msgstr ""
 
-#: multivariate.R:361
+#: multivariate.R:368
 msgid "Eigenvalues"
 msgstr ""
 
-#: multivariate.R:362
+#: multivariate.R:369
 msgid "Explained var. (%)"
 msgstr ""
 
-#: multivariate.R:363
+#: multivariate.R:370
 msgid "Cumulative var. (%)"
 msgstr ""
 
-#: multivariate.R:384
+#: multivariate.R:391
 msgid "Coordinates"
 msgstr ""
 
-#: multivariate.R:389
+#: multivariate.R:396
 msgid "Contribution"
 msgstr ""
 
-#: multivariate.R:394
+#: multivariate.R:401
 msgid "Squared cosinus"
 msgstr ""
 
-#: multivariate.R:404
+#: multivariate.R:411
 msgid "Inertia"
 msgstr ""
 
-#: multivariate.R:409
+#: multivariate.R:416
 msgid "Axis"
 msgstr ""
 
-#: pca.R:22 pca.R:91
+#: pca.R:22
 msgid "PCA"
 msgstr ""
 
-#: pca.R:26 pca.R:123
+#: pca.R:26 pca.R:120
 msgid "Principal Components Analysis"
 msgstr ""
 
@@ -1060,7 +1220,7 @@ msgstr ""
 msgid "Scale"
 msgstr ""
 
-#: pca.R:94
+#: pca.R:89
 msgid ""
 "PCA is computed on centered log-ratio (CLR), you should check the data "
 "transformation first."
@@ -1070,7 +1230,7 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#: plot.R:23 prepare.R:113
+#: plot.R:23 prepare.R:133
 msgid "Download"
 msgstr ""
 
@@ -1106,59 +1266,59 @@ msgstr ""
 msgid "Export your data for futur use."
 msgstr ""
 
-#: prepare.R:148
+#: prepare.R:145
 msgid "Remove leading/trailing whitespace"
 msgstr ""
 
-#: prepare.R:155
+#: prepare.R:152
 msgid "Remove rows with zero"
 msgstr ""
 
-#: prepare.R:161
+#: prepare.R:158
 msgid "Remove columns with zero"
 msgstr ""
 
-#: prepare.R:168
+#: prepare.R:165
 msgid "Remove constant columns"
 msgstr ""
 
-#: prepare.R:175
+#: prepare.R:172
 msgid "Remove only if all values meet the condition"
 msgstr ""
 
-#: prepare.R:236
+#: prepare.R:233
 msgid "Empty string as missing value"
 msgstr ""
 
-#: prepare.R:242
+#: prepare.R:239
 msgid "Zero as missing value"
 msgstr ""
 
-#: prepare.R:248
+#: prepare.R:245
 msgid "Remove missing values:"
 msgstr ""
 
-#: prepare.R:250
+#: prepare.R:247
 msgid "Keep as is"
 msgstr ""
 
-#: prepare.R:251
+#: prepare.R:248
 msgid "Replace missing values with zeros"
 msgstr ""
 
-#: prepare.R:252
+#: prepare.R:249
 msgid "Remove rows with missing values"
 msgstr ""
 
-#: prepare.R:253
+#: prepare.R:250
 msgid "Remove columns with missing values"
 msgstr ""
 
-#: run.R:38
+#: run.R:40
 msgid "Could not find the %s application."
 msgstr ""
 
-#: run.R:79
+#: run.R:81
 msgid "Could not find the configuration file for %s."
 msgstr ""
 
@@ -1202,15 +1362,11 @@ msgstr ""
 msgid "CA dimension"
 msgstr ""
 
-#: seriate.R:46
-msgid "Export matrix"
-msgstr ""
-
-#: seriate.R:53
+#: seriate.R:50
 msgid "Rearranged matrix"
 msgstr ""
 
-#: seriate.R:79
+#: seriate.R:76
 msgid "Compute the seriation order first."
 msgstr ""
 
@@ -1262,10 +1418,6 @@ msgstr ""
 msgid "Visualize your data in the ternary space."
 msgstr ""
 
-#: time_interval.R:17
-msgid "Intervals"
-msgstr ""
-
 #: time_interval.R:21
 msgid "Time Intervals"
 msgstr ""
@@ -1278,7 +1430,7 @@ msgstr ""
 msgid "Upper temporal boundary"
 msgstr ""
 
-#: variables.R:172
+#: variables.R:176
 msgid "Choose"
 msgstr ""
 

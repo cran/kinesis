@@ -5,8 +5,8 @@
 \title{Run an App}
 \usage{
 run_app(
-  app = c("diversity", "seriation", "aoristic", "mcd", "source", "scatter", "ternary",
-    "ca", "pca"),
+  app = c("diversity", "seriation", "aoristic", "mcd", "radiocarbon", "source",
+    "scatter", "ternary", "ca", "pca"),
   options = list(launch.browser = interactive())
 )
 }
@@ -15,26 +15,27 @@ run_app(
 to run (see details). Any unambiguous substring can be given.}
 
 \item{options}{A \code{\link{list}} of named options that should be passed to the
-\code{\link[shiny:shinyApp]{shiny::shinyAppDir()}} call.}
+\code{\link[shiny:shinyAppDir]{shiny::shinyAppDir()}} call.}
 }
 \value{
 A \pkg{shiny} application object.
 }
 \description{
-A wrapper for \code{\link[shiny:shinyApp]{shiny::shinyAppDir()}}.
+A wrapper for \code{\link[shiny:shinyAppDir]{shiny::shinyAppDir()}}.
 }
 \details{
 \tabular{ll}{
-\strong{Application name}          \tab  \strong{Keyword} \cr
-Aoristic Analysis             \tab \code{aoristic}   \cr
-Correspondence Analysis       \tab \code{ca}         \cr
-Principal Components Analysis \tab \code{pca}        \cr
-Diversity Measures            \tab \code{diversity}  \cr
-Mean Ceramic Date             \tab \code{mcd}        \cr
-Scatter Plot                  \tab \code{scatter}    \cr
-Matrix Seriation              \tab \code{seriation}  \cr
-Compositional Data Analysis   \tab \code{source}     \cr
-Ternary Plot                  \tab \code{ternary}    \cr
+\strong{Application name}          \tab  \strong{Keyword}  \cr
+Aoristic Analysis             \tab \code{aoristic}    \cr
+Correspondence Analysis       \tab \code{ca}          \cr
+Principal Components Analysis \tab \code{pca}         \cr
+Diversity Measures            \tab \code{diversity}   \cr
+Mean Ceramic Date             \tab \code{mcd}         \cr
+Radiocarbon Calibration       \tab \code{radiocarbon} \cr
+Scatter Plot                  \tab \code{scatter}     \cr
+Matrix Seriation              \tab \code{seriation}   \cr
+Compositional Data Analysis   \tab \code{source}      \cr
+Ternary Plot                  \tab \code{ternary}     \cr
 }
 }
 \examples{

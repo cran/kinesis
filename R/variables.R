@@ -43,10 +43,14 @@ subset_qualitative <- function(x) {
 #'  (see [shiny::selectizeInput()]).
 #' @seealso [update_selectize_colnames()], [update_selectize_rownames()]
 #' @keywords internal
-selectize_ui <- function(id, label = "Choose", multiple = FALSE) {
+selectize_ui <- function(id, label = "Choose", multiple = FALSE, help = NULL) {
   ns <- NS(id)
   plugins <- ifelse(isTRUE(multiple), "remove_button", "clear_button")
   options <- list(plugins = plugins)
+
+  if (!is.null(help)) {
+    label <- bslib::tooltip(trigger = list(label, icon("info-circle")), help)
+  }
 
   selectizeInput(
     inputId = ns("names"),

@@ -226,7 +226,7 @@ coda_zero_server <- function(id, x) {
         FUN = function(i) {
           numericInput(
             inputId = session$ns(i),
-            label = paste(sub("limit_", "", i), "(%)", sep = " "),
+            label = paste(sub("limit_", "", i, fixed = TRUE), "(%)", sep = " "),
             value = 0, min = 0, max = 100
           )
         }

@@ -38,7 +38,7 @@ coda_outliers_ui <- function(id) {
           value = 0.975, step = 0.005
         ),
         actionButton(inputId = ns("go"), label = tr_("(Re)Detect")),
-        downloadButton(outputId = ns("download"), tr_("Download results"))
+        render_export_button(ns("export_results"))
       ), # sidebar
       layout_columns(
         col_widths = "50%",
@@ -107,7 +107,7 @@ coda_outliers_server <- function(id, x) {
     })
 
     ## Download results -----
-    output$download <- export_table(results, name = "coda_outliers")
+    export_table("export_results", results, name = "coda_outliers")
 
     out
   })

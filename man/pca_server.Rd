@@ -21,12 +21,12 @@ Principal Components Analysis Server
 \seealso{
 \code{\link[=pca_ui]{pca_ui()}}
 
-Other multivariate analysis modules: 
-\code{\link{ca_server}()},
-\code{\link{ca_ui}()},
-\code{\link{multivariate_server}()},
-\code{\link{multivariate_ui}()},
-\code{\link{pca_ui}()}
+Other multivariate analysis modules:
+\code{\link[=ca_server]{ca_server()}},
+\code{\link[=ca_ui]{ca_ui()}},
+\code{\link[=multivariate_server]{multivariate_server()}},
+\code{\link[=multivariate_ui]{multivariate_ui()}},
+\code{\link[=pca_ui]{pca_ui()}}
 }
 \concept{multivariate analysis modules}
 \keyword{internal}

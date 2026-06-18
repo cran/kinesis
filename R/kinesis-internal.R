@@ -192,33 +192,3 @@ notify <- function(expr, title = NULL) {
 
   res
 }
-
-#' Compare Two \R Objects
-#'
-#' Shows a notification if `x` and `y` are not [identical][identical()].
-#' @param x A reactive object.
-#' @param y A reactive object.
-#' @param title A [`character`] string giving the title of the notification.
-#' @return
-#'  No return value, called for side effects.
-#' @keywords internal
-#' @noRd
-notify_change <- function(id, x, y, title = "Important message") {
-  stopifnot(is.reactive(x))
-  stopifnot(is.reactive(y))
-
-  moduleServer(id, function(input, output, session) {
-    observe({
-      if (identical(x(), y())) {
-        removeNotification(id)
-      } else {
-        txt <- paste(tr_("Your data seem to have changed."),
-                     tr_("You should perform your analysis again."), sep = " ")
-        show_notification(id = id, text = txt, title = title,
-                          duration = NULL, closeButton = FALSE,
-                          type = "warning")
-      }
-    }) |>
-      bindEvent(x(), y())
-  })
-}

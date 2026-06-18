@@ -13,7 +13,7 @@ home_ui(id, package = NULL)
 }
 \value{
 A nav item that may be passed to a nav container
-(e.g. \code{\link[bslib:navset]{bslib::navset_tab()}}).
+(e.g. \code{\link[bslib:navset_tab]{bslib::navset_tab()}}).
 }
 \description{
 About UI
@@ -21,10 +21,10 @@ About UI
 \seealso{
 \code{\link[=home_server]{home_server()}}
 
-Other page modules: 
-\code{\link{footer_server}()},
-\code{\link{footer_ui}()},
-\code{\link{home_server}()}
+Other page modules:
+\code{\link[=footer_server]{footer_server()}},
+\code{\link[=footer_ui]{footer_ui()}},
+\code{\link[=home_server]{home_server()}}
 }
 \concept{page modules}
 \keyword{internal}

@@ -21,8 +21,8 @@ No return value, called for side effects.
 Plot Server
 }
 \seealso{
-Other widgets: 
-\code{\link{output_plot}()}
+Other widgets:
+\code{\link[=output_plot]{output_plot()}}
 }
 \concept{widgets}
 \keyword{internal}

@@ -11,7 +11,7 @@ prepare_ui(id)
 }
 \value{
 A nav item that may be passed to a nav container
-(e.g. \code{\link[bslib:navset]{bslib::navset_tab()}}).
+(e.g. \code{\link[bslib:navset_tab]{bslib::navset_tab()}}).
 }
 \description{
 Prepare Data UI
@@ -19,10 +19,10 @@ Prepare Data UI
 \seealso{
 \code{\link[=prepare_server]{prepare_server()}}
 
-Other generic modules: 
-\code{\link{import_server}()},
-\code{\link{import_ui}()},
-\code{\link{prepare_server}()}
+Other generic modules:
+\code{\link[=import_server]{import_server()}},
+\code{\link[=import_ui]{import_ui()}},
+\code{\link[=prepare_server]{prepare_server()}}
 }
 \concept{generic modules}
 \keyword{internal}

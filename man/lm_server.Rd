@@ -21,8 +21,8 @@ Linear Model Server
 \seealso{
 \code{\link[=lm_ui]{lm_ui()}}
 
-Other modeling modules: 
-\code{\link{lm_ui}()}
+Other modeling modules:
+\code{\link[=lm_ui]{lm_ui()}}
 }
 \concept{modeling modules}
 \keyword{internal}

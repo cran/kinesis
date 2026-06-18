@@ -10,7 +10,7 @@ multivariate_server(id, x, y)
 \item{id}{An ID string that corresponds with the ID used to call the module's
 UI function.}
 
-\item{x}{A reactive \code{\link[dimensio:MultivariateAnalysis]{dimensio::MultivariateAnalysis}} object.}
+\item{x}{A reactive \code{\link[dimensio:MultivariateAnalysis-class]{dimensio::MultivariateAnalysis}} object.}
 
 \item{y}{A reactive \code{matrix}-like object use to compute the multivariate
 analysis.}
@@ -24,12 +24,12 @@ Multivariate Analysis Server
 \seealso{
 \link{multivariate_ui}
 
-Other multivariate analysis modules: 
-\code{\link{ca_server}()},
-\code{\link{ca_ui}()},
-\code{\link{multivariate_ui}()},
-\code{\link{pca_server}()},
-\code{\link{pca_ui}()}
+Other multivariate analysis modules:
+\code{\link[=ca_server]{ca_server()}},
+\code{\link[=ca_ui]{ca_ui()}},
+\code{\link[=multivariate_ui]{multivariate_ui()}},
+\code{\link[=pca_server]{pca_server()}},
+\code{\link[=pca_ui]{pca_ui()}}
 }
 \concept{multivariate analysis modules}
 \keyword{internal}

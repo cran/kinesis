@@ -12,8 +12,9 @@ A collection of 'shiny' applications for the 'tesselle' packages \url{https://ww
 }
 \details{
 \tabular{ll}{
-\strong{Version} \tab 0.3.1 \cr
+\strong{Version} \tab 0.4.0 \cr
 \strong{License} \tab GPL-3 \cr
+\strong{CRAN DOI} \tab \doi{10.32614/CRAN.package.kinesis} \cr
 \strong{Zenodo DOI} \tab \doi{10.5281/zenodo.14645671} \cr
 }
 
@@ -23,15 +24,6 @@ Université Bordeaux Montaigne\cr
 F-33607 Pessac cedex\cr
 France
 }
-\section{Package options}{
-
-\pkg{kinesis} uses the following \code{\link[=options]{options()}} to configure behavior:
-\itemize{
-\item \code{kinesis.workers}: an \code{\link{integer}} specifying the number of \R sessions
-to be used for asynchronous (parallel) computing. Defaults to 1.
-}
-}
-
 \seealso{
 Useful links:
 \itemize{
@@ -44,6 +36,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Nicolas Frerebeau \email{nicolas.frerebeau@u-bordeaux-montaigne.fr} (\href{https://orcid.org/0000-0001-5759-4944}{ORCID})
+
+Authors:
+\itemize{
+  \item Nicolas Frerebeau \email{nicolas.frerebeau@u-bordeaux-montaigne.fr} (\href{https://orcid.org/0000-0001-5759-4944}{ORCID})
+}
 
 Other contributors:
 \itemize{

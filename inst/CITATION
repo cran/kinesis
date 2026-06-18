@@ -16,7 +16,7 @@ bibentry(
   key          = "R-kinesis",
   author       = person("Nicolas", "Frerebeau", role = "aut"),
   title        = "{kinesis: 'shiny' Applications for the 'tesselle' Packages}",
-  year         = "2025",
+  year         = "2026",
   organization = "Université Bordeaux Montaigne",
   address      = "Pessac, France",
   note         = sprintf("R package version %s", meta$Version),

@@ -11,7 +11,7 @@ scatter_ui(id)
 }
 \value{
 A nav item that may be passed to a nav container
-(e.g. \code{\link[bslib:navset]{bslib::navset_tab()}}).
+(e.g. \code{\link[bslib:navset_tab]{bslib::navset_tab()}}).
 }
 \description{
 Scatter Plot UI
@@ -19,12 +19,12 @@ Scatter Plot UI
 \seealso{
 \code{\link[=scatter_server]{scatter_server()}}
 
-Other plot modules: 
-\code{\link{graphics_server}()},
-\code{\link{graphics_ui}()},
-\code{\link{scatter_server}()},
-\code{\link{ternary_server}()},
-\code{\link{ternary_ui}()}
+Other plot modules:
+\code{\link[=graphics_server]{graphics_server()}},
+\code{\link[=graphics_ui]{graphics_ui()}},
+\code{\link[=scatter_server]{scatter_server()}},
+\code{\link[=ternary_server]{ternary_server()}},
+\code{\link[=ternary_ui]{ternary_ui()}}
 }
 \concept{plot modules}
 \keyword{internal}

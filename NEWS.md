@@ -1,3 +1,17 @@
+# kinesis 0.4.0
+## Enhancements
+* Add radiocarbon calibration app.
+
+## Bugfixes & changes
+* Fix graphical parameters selection.
+
+## Internals
+* Import **aion** (>= 1.7.0).
+* Import **ananke** (>= 0.3.0).
+* Import **dimensio** (>= 0.14.1).
+* Import **khroma** (>= 1.17.0).
+* Import **tabula** (>= 3.3.2).
+
 # kinesis 0.3.1
 ## Bugfixes & changes
 * Fix column names of multivariate analysis summary table.

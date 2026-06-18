@@ -41,10 +41,7 @@ seriate_ui <- function(id) {
           step = 1
         ),
         ## Output: download
-        downloadButton(
-          outputId = ns("export_table"),
-          label = tr_("Export matrix")
-        )
+        render_export_button(ns("export_results"))
       ), # sidebar
       ## Output: plot reordered matrix
       navset_card_pill(
@@ -96,7 +93,7 @@ seriate_server  <- function(id, x, order) {
     bertin_server("plot", x = data_permute)
 
     ## Download -----
-    output$export_table <- export_table(data_permute, name = "permuted")
+    export_table("export_results", data_permute, name = "permuted")
 
     data_seriate
   })

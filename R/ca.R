@@ -35,10 +35,7 @@ ca_ui <- function(id) {
           multiple = TRUE
         ),
         bslib::input_task_button(id = ns("go"), label = tr_("(Re)Compute")),
-        downloadButton(
-          outputId = ns("download"),
-          label = tr_("Download results")
-        ),
+        uiOutput(outputId = ns("download_button")),
         uiOutput(outputId = ns("chi2"))
       ), # sidebar
       multivariate_ui(ns("ca")),
@@ -71,10 +68,6 @@ ca_server <- function(id, x) {
     sup_col <- update_selectize_colnames("sup_col", x = quanti)
     sup_quali <- update_selectize_colnames("sup_quali", x = quali, select = TRUE)
 
-    ## Check data -----
-    old <- reactive({ x() }) |> bindEvent(input$go)
-    notify_change(session$ns("change"), x, old, title = tr_("CA"))
-
     ## Compute CA -----
     compute_ca <- ExtendedTask$new(
       function(x, rank, sup_row, sup_col, sup_quali) {
@@ -95,7 +88,9 @@ ca_server <- function(id, x) {
     }) |>
       bindEvent(input$go)
 
+    old <- reactive({ x() }) |> bindEvent(input$go)
     results <- reactive({
+      if (!identical(x(), old())) return(NULL) # Invalidate
       notify(compute_ca$result(), title = tr_("Correspondence Analysis"))
     })
 
@@ -132,7 +127,7 @@ ca_server <- function(id, x) {
             sprintf(tr_("Degrees of freedom: %.0f"), chi2_test()$parameter)
           ),
           tags$li(
-            sprintf(tr_("p-value: %s"), format.pval(chi2_test()$p.value, eps = .001))
+            sprintf(tr_("p-value: %s"), format.pval(chi2_test()$p.value, eps = 0.001))
           ),
           tags$li(
             sprintf(tr_("Cramer's V: %.2f"), chi2_test()$cramer)
@@ -142,6 +137,13 @@ ca_server <- function(id, x) {
     })
 
     ## Export -----
+    output$download_button <- renderUI({
+      req(results())
+      downloadButton(
+        outputId = session$ns("download"),
+        label = tr_("Download results")
+      )
+    })
     output$download <- downloadHandler(
       filename = function() { make_file_name("ca", "zip") },
       content = function(file) {

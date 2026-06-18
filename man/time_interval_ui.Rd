@@ -11,7 +11,7 @@ time_interval_ui(id)
 }
 \value{
 A nav item that may be passed to a nav container
-(e.g. \code{\link[bslib:navset]{bslib::navset_tab()}}).
+(e.g. \code{\link[bslib:navset_tab]{bslib::navset_tab()}}).
 }
 \description{
 Time Intervals UI
@@ -19,12 +19,14 @@ Time Intervals UI
 \seealso{
 \code{\link[=time_interval_server]{time_interval_server()}}
 
-Other chronology modules: 
-\code{\link{aoristic_server}()},
-\code{\link{aoristic_ui}()},
-\code{\link{seriate_server}()},
-\code{\link{seriate_ui}()},
-\code{\link{time_interval_server}()}
+Other chronology modules:
+\code{\link[=aoristic_server]{aoristic_server()}},
+\code{\link[=aoristic_ui]{aoristic_ui()}},
+\code{\link[=calibrate_server]{calibrate_server()}},
+\code{\link[=calibrate_ui]{calibrate_ui()}},
+\code{\link[=seriate_server]{seriate_server()}},
+\code{\link[=seriate_ui]{seriate_ui()}},
+\code{\link[=time_interval_server]{time_interval_server()}}
 }
 \concept{chronology modules}
 \keyword{internal}

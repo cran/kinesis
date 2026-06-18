@@ -9,16 +9,17 @@
 #'  [`shiny::shinyAppDir()`] call.
 #' @details
 #'  \tabular{ll}{
-#'   **Application name**          \tab  **Keyword** \cr
-#'   Aoristic Analysis             \tab `aoristic`   \cr
-#'   Correspondence Analysis       \tab `ca`         \cr
-#'   Principal Components Analysis \tab `pca`        \cr
-#'   Diversity Measures            \tab `diversity`  \cr
-#'   Mean Ceramic Date             \tab `mcd`        \cr
-#'   Scatter Plot                  \tab `scatter`    \cr
-#'   Matrix Seriation              \tab `seriation`  \cr
-#'   Compositional Data Analysis   \tab `source`     \cr
-#'   Ternary Plot                  \tab `ternary`    \cr
+#'   **Application name**          \tab  **Keyword**  \cr
+#'   Aoristic Analysis             \tab `aoristic`    \cr
+#'   Correspondence Analysis       \tab `ca`          \cr
+#'   Principal Components Analysis \tab `pca`         \cr
+#'   Diversity Measures            \tab `diversity`   \cr
+#'   Mean Ceramic Date             \tab `mcd`         \cr
+#'   Radiocarbon Calibration       \tab `radiocarbon` \cr
+#'   Scatter Plot                  \tab `scatter`     \cr
+#'   Matrix Seriation              \tab `seriation`   \cr
+#'   Compositional Data Analysis   \tab `source`      \cr
+#'   Ternary Plot                  \tab `ternary`     \cr
 #'  }
 #' @examples
 #' if (interactive()) {
@@ -29,12 +30,13 @@
 #' @author N. Frerebeau
 #' @export
 run_app <- function(app = c("diversity", "seriation", "aoristic", "mcd",
-                            "source", "scatter", "ternary", "ca", "pca"),
+                            "radiocarbon", "source",
+                            "scatter", "ternary", "ca", "pca"),
                     options = list(launch.browser = interactive())) {
   ## App selection
   app <- match.arg(app, several.ok = FALSE)
   app_dir <- system.file("app", app, package = "kinesis")
-  if (app_dir == "") {
+  if (!nzchar(app_dir)) {
     msg <- sprintf(tr_("Could not find the %s application."), sQuote(app))
     stop(msg, call. = FALSE)
   }

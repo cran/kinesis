@@ -22,10 +22,10 @@ Prepare Data Server
 \seealso{
 \code{\link[=prepare_ui]{prepare_ui()}}
 
-Other generic modules: 
-\code{\link{import_server}()},
-\code{\link{import_ui}()},
-\code{\link{prepare_ui}()}
+Other generic modules:
+\code{\link[=import_server]{import_server()}},
+\code{\link[=import_ui]{import_ui()}},
+\code{\link[=prepare_ui]{prepare_ui()}}
 }
 \concept{generic modules}
 \keyword{internal}

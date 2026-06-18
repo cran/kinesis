@@ -13,7 +13,7 @@ logratio_ui(id, title)
 }
 \value{
 A nav item that may be passed to a nav container
-(e.g. \code{\link[bslib:navset]{bslib::navset_tab()}}).
+(e.g. \code{\link[bslib:navset_tab]{bslib::navset_tab()}}).
 }
 \description{
 Log-Ratio UI
@@ -21,20 +21,20 @@ Log-Ratio UI
 \seealso{
 \code{\link[=logratio_server]{logratio_server()}}
 
-Other coda modules: 
-\code{\link{coda_barplot_server}()},
-\code{\link{coda_barplot_ui}()},
-\code{\link{coda_hclust_server}()},
-\code{\link{coda_hclust_ui}()},
-\code{\link{coda_hist_server}()},
-\code{\link{coda_hist_ui}()},
-\code{\link{coda_outliers_server}()},
-\code{\link{coda_outliers_ui}()},
-\code{\link{coda_server}()},
-\code{\link{coda_summary_server}()},
-\code{\link{coda_summary_ui}()},
-\code{\link{coda_ui}()},
-\code{\link{logratio_server}()}
+Other coda modules:
+\code{\link[=coda_barplot_server]{coda_barplot_server()}},
+\code{\link[=coda_barplot_ui]{coda_barplot_ui()}},
+\code{\link[=coda_hclust_server]{coda_hclust_server()}},
+\code{\link[=coda_hclust_ui]{coda_hclust_ui()}},
+\code{\link[=coda_hist_server]{coda_hist_server()}},
+\code{\link[=coda_hist_ui]{coda_hist_ui()}},
+\code{\link[=coda_outliers_server]{coda_outliers_server()}},
+\code{\link[=coda_outliers_ui]{coda_outliers_ui()}},
+\code{\link[=coda_server]{coda_server()}},
+\code{\link[=coda_summary_server]{coda_summary_server()}},
+\code{\link[=coda_summary_ui]{coda_summary_ui()}},
+\code{\link[=coda_ui]{coda_ui()}},
+\code{\link[=logratio_server]{logratio_server()}}
 }
 \concept{coda modules}
 \keyword{internal}

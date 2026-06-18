@@ -15,7 +15,7 @@ UI function.}
 \item{order}{A reactive \R object (coercible by \code{\link[kairos:as_seriation]{kairos::as_seriation()}}).}
 }
 \value{
-A reactive \code{\link[kairos:PermutationOrder-class]{kairos::AveragePermutationOrder}} object.
+A reactive \code{\link[kairos:AveragePermutationOrder-class]{kairos::AveragePermutationOrder}} object.
 }
 \description{
 CA Seriation Server
@@ -23,12 +23,14 @@ CA Seriation Server
 \seealso{
 \code{\link[=seriate_ui]{seriate_ui()}}
 
-Other chronology modules: 
-\code{\link{aoristic_server}()},
-\code{\link{aoristic_ui}()},
-\code{\link{seriate_ui}()},
-\code{\link{time_interval_server}()},
-\code{\link{time_interval_ui}()}
+Other chronology modules:
+\code{\link[=aoristic_server]{aoristic_server()}},
+\code{\link[=aoristic_ui]{aoristic_ui()}},
+\code{\link[=calibrate_server]{calibrate_server()}},
+\code{\link[=calibrate_ui]{calibrate_ui()}},
+\code{\link[=seriate_ui]{seriate_ui()}},
+\code{\link[=time_interval_server]{time_interval_server()}},
+\code{\link[=time_interval_ui]{time_interval_ui()}}
 }
 \concept{chronology modules}
 \keyword{internal}

@@ -18,14 +18,14 @@ output_plot(id, ..., tools = NULL, title = NULL, note = NULL)
 \item{note}{A \code{\link{character}} string giving a note to be placed in the footer.}
 }
 \value{
-A \code{\link[htmltools:builder]{htmltools::div()}} tag.
+A \code{\link[htmltools:div]{htmltools::div()}} tag.
 }
 \description{
 Plot UI
 }
 \seealso{
-Other widgets: 
-\code{\link{render_plot}()}
+Other widgets:
+\code{\link[=render_plot]{render_plot()}}
 }
 \concept{widgets}
 \keyword{internal}

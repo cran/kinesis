@@ -11,7 +11,7 @@ diversity_beta_ui(id)
 }
 \value{
 A nav item that may be passed to a nav container
-(e.g. \code{\link[bslib:navset]{bslib::navset_tab()}}).
+(e.g. \code{\link[bslib:navset_tab]{bslib::navset_tab()}}).
 }
 \description{
 Beta Diversity UI
@@ -19,19 +19,19 @@ Beta Diversity UI
 \seealso{
 \code{\link[=diversity_beta_server]{diversity_beta_server()}}
 
-Other count data modules: 
-\code{\link{bertin_server}()},
-\code{\link{bertin_ui}()},
-\code{\link{count_server}()},
-\code{\link{count_ui}()},
-\code{\link{diversity_alpha_server}()},
-\code{\link{diversity_alpha_ui}()},
-\code{\link{diversity_beta_server}()},
-\code{\link{diversity_docs_ui}()},
-\code{\link{diversity_server}()},
-\code{\link{diversity_ui}()},
-\code{\link{occurrence_server}()},
-\code{\link{occurrence_ui}()}
+Other count data modules:
+\code{\link[=bertin_server]{bertin_server()}},
+\code{\link[=bertin_ui]{bertin_ui()}},
+\code{\link[=count_server]{count_server()}},
+\code{\link[=count_ui]{count_ui()}},
+\code{\link[=diversity_alpha_server]{diversity_alpha_server()}},
+\code{\link[=diversity_alpha_ui]{diversity_alpha_ui()}},
+\code{\link[=diversity_beta_server]{diversity_beta_server()}},
+\code{\link[=diversity_docs_ui]{diversity_docs_ui()}},
+\code{\link[=diversity_server]{diversity_server()}},
+\code{\link[=diversity_ui]{diversity_ui()}},
+\code{\link[=occurrence_server]{occurrence_server()}},
+\code{\link[=occurrence_ui]{occurrence_ui()}}
 }
 \concept{count data modules}
 \keyword{internal}

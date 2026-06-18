@@ -18,10 +18,7 @@ diversity_alpha_ui <- function(id) {
     layout_sidebar(
       sidebar = sidebar(
         title = tr_("Diversity Measures"),
-        downloadButton(
-          outputId = ns("download"),
-          label = tr_("Download results")
-        ),
+        render_export_button(ns("export_results"))
       ), # sidebar
       card(
         gt::gt_output(outputId = ns("measures"))
@@ -92,7 +89,7 @@ diversity_alpha_server <- function(id, x, verbose = get_option("verbose", FALSE)
     })
 
     ## Download -----
-    output$download <- export_table(results, "alpha")
+    export_table("export_results", results, name = "alpha")
 
     results
   })

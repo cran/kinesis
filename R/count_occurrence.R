@@ -28,10 +28,7 @@ occurrence_ui <- function(id) {
         ),
         info_article(author = "Kintigh", year = "2006", doi = "10.6067/XCV8J38QSS"),
         bslib::input_task_button(id = ns("go"), label = tr_("(Re)Compute")),
-        downloadButton(
-          outputId = ns("download"),
-          label = tr_("Download results")
-        )
+        render_export_button(ns("export_results"))
       ), # sidebar
       layout_columns(
         col_widths = breakpoints(xs = c(12, 12), lg = c(6, 6)),
@@ -66,10 +63,6 @@ occurrence_server <- function(id, x, verbose = get_option("verbose", FALSE)) {
   stopifnot(is.reactive(x))
 
   moduleServer(id, function(input, output, session) {
-    ## Check data -----
-    old <- reactive({ x() }) |> bindEvent(input$go)
-    notify_change(session$ns("change"), x, old, title = tr_("Co-Occurrence"))
-
     ## Compute index -----
     compute_occur <- ExtendedTask$new(
       function(x, method) {
@@ -83,7 +76,9 @@ occurrence_server <- function(id, x, verbose = get_option("verbose", FALSE)) {
     }) |>
       bindEvent(input$go)
 
+    old <- reactive({ x() }) |> bindEvent(input$go)
     results <- reactive({
+      if (!identical(x(), old())) return(NULL) # Invalidate
       notify(compute_occur$result(), title = tr_("Co-Occurrence"))
     })
 
@@ -108,7 +103,7 @@ occurrence_server <- function(id, x, verbose = get_option("verbose", FALSE)) {
     render_plot("plot", x = map)
 
     ## Download -----
-    output$download <- export_table(results, "occurrence")
+    export_table("export_results", results, name = "occurrence")
 
     results
   })

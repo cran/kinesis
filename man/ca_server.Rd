@@ -21,12 +21,12 @@ Correspondence Analysis Server
 \seealso{
 \code{\link[=ca_ui]{ca_ui()}}
 
-Other multivariate analysis modules: 
-\code{\link{ca_ui}()},
-\code{\link{multivariate_server}()},
-\code{\link{multivariate_ui}()},
-\code{\link{pca_server}()},
-\code{\link{pca_ui}()}
+Other multivariate analysis modules:
+\code{\link[=ca_ui]{ca_ui()}},
+\code{\link[=multivariate_server]{multivariate_server()}},
+\code{\link[=multivariate_ui]{multivariate_ui()}},
+\code{\link[=pca_server]{pca_server()}},
+\code{\link[=pca_ui]{pca_ui()}}
 }
 \concept{multivariate analysis modules}
 \keyword{internal}

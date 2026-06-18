@@ -13,7 +13,7 @@ If \code{NULL} (the default), all options are returned.}
 \item{default}{A value to be returned if the option is not currently set.}
 }
 \value{
-The value of a \pkg{Shiny} option (see \code{\link[shiny:shinyOptions]{shiny::getShinyOption()}}).
+The value of a \pkg{Shiny} option (see \code{\link[shiny:getShinyOption]{shiny::getShinyOption()}}).
 }
 \description{
 Get App Options
