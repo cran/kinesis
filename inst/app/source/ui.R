@@ -10,25 +10,9 @@ function(request) {
     kinesis::home_ui("home"),
     kinesis::coda_ui("coda"),
     kinesis::coda_summary_ui("coda_summary"),
-    bslib::nav_menu(
-      title = "Plot",
-      kinesis::coda_hist_ui("hist"),
-      kinesis::coda_barplot_ui("barplot"),
-      kinesis::ternary_ui("ternary")
-    ),
-    bslib::nav_menu(
-      title = "Transform",
-      kinesis::logratio_ui("clr", title = "CLR"),
-      kinesis::logratio_ui("alr", title = "ALR"),
-      kinesis::logratio_ui("ilr", title = "ILR"),
-      kinesis::logratio_ui("plr", title = "PLR")
-    ),
-    bslib::nav_menu(
-      title = "Analysis",
-      # kinesis::coda_outliers_ui("outliers"),
-      kinesis::pca_ui("pca", scale = FALSE),
-      kinesis::coda_hclust_ui("clust")
-    ),
+    kinesis::coda_nav_plot(),
+    kinesis::coda_nav_logratio(),
+    kinesis::coda_nav_analysis(),
     bslib::nav_spacer(),
     bslib::nav_item(bslib::input_dark_mode()),
     footer = kinesis::footer_ui("footer"),

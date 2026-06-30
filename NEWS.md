@@ -1,3 +1,12 @@
+# kinesis 0.5.0
+## Enhancements
+* Small UI enhancements (use `bslib::toast()` and `bslib::toolbar()`).
+
+## Internals
+* Import **aion** (>= 1.7.1).
+* Import **dimensio** (>= 0.14.2).
+* Import **nexus** (>= 0.6.1).
+
 # kinesis 0.4.0
 ## Enhancements
 * Add radiocarbon calibration app.

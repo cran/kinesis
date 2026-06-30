@@ -229,12 +229,8 @@ multivariate_server <- function(id, x, y) {
       req(x())
 
       col <- param_ind$pal_quali
-      pch <- NULL
       if (isTruthy(extra_quali())) {
-        quali <- qualiNA <- extra_quali()
-        ## Workaround to display symbols even if NAs
-        qualiNA[is.na(qualiNA)] <- "...NA..."
-        pch <- param_ind$pch(qualiNA)
+        quali <- extra_quali()
       } else if (isTruthy(extra_quanti())) {
         quali <- NULL
         col <- param_ind$pal_quanti
@@ -257,10 +253,10 @@ multivariate_server <- function(id, x, y) {
           color = col,
           symbol = param_ind$pal_pch,
           size = param_ind$pal_cex,
-          pch = pch,
           xlim = range_ind$x,
           ylim = range_ind$y,
-          panel.first = graphics::grid()
+          panel.first = graphics::grid(),
+          na_show = TRUE # /!\ Undocumented feature /!\
         )
 
         if (add_ellipses) {

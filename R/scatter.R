@@ -39,8 +39,7 @@ scatter_ui <- function(id) {
           selected = "0.95",
           choiceNames = c("68%", "95%", "99%"),
           choiceValues = c("0.68", "0.95", "0.99")
-        ),
-        checkboxInput(inputId = ns("grid"), label = tr_("Grid"), value = TRUE)
+        )
       ), # sidebar
       helpText(
         tr_("Click and drag to select an area, then double-click to zoom in."),
@@ -50,7 +49,10 @@ scatter_ui <- function(id) {
         col_widths = c(8, 4),
         output_plot(
           id = ns("plot"),
-          tools = graphics_ui(ns("par"), col_quant = FALSE, lty = FALSE, asp = TRUE),
+          tools = list(
+            graphics_ui(ns("par"), lty = FALSE, asp = TRUE),
+            checkboxInput(inputId = ns("grid"), label = tr_("Grid"), value = TRUE)
+          ),
           title = tr_("Scatter Plot"),
           click = ns("plot_click"),
           dblclick = ns("plot_dblclick"),
@@ -136,9 +138,19 @@ scatter_server <- function(id, x) {
       coord_x <- x()[[axis1()]]
       coord_y <- x()[[axis2()]]
 
-      col <- param$col_quali(extra_quali())
+
+      if (isTruthy(extra_quali())) {
+        col <- param$col_quali(extra_quali())
+      } else {
+        col <- param$col_quant(extra_quanti())
+      }
       pch <- param$pch(extra_quali())
       cex <- param$cex(extra_quanti())
+
+      ## Keep NAs
+      if (isTruthy(extra_quali())) {
+        pch[which(is.na(extra_quali()))] <- 16
+      }
 
       ## Build plot
       function() {
@@ -158,10 +170,15 @@ scatter_server <- function(id, x) {
           las = 1
         )
 
-        if (isTruthy(extra_quali())) {
-          ## Add ellipses
-          wrap()(x = coord_x, y = coord_y, z = extra_quali(), color = param$pal_quali)
+        ## Add ellipses
+        wrap()(
+          x = coord_x,
+          y = coord_y,
+          z = extra_quali() %|||% rep("All", length(coord_x)),
+          color = param$pal_quali
+        )
 
+        if (isTruthy(extra_quali())) {
           ## Add legend
           labels <- unique(extra_quali())
           keep <- !is.na(labels)

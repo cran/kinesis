@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kinesis 0.1.0.9000\n"
-"POT-Creation-Date: 2026-06-18 14:45+0200\n"
+"POT-Creation-Date: 2026-06-24 12:12+0200\n"
 "PO-Revision-Date: 2025-06-03 17:58+0000\n"
 "Last-Translator: nfrerebeau <nicolas.frerebeau@u-bordeaux-montaigne.fr>\n"
 "Language-Team: French <https://translate.codeberg.org/projects/tesselle/"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 5.11.4\n"
 
-#: aorisitc.R:17
+#: aorisitc.R:17 coda.R:41
 msgid "Analysis"
 msgstr "Analyse"
 
@@ -42,8 +42,8 @@ msgstr "Pondération"
 msgid "(Re)Compute"
 msgstr "(Re)Calculer"
 
-#: bertin.R:18 calibrate.R:124 coda_barplot.R:62 coda_outliers.R:47
-#: diversity.R:25 ternary.R:124
+#: bertin.R:18 calibrate.R:118 coda.R:18 coda_barplot.R:62 coda_outliers.R:47
+#: diversity.R:25 lm.R:66 ternary.R:124
 msgid "Plot"
 msgstr "Graphique"
 
@@ -132,7 +132,7 @@ msgstr "V de Cramér : %.2f"
 msgid "Download results"
 msgstr "Télécharger les résultats"
 
-#: calibrate.R:17 calibrate.R:21 calibrate.R:260
+#: calibrate.R:17 calibrate.R:21 calibrate.R:265
 msgid "Calibration"
 msgstr "Calibration"
 
@@ -144,14 +144,14 @@ msgstr "La calibration doit-elle être réalisée en valeurs F<sup>14</sup>C ?"
 msgid "If so, your data must be expressed as F<sup>14</sup>C."
 msgstr "Dans ce cas, vos données doivent être exprimées en F<sup>14</sup>C."
 
-#: calibrate.R:34 coda.R:17 coda.R:30 count.R:17 count.R:22 count.R:30
+#: calibrate.R:34 coda.R:63 coda.R:76 count.R:17 count.R:22 count.R:30
 #: prepare.R:17 prepare.R:22 prepare.R:30
 msgid "Data"
 msgstr "Données"
 
 #: calibrate.R:37
 msgid "Select the corresponding columns from your data set."
-msgstr "Sélectionnez les colonnes de vos données correspondantes."
+msgstr "Sélectionnez les colonnes correspondantes de vos données."
 
 #: calibrate.R:38
 msgid "Leave blank to use the default parameters."
@@ -226,7 +226,7 @@ msgstr "Correction de l'effet de réservoir"
 msgid "Reservoir error"
 msgstr "Erreur sur l'effet de réservoir"
 
-#: calibrate.R:75 calibrate.R:280
+#: calibrate.R:75 calibrate.R:285
 msgid "From"
 msgstr "Depuis"
 
@@ -236,7 +236,7 @@ msgstr ""
 "Date la plus ancienne à prendre en compte pour la calibration, en années "
 "cal. BP."
 
-#: calibrate.R:83 calibrate.R:281
+#: calibrate.R:83 calibrate.R:286
 msgid "To"
 msgstr "Jusqu'à"
 
@@ -261,83 +261,87 @@ msgstr "(Re)Calibrer"
 msgid "Options"
 msgstr "Options"
 
-#: calibrate.R:107 lm.R:63
+#: calibrate.R:107 lm.R:56
 msgid "Level:"
 msgstr "Niveau :"
 
-#: calibrate.R:112
-msgid "Fixed scale"
-msgstr "Échelle fixe"
-
-#: calibrate.R:113
-msgid "Decreasing order"
-msgstr "Tri décroissant"
-
-#: calibrate.R:116 multivariate.R:58 scatter.R:26 ternary.R:30
-msgid "Extra qualitative variable"
-msgstr "Variable qualitative illustrative"
-
-#: calibrate.R:120 multivariate.R:79
+#: calibrate.R:114 multivariate.R:79
 msgid "Results"
 msgstr "Résultats"
 
-#: calibrate.R:137 time_interval.R:17
+#: calibrate.R:122
+msgid "Fixed scale"
+msgstr "Échelle fixe"
+
+#: calibrate.R:123 calibrate.R:144
+msgid "Decreasing order"
+msgstr "Tri décroissant"
+
+#: calibrate.R:126 lm.R:35 multivariate.R:58 scatter.R:26 ternary.R:30
+msgid "Extra qualitative variable"
+msgstr "Variable qualitative illustrative"
+
+#: calibrate.R:139 time_interval.R:17
 msgid "Intervals"
 msgstr "Intervalles"
 
-#: calibrate.R:221
+#: calibrate.R:226
 msgid "Radiocarbon Calibration"
 msgstr "Calibration du radiocarbone"
 
-#: calibrate.R:248
+#: calibrate.R:253
 msgid "Conventional Age"
 msgstr "Âge conventionnel"
 
-#: calibrate.R:256
+#: calibrate.R:261
 msgid "Marine Reservoir"
 msgstr "Réservoir"
 
-#: calibrate.R:264
+#: calibrate.R:269
 msgid "Value"
 msgstr "Valeur"
 
-#: calibrate.R:265 calibrate.R:267
+#: calibrate.R:270 calibrate.R:272
 msgid "Error"
 msgstr "Erreur"
 
-#: calibrate.R:266
+#: calibrate.R:271
 msgid "Offset"
 msgstr "Correction"
 
-#: calibrate.R:268
+#: calibrate.R:273
 msgid "Curve"
 msgstr "Courbe"
 
-#: calibrate.R:269
+#: calibrate.R:274
 msgid "HDR"
 msgstr "HDR"
 
-#: calibrate.R:282
+#: calibrate.R:287
 msgid "p"
-msgstr ""
+msgstr "p"
 
-#: coda.R:22 coda.R:127
+#: coda.R:29 ternary.R:62
+msgid "Transform"
+msgstr "Transformation"
+
+#: coda.R:68 coda.R:173
 msgid "Compositional Data"
 msgstr "Données de composition"
 
-#: coda.R:37
+#: coda.R:83
 msgid "Compositional parts"
 msgstr "Données de composition"
 
-#: coda.R:40 count.R:40
+#: coda.R:86 count.R:40
 msgid "Select the variables you want to use."
 msgstr "Sélectionnez les variables à utiliser."
 
-#: coda.R:47
+#: coda.R:93
 msgid "Group by"
 msgstr "Grouper"
 
-#: coda.R:50
+#: coda.R:96
 msgid ""
 "You can use a qualitative variable to assign each sample to a (reference) "
 "group."
@@ -345,17 +349,17 @@ msgstr ""
 "Vous pouvez utiliser une variable qualitative pour attribuer chaque "
 "échantillon à un groupe (de référence)."
 
-#: coda.R:51
+#: coda.R:97
 msgid "Missing values will be interpreted as unassigned samples."
 msgstr ""
 "Les valeurs manquantes seront interprétées comme des échantillons non "
 "attribués."
 
-#: coda.R:59
+#: coda.R:105
 msgid "Condense by"
 msgstr "Condenser"
 
-#: coda.R:62
+#: coda.R:108
 msgid ""
 "You can use one or more categorical variable to split the data into subsets "
 "and compute the compositional mean for each."
@@ -364,7 +368,7 @@ msgstr ""
 "les données en sous-ensembles et calculer la composition moyenne de chacun "
 "d'entre eux."
 
-#: coda.R:63
+#: coda.R:109
 msgid ""
 "Usefull if your data contain several observations for the same sample (e.g. "
 "repeated measurements)."
@@ -372,23 +376,23 @@ msgstr ""
 "Utile si vos données contiennent plusieurs observations pour le même "
 "échantillon (par ex., mesures répétées)."
 
-#: coda.R:71 count.R:46 prepare.R:33
+#: coda.R:117 count.R:46 prepare.R:33
 msgid "Table overview"
 msgstr "Aperçu du tableau"
 
-#: coda.R:78 count.R:53 prepare.R:38
+#: coda.R:124 count.R:53 prepare.R:38
 msgid "Clean values"
 msgstr "Nettoyage"
 
-#: coda.R:82 count.R:57 prepare.R:42 prepare.R:106
+#: coda.R:128 count.R:57 prepare.R:42 prepare.R:106
 msgid "Missing values"
 msgstr "Valeurs manquantes"
 
-#: coda.R:171 multivariate.R:160
+#: coda.R:217 lm.R:39 multivariate.R:160
 msgid "Group"
 msgstr "Groupe"
 
-#: coda.R:191
+#: coda.R:237
 msgid ""
 "If your data contains zeros, these can be considered as values below the "
 "detection limit (i.e. small unknown values)."
@@ -397,7 +401,7 @@ msgstr ""
 "des valeurs inférieures à la limite de détection (c'est-à-dire de petites "
 "valeurs inconnues)."
 
-#: coda.R:192
+#: coda.R:238
 msgid ""
 "In this case, you can define the detection limit for each compositional part "
 "below."
@@ -405,7 +409,7 @@ msgstr ""
 "Dans ce cas, vous pouvez définir ci-dessous la limite de détection pour "
 "chaque partie de la composition."
 
-#: coda.R:193
+#: coda.R:239
 msgid ""
 "If all limits are specified, zeros will be replaced by a fraction of these "
 "limits."
@@ -413,15 +417,15 @@ msgstr ""
 "Si toutes les limites sont spécifiées, les zéros seront remplacés par une "
 "fraction de ces limites."
 
-#: coda.R:194
+#: coda.R:240
 msgid "For computational details, see"
 msgstr "Pour plus de détails sur les calculs, voir"
 
-#: coda.R:199
+#: coda.R:245
 msgid "Fraction"
 msgstr "Fraction"
 
-#: coda.R:205
+#: coda.R:251
 msgid "Replace zero"
 msgstr "Remplacer les zéro"
 
@@ -465,7 +469,7 @@ msgstr "CAH"
 msgid "Hierarchical Clustering"
 msgstr "Regroupement hiérarchique"
 
-#: coda_hclust.R:24 multivariate.R:407
+#: coda_hclust.R:24 multivariate.R:403
 msgid "Distance"
 msgstr "Distance"
 
@@ -781,7 +785,7 @@ msgstr "Saisissez la date (en années) de chaque type de céramique."
 
 #: count_mcd.R:81
 msgid "MCD"
-msgstr ""
+msgstr "DCM"
 
 #: count_occurrence.R:17 count_occurrence.R:20 count_occurrence.R:82
 msgid "Co-Occurrence"
@@ -970,7 +974,7 @@ msgstr "Nom des lignes"
 msgid "Import Data"
 msgstr "Importer des données"
 
-#: import.R:50 plot.R:144
+#: import.R:50 plot.R:155
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -1086,70 +1090,82 @@ msgid "Dependent variable"
 msgstr "Variable dépendante"
 
 #: lm.R:30
-msgid "Independent variables"
+msgid "Independent variable"
 msgstr "Variable indépendante"
 
-#: lm.R:35
-msgid "Summary"
-msgstr "Résumé"
-
-#: lm.R:39
-msgid "Diagnostic"
-msgstr "Diagnostic"
-
-#: lm.R:42
-msgid "Residuals histogram"
-msgstr "Histogramme des résidus"
-
-#: lm.R:43
-msgid "Residual Q-Q plot"
-msgstr ""
-
 #: lm.R:44
-msgid "Residuals-Fitted"
-msgstr ""
-
-#: lm.R:45
-msgid "Scale-Location"
-msgstr ""
-
-#: lm.R:46
-msgid "Cook's distance"
-msgstr ""
-
-#: lm.R:47
-msgid "Residuals-Leverage"
-msgstr ""
-
-#: lm.R:51
 msgid "Prediction"
 msgstr "Prédiction"
 
-#: lm.R:57
+#: lm.R:50
 msgid "Interval"
 msgstr "Intervalle"
 
-#: lm.R:58 lm.R:170
+#: lm.R:51 lm.R:251
 msgid "Confidence interval"
 msgstr "Intervalle de confiance"
 
-#: lm.R:171
+#: lm.R:51 lm.R:252
 msgid "Prediction interval"
 msgstr "Intervalle de prédiction"
 
-#: lm.R:179
+#: lm.R:72 scatter.R:54 ternary.R:97
+msgid "Grid"
+msgstr "Grille"
+
+#: lm.R:80
+msgid "Summary"
+msgstr "Résumé"
+
+#: lm.R:84
+msgid "Diagnostic"
+msgstr "Diagnostic"
+
+#: lm.R:87
+msgid "Residuals histogram"
+msgstr "Histogramme des résidus"
+
+#: lm.R:88
+msgid "Residual Q-Q plot"
+msgstr "Diagramme Q-Q des résidus"
+
+#: lm.R:89
+msgid "Residuals-Fitted"
+msgstr ""
+
+#: lm.R:90
+msgid "Scale-Location"
+msgstr ""
+
+#: lm.R:91
+msgid "Cook's distance"
+msgstr ""
+
+#: lm.R:92
+msgid "Residuals-Leverage"
+msgstr ""
+
+#: lm.R:208
+msgid "Residuals"
+msgstr "Résidus"
+
+#: lm.R:208
+msgid "Frequency"
+msgstr "Fréquence"
+
+#: lm.R:260
 msgid "Response"
 msgstr "Réponse"
 
-#: lm.R:180
+#: lm.R:261
 msgid "Fitted"
 msgstr "Valeur ajustée"
 
-#: lm.R:181
+#: lm.R:262
 msgid "Lower bound"
 msgstr "Limite inférieure"
 
-#: lm.R:182
+#: lm.R:263
 msgid "Upper bound"
 msgstr "Limite supérieure"
 
@@ -1201,13 +1217,13 @@ msgstr "Ellipse de confiance"
 msgid "Ellipse level:"
 msgstr "Niveau :"
 
-#: multivariate.R:81 scatter.R:46 ternary.R:118
+#: multivariate.R:81 scatter.R:45 ternary.R:118
 msgid "Click and drag to select an area, then double-click to zoom in."
 msgstr ""
 "Cliquez et faites glisser pour sélectionner une zone, puis double-cliquez "
 "pour effectuer un zoom avant."
 
-#: multivariate.R:82 scatter.R:47 ternary.R:119
+#: multivariate.R:82 scatter.R:46 ternary.R:119
 msgid "Double-click again to reset the zoom."
 msgstr "Double-cliquez à nouveau pour réinitialiser le zoom."
 
@@ -1231,35 +1247,35 @@ msgstr "Variables"
 msgid "Screeplot"
 msgstr "Diagramme d'éboulis"
 
-#: multivariate.R:368
+#: multivariate.R:364
 msgid "Eigenvalues"
 msgstr "Valeurs propres"
 
-#: multivariate.R:369
+#: multivariate.R:365
 msgid "Explained var. (%)"
 msgstr "Var. expliquée (%)"
 
-#: multivariate.R:370
+#: multivariate.R:366
 msgid "Cumulative var. (%)"
 msgstr "Var. cumulée (%)"
 
-#: multivariate.R:391
+#: multivariate.R:387
 msgid "Coordinates"
 msgstr "Coordonnées"
 
-#: multivariate.R:396
+#: multivariate.R:392
 msgid "Contribution"
 msgstr "Contribution"
 
-#: multivariate.R:401
+#: multivariate.R:397
 msgid "Squared cosinus"
 msgstr "Cosinus carré"
 
-#: multivariate.R:411
+#: multivariate.R:407
 msgid "Inertia"
 msgstr "Inertie"
 
-#: multivariate.R:416
+#: multivariate.R:412
 msgid "Axis"
 msgstr "Axe"
 
@@ -1287,31 +1303,31 @@ msgstr ""
 "L'ACP est calculée sur les rapports logarithmiques centrés (CLR), vous "
 "devriez d'abord vérifier la transformation des données."
 
-#: plot.R:18
-msgid "Tools"
-msgstr "Outils"
+#: plot.R:21 plot.R:25
+msgid "Settings"
+msgstr "Paramètres"
 
-#: plot.R:23 prepare.R:133
+#: plot.R:41 prepare.R:133
 msgid "Download"
 msgstr "Télécharger"
 
-#: plot.R:115
+#: plot.R:126
 msgid "Save plot - Preview"
 msgstr "Enregistrer le graphique - Aperçu"
 
-#: plot.R:127
+#: plot.R:138
 msgid "File name"
 msgstr "Nom du fichier"
 
-#: plot.R:132
+#: plot.R:143
 msgid "Width (in)"
 msgstr "Largeur (in)"
 
-#: plot.R:138
+#: plot.R:149
 msgid "Height (in)"
 msgstr "Hauteur (in)"
 
-#: plot.R:177
+#: plot.R:188
 msgid "Unknown graphics device."
 msgstr "Périphérique graphique inconnu."
 
@@ -1383,7 +1399,7 @@ msgstr "Impossible de trouver l'application %s."
 msgid "Could not find the configuration file for %s."
 msgstr "Impossible de trouver le fichier de configuration pour %s."
 
-#: scatter.R:17 scatter.R:54
+#: scatter.R:17 scatter.R:56
 msgid "Scatter Plot"
 msgstr "Diagramme de dispersion"
 
@@ -1395,11 +1411,7 @@ msgstr "Composant X"
 msgid "Component Y"
 msgstr "Composant Y"
 
-#: scatter.R:43 ternary.R:97
-msgid "Grid"
-msgstr "Grille"
-
-#: scatter.R:64
+#: scatter.R:66
 msgid "Click the plot to select rows of data."
 msgstr "Cliquez sur le graphique pour sélectionner des individus."
 
@@ -1459,10 +1471,6 @@ msgstr "Groupement par classe"
 msgid "Number of bins"
 msgstr "Nombre de classes"
 
-#: ternary.R:62
-msgid "Transform"
-msgstr "Transformation"
-
 #: ternary.R:75
 msgid "Envelopes"
 msgstr "Enveloppes"
@@ -1491,7 +1499,7 @@ msgstr "Limite temporelle inférieure"
 msgid "Upper temporal boundary"
 msgstr "Limite temporelle supérieure"
 
-#: variables.R:176
+#: variables.R:178
 msgid "Choose"
 msgstr "Choisissez"
 

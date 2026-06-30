@@ -5,9 +5,9 @@
 \title{Update an Input Control with Column Names}
 \usage{
 update_input(
-  control,
   id,
   x,
+  control,
   choices = colnames,
   exclude = reactive(NULL),
   select = TRUE,
@@ -15,11 +15,11 @@ update_input(
 )
 }
 \arguments{
-\item{control}{An UI input updater.}
-
 \item{id}{A \code{\link{character}} string specifying the namespace.}
 
 \item{x}{A reactive \code{matrix}-like object.}
+
+\item{control}{An UI input updater.}
 
 \item{choices}{A \code{\link{function}} that takes \code{x} as a single argument and returns
 a \code{character} vector.}

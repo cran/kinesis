@@ -1,4 +1,50 @@
 # UI ===========================================================================
+#' Compositional Data Navigation UI
+#'
+#' @param ... Currently not used.
+#' @return
+#'  A nav item that may be passed to a nav container
+#'  (e.g. [bslib::navset_tab()]).
+#' @family coda modules
+#' @keywords internal
+#' @name coda_nav
+#' @rdname coda_nav
+NULL
+
+#' @rdname coda_nav
+#' @export
+coda_nav_plot <- function(...) {
+  nav_menu(
+    title = tr_("Plot"),
+    coda_hist_ui("hist"),
+    coda_barplot_ui("barplot"),
+    ternary_ui("ternary")
+  )
+}
+
+#' @rdname coda_nav
+#' @export
+coda_nav_logratio <- function(...) {
+  nav_menu(
+    title = tr_("Transform"),
+    logratio_ui("clr", title = "CLR"),
+    logratio_ui("alr", title = "ALR"),
+    logratio_ui("ilr", title = "ILR"),
+    logratio_ui("plr", title = "PLR")
+  )
+}
+
+#' @rdname coda_nav
+#' @export
+coda_nav_analysis <- function(...) {
+  nav_menu(
+    title = tr_("Analysis"),
+    #coda_outliers_ui("outliers"),
+    pca_ui("pca", scale = FALSE),
+    coda_hclust_ui("clust")
+  )
+}
+
 #' Compositional Data UI
 #'
 #' @param id A [`character`] vector to be used for the namespace.

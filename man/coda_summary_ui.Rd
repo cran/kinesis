@@ -26,6 +26,7 @@ Other coda modules:
 \code{\link[=coda_hclust_ui]{coda_hclust_ui()}},
 \code{\link[=coda_hist_server]{coda_hist_server()}},
 \code{\link[=coda_hist_ui]{coda_hist_ui()}},
+\code{\link{coda_nav}},
 \code{\link[=coda_outliers_server]{coda_outliers_server()}},
 \code{\link[=coda_outliers_ui]{coda_outliers_ui()}},
 \code{\link[=coda_server]{coda_server()}},

@@ -12,7 +12,7 @@ A collection of 'shiny' applications for the 'tesselle' packages \url{https://ww
 }
 \details{
 \tabular{ll}{
-\strong{Version} \tab 0.4.0 \cr
+\strong{Version} \tab 0.5.0 \cr
 \strong{License} \tab GPL-3 \cr
 \strong{CRAN DOI} \tab \doi{10.32614/CRAN.package.kinesis} \cr
 \strong{Zenodo DOI} \tab \doi{10.5281/zenodo.14645671} \cr

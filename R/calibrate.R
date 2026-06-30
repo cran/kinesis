@@ -108,12 +108,6 @@ calibrate_ui <- function(id) {
             selected = "0.95",
             choiceNames = c("68%", "95%", "99%"),
             choiceValues = c("0.68", "0.95", "0.99")
-          ),
-          checkboxInput(inputId = ns("fixed"), value = TRUE, label = tr_("Fixed scale")),
-          checkboxInput(inputId = ns("decreasing"), label = tr_("Decreasing order")),
-          selectize_ui(
-            id = ns("extra_quali"),
-            label = tr_("Extra qualitative variable")
           )
         ),
         nav_panel(
@@ -124,12 +118,20 @@ calibrate_ui <- function(id) {
           title = tr_("Plot"),
           output_plot(
             id = ns("plot_density"),
-            tools = graphics_ui(
-              id = ns("par_dens"),
-              col_quant = FALSE,
-              pch = FALSE,
-              lty = FALSE,
-              cex = FALSE
+            tools = list(
+              checkboxInput(inputId = ns("fixed"), value = TRUE, label = tr_("Fixed scale")),
+              checkboxInput(inputId = ns("sort_density"), label = tr_("Decreasing order")),
+              selectize_ui(
+                id = ns("extra_quali"),
+                label = tr_("Extra qualitative variable")
+              ),
+              graphics_ui(
+                id = ns("par_dens"),
+                col_quant = FALSE,
+                pch = FALSE,
+                lty = FALSE,
+                cex = FALSE
+              )
             )
           )
         ),
@@ -138,13 +140,16 @@ calibrate_ui <- function(id) {
           layout_column_wrap(
             output_plot(
               id = ns("plot_intervals"),
-              tools = graphics_ui(
-                id = ns("par_int"),
-                col_quali = FALSE,
-                col_quant = FALSE,
-                pch = FALSE,
-                lty = FALSE,
-                size_range = FALSE
+              tools = list(
+                checkboxInput(inputId = ns("sort_intervals"), label = tr_("Decreasing order")),
+                graphics_ui(
+                  id = ns("par_int"),
+                  col_quali = FALSE,
+                  col_quant = FALSE,
+                  pch = FALSE,
+                  lty = FALSE,
+                  size_range = FALSE
+                )
               )
             ),
             # render_export_button(ns("export_intervals")),
@@ -307,17 +312,27 @@ calibrate_server  <- function(id, x) {
           interval = "hdr",
           level = as.numeric(input$level),
           fixed = isTRUE(input$fixed),
-          decreasing = isTRUE(input$decreasing),
+          decreasing = isTRUE(input$sort_density),
           col = col
         )
+
+        if (isTruthy(extra_quali())) {
+          graphics::legend(
+            x = ifelse(isTRUE(input$sort_density), "topright", "topleft"),
+            legend = unique(extra_quali()),
+            fill = unique(col),
+            bty = "n"
+          )
+        }
       }
     })
     plot_intervals <- reactive({
       req(intervals())
       function() {
-        plot(
+        aion::plot(
           x = intervals(),
           calendar = calendar(),
+          decreasing = isTRUE(input$sort_intervals),
           lwd = param_int$pal_cex
         )
       }

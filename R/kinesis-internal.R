@@ -141,25 +141,39 @@ render_numeric_input <- function(id) {
 }
 
 # Notification =================================================================
+#' Toast Notification
+#'
+#' Shows a lightweight, temporary message.
+#' @param text A [`character`] string giving the body content of the
+#'  notification.
+#' @param title A [`character`] string giving the title of the notification.
+#' @inheritParams bslib::toast
+#' @return Invisibly returns the toast ID (string).
+#' @keywords internal
+#' @noRd
 show_notification <- function(text, title = NULL, id = NULL, duration = 5,
-                              closeButton = TRUE, type = "default") {
+                              closable = TRUE, type = "default") {
   # text <- paste0(text, collapse = "\n")
-  if (!is.null(title)) text <- sprintf("**%s**\n%s", title, text)
-  id <- showNotification(
-    ui = markdown(text, hardbreaks = TRUE),
-    duration = duration,
-    closeButton = closeButton,
-    id = id,
-    type = type
+  id <- show_toast(
+    toast(
+      markdown(text, hardbreaks = TRUE),
+      header = title,
+      icon = NULL,
+      id = id,
+      type = type,
+      duration_s = duration,
+      position = c("top", "center"),
+      closable = closable
+    )
   )
   invisible(id)
 }
 
-#' Notify
+#' Notification
 #'
 #' Shows a notification if an expression raises an error or a warning.
 #' @param expr An expression to be evaluated.
-#' @param what A [`character`] string giving the title of the notification.
+#' @param title A [`character`] string giving the title of the notification.
 #' @return The result of `expr` or `NULL`.
 #' @keywords internal
 #' @noRd

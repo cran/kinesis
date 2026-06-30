@@ -25,12 +25,57 @@ lm_ui <- function(id) {
           label = tr_("Dependent variable"),
           multiple = FALSE
         ),
-        checkbox_ui(
+        selectize_ui(
           id = ns("explanatory"),
-          label = tr_("Independent variables")
+          label = tr_("Independent variable"),
+          multiple = FALSE
+        ),
+        selectize_ui(
+          id = ns("quali"),
+          label = tr_("Extra qualitative variable")
+        ),
+        selectize_ui(
+          id = ns("group"),
+          label = tr_("Group")
         )
       ), # sidebar
       navset_card_pill(
+        nav_panel(
+          title = tr_("Prediction"),
+          layout_sidebar(
+            sidebar = sidebar(
+              ## Input: prediction
+              radioButtons(
+                inputId = ns("interval"),
+                label = tr_("Interval"),
+                choiceNames = c(tr_("Confidence interval"), tr_("Prediction interval")),
+                choiceValues = c("confidence", "prediction")
+              ),
+              radioButtons(
+                inputId = ns("level"),
+                label = tr_("Level:"),
+                selected = "0.95",
+                choiceNames = c("68%", "95%", "99%"),
+                choiceValues = c("0.68", "0.95", "0.99")
+              )
+            ),
+            layout_columns(
+              col_widths = c(8, 4),
+              output_plot(
+                id = ns("plot_lm"),
+                title = tr_("Plot"),
+                tools = list(
+                  graphics_ui(
+                    id = ns("par"), col_quali = FALSE, col_quant = FALSE,
+                    pch = FALSE, lty = FALSE, cex = FALSE, asp = TRUE
+                  ),
+                  checkboxInput(inputId = ns("grid"), label = tr_("Grid"), value = TRUE)
+                )
+              ),
+              gt::gt_output(outputId = ns("prediction"))
+            )
+          )
+        ),
         nav_panel(
           title = tr_("Summary"),
           verbatimTextOutput(outputId = ns("summary"))
@@ -45,28 +90,6 @@ lm_ui <- function(id) {
             output_plot(id = ns("plot_scale"), title = tr_("Scale-Location")),
             output_plot(id = ns("plot_cook"), title = tr_("Cook's distance")),
             output_plot(id = ns("plot_lev"), title = tr_("Residuals-Leverage"))
-          )
-        ),
-        nav_panel(
-          title = tr_("Prediction"),
-          layout_sidebar(
-            sidebar = sidebar(
-              ## Input: prediction
-              radioButtons(
-                inputId = ns("interval"),
-                label = tr_("Interval"),
-                choiceNames = c(tr_("Confidence interval")), # tr_("Prediction interval")
-                choiceValues = c("confidence") # "prediction"
-              ),
-              radioButtons(
-                inputId = ns("level"),
-                label = tr_("Level:"),
-                selected = "0.95",
-                choiceNames = c("68%", "95%", "99%"),
-                choiceValues = c("0.68", "0.95", "0.99")
-              )
-            ),
-            gt::gt_output(outputId = ns("prediction"))
           )
         )
       ) # navset_card_pill
@@ -91,8 +114,20 @@ lm_server <- function(id, x) {
   moduleServer(id, function(input, output, session) {
     ## Update UI -----
     quanti <- subset_quantitative(x)
+    quali <- subset_qualitative(x)
+
+    col_quali <- update_selectize_colnames("quali", x = quali)
     resp <- update_selectize_colnames("response", x = quanti)
-    expl <- update_checkbox_colnames("explanatory", x = quanti, exclude = resp)
+    expl <- update_selectize_colnames("explanatory", x = quanti, exclude = resp)
+
+    ## Subset -----
+    groups <- select_data(quali, col_quali, drop = TRUE)
+    group <- update_input("group", x = groups, control = updateSelectizeInput,
+                          choices = unique, select = FALSE, placeholder = TRUE)
+    data <- reactive({
+      if (!isTruthy(group())) return(x())
+      x()[which(groups() == group()), , drop = FALSE]
+    })
 
     ## Linear regression -----
     vars <- reactive({
@@ -103,13 +138,14 @@ lm_server <- function(id, x) {
       debounce(500)
 
     model <- reactive({
-      stats::lm(vars(), data = x(), na.action = stats::na.omit, y = TRUE)
+      notify(
+        stats::lm(vars(), data = data(), na.action = stats::na.omit, y = TRUE)
+      )
     }) |>
-      bindEvent(vars())
+      bindEvent(vars(), data())
 
     prediction <- reactive({
-      data.frame(
-        y = model()$y,
+      pred <- notify(
         stats::predict(
           object = model(),
           se.fit = FALSE,
@@ -117,6 +153,49 @@ lm_server <- function(id, x) {
           level = as.numeric(input$level)
         )
       )
+      data.frame(y = model()$y, pred)
+    })
+
+    ## Graphical parameters -----
+    param <- graphics_server("par")
+
+    ## Build plot -----
+    plot_lm <- reactive({
+      ## Select data
+      req(data(), prediction())
+
+      coord_x <- data()[[expl()]]
+      coord_y <- data()[[resp()]]
+
+      ## Build plot
+      function() {
+        graphics::plot(
+          x = coord_x,
+          y = coord_y,
+          type = "p",
+          xlab = expl(),
+          ylab = resp(),
+          panel.first = if (isTRUE(input$grid)) graphics::grid() else NULL,
+          col = "black",
+          pch = 16,
+          cex = 1,
+          asp = param$asp,
+          las = 1
+        )
+
+        i <- order(coord_x)
+        graphics::polygon(
+          x = c(coord_x[i], rev(x = coord_x[i])),
+          y = c(prediction()$upr[i], rev(prediction()$lwr[i])),
+          col = grDevices::adjustcolor("grey", alpha.f = 0.5), border = NA
+        )
+        graphics::lines(x = coord_x[i], y = prediction()$upr[i],
+                        lty = 2, lwd = 1, col = "#004488")
+        graphics::lines(x = coord_x[i], y = prediction()$lwr[i],
+                        lty = 2, lwd = 1, col = "#004488")
+        graphics::lines(x = coord_x[i], y = prediction()$fit[i],
+                        lty = 1, lwd = 1, col = "#BB5566")
+      }
     })
 
     ## Diagnostic tests -----
@@ -125,7 +204,8 @@ lm_server <- function(id, x) {
     ## Diagnostic plots -----
     plot_hist <- reactive({
       function() {
-        graphics::hist(stats::residuals(model()), main = NULL, xlab = "Residuals")
+        graphics::hist(stats::residuals(model()), main = NULL,
+                       xlab = tr_("Residuals"), ylab = tr_("Frequency"))
       }
     })
     plot_fitted <- reactive({
@@ -155,6 +235,7 @@ lm_server <- function(id, x) {
     })
 
     ## Render plot -----
+    render_plot("plot_lm", plot_lm)
     render_plot("plot_hist", plot_hist)
     render_plot("plot_fitted", plot_fitted)
     render_plot("plot_qq", plot_qq)

@@ -13,25 +13,36 @@ output_plot <- function(id, ..., tools = NULL, title = NULL, note = NULL) {
   ## Create a namespace function using the provided id
   ns <- NS(id)
 
-  gear <- popover(
-    icon("gear"),
-    title = tr_("Tools"),
-    placement = "auto",
-    tools,
-    actionButton(
-      inputId = ns("download"),
-      label = tr_("Download"),
-      icon = icon("download")
+  if (!is.null(tools)) {
+    tools <- popover(
+      placement = "auto",
+      toolbar_input_button(
+        id = ns("chart_settings"),
+        label = tr_("Settings"),
+        icon = icon("sliders"),
+        tooltip = FALSE,
+        show_label = FALSE,
+        title = tr_("Settings")
+      ),
+      tools
     )
-  )
-
+  }
   footer <- if (!is.null(note)) card_footer(note) else NULL
 
   card(
     id = ns("card"),
     full_screen = TRUE,
     card_header(
-      title, gear,
+      title,
+      toolbar(
+        tools,
+        toolbar_input_button(
+          id = ns("download"),
+          label = tr_("Download"),
+          icon = icon("download"),
+          show_label = TRUE
+        )
+      ),
       class = "d-flex justify-content-between"
     ),
     card_body(

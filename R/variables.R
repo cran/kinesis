@@ -131,9 +131,9 @@ update_selectize_rownames <- function(id, x, exclude = reactive(NULL),
 
 #' Update an Input Control with Column Names
 #'
-#' @param control An UI input updater.
 #' @param id A [`character`] string specifying the namespace.
 #' @param x A reactive `matrix`-like object.
+#' @param control An UI input updater.
 #' @param choices A [`function`] that takes `x` as a single argument and returns
 #'  a `character` vector.
 #' @param exclude A reactive [`character`] vector of values to be excluded from
@@ -147,7 +147,7 @@ update_selectize_rownames <- function(id, x, exclude = reactive(NULL),
 #' @seealso [update_checkbox_colnames()], [update_selectize_colnames()],
 #'  [update_selectize_rownames()]
 #' @keywords internal
-update_input <- function(control, id, x,
+update_input <- function(id, x, control,
                          choices = colnames, exclude = reactive(NULL),
                          select = TRUE, placeholder = FALSE) {
   stopifnot(is.reactive(x))
@@ -169,6 +169,8 @@ update_input <- function(control, id, x,
       } else {
         opt <- character(0)
       }
+
+      names(opt) <- opt
 
       ## Add placeholder
       if (isTRUE(placeholder)) {

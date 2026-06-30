@@ -65,7 +65,7 @@ Practice*, *12*(4), 424-430. <doi:10.1017/aap.2024.10>
 Frerebeau N (2026). *kinesis: ‘shiny’ Applications for the ‘tesselle’
 Packages*. Université Bordeaux Montaigne, Pessac, France.
 <doi:10.5281/zenodo.14645671> <https://doi.org/10.5281/zenodo.14645671>.
-R package version 0.4.0, <https://packages.tesselle.org/kinesis/>.
+R package version 0.5.0, <https://packages.tesselle.org/kinesis/>.
 
 This package is a part of the tesselle project
 <https://www.tesselle.org>.
